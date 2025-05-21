@@ -1,0 +1,36 @@
+.header-wrap {
+
+    background: $light_blue;
+
+    .header {
+
+        .header-logo {
+            img {
+                border-radius: 50%;
+                width: 70px;
+                height: 70px;
+            }
+        }
+
+        .header-nav {
+
+            .nav-item {
+                height: fit-content;
+                color: white;
+            }
+        }
+
+        .hotline {
+            padding: 10px;
+            background: white;
+            border-radius: 12px;
+
+            svg,
+            .text {
+                height: fit-content;
+
+            }
+
+        }
+    }
+}
