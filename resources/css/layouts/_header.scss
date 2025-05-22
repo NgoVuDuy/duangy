@@ -12,11 +12,19 @@
             }
         }
 
+        .header-logo-text {
+            font-weight: bold;
+            color: white;
+            font-size: 24px;
+            margin-left: 18px;
+        }
+
         .header-nav {
 
             .nav-item {
                 height: fit-content;
                 color: white;
+                text-decoration: none;
             }
         }
 
@@ -24,6 +32,7 @@
             padding: 10px;
             background: white;
             border-radius: 12px;
+            cursor: pointer;
 
             svg,
             .text {

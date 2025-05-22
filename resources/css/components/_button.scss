@@ -4,6 +4,12 @@
     color: $white;
     background: $orange;
     padding: 12px 18px;
-    font-size: 18px;
     height: fit-content;
+    width: max-content;
+    transition: transform .3s ease-in;
+    &:hover {
+
+        transform: scale(1.05);
+    }
 }
+

@@ -22,19 +22,13 @@
 
     @livewire('header')
 
-    {{-- @livewire('sign-in')
-    @livewire('sign-up') --}}
-
     {{ $slot }}
 
-    {{-- @livewire('user-order-status') --}}
     @livewire('footer')
 
     @yield('js')
-    
+
     @livewireScripts
 </body>
-
-<script></script>
 
 </html>
