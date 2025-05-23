@@ -7,9 +7,23 @@
     height: fit-content;
     width: max-content;
     transition: transform .3s ease-in;
+
     &:hover {
 
         transform: scale(1.05);
     }
 }
 
+.main-btn.small-btn {
+    border: none;
+    border-radius: 12px;
+    color: $white;
+    background: $orange;
+    padding: 6px 8px;
+    transition: transform .3s ease-in;
+
+    &:hover {
+
+        transform: scale(1.05);
+    }
+}

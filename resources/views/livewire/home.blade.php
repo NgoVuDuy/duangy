@@ -35,7 +35,7 @@
         const myCarousel = document.querySelector('#carousel-bg')
     
         const carousel = new bootstrap.Carousel(myCarousel, {
-            interval: 3000,
+            interval: 2000,
             touch: false
         })
     </script> --}}

@@ -25,6 +25,16 @@
                 height: fit-content;
                 color: white;
                 text-decoration: none;
+                padding: 6px 8px;
+                border-radius: 12px;
+
+            }
+
+            .nav-item.active {
+
+                background: $outline_blue;
+                color: $light_blue;
+                // border: 2px black solid;
             }
         }
 

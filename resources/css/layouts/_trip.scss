@@ -3,7 +3,55 @@
         background: $white;
         padding: 18px 12px;
         margin: 20px;
-        border: 1px #e6e6e6 solid;
+        border: 1px $border-gray solid;
         border-radius: 12px;
+    }
+
+}
+
+.sort-wrap {
+    background: $white;
+    padding: 18px 12px;
+    margin: 20px;
+    border: 1px $border-gray solid;
+    border-radius: 12px;
+}
+
+.trip-list {
+    margin: 20px;
+
+    .item-wrap {
+        background: $white;
+        padding: 18px 12px;
+        border: 1px $border-gray solid;
+        border-radius: 12px;
+
+        .item {
+
+
+            .trip-process-wrap {
+                margin-top: 4px;
+                margin-bottom: 4px;
+
+                .trip-process {
+                    border-radius: 12px;
+                    width: 3px;
+                    height: 28px;
+                    background: $gray;
+                    margin: 4px 0px;
+                }
+            }
+
+            .address {
+                height: max-content;
+            }
+        }
+
+        .trip-show-more {
+
+            display: none;
+        }
+
+
     }
 }

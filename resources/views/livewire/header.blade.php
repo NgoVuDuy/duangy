@@ -7,10 +7,10 @@
         </div>
 
         <div class="header-nav d-flex align-items-center column-gap-4">
-            <a href="/" class="nav-item fw-medium" wire:navigate>Trang chủ</a>
-            <a href="#" class="nav-item fw-medium">Vé xe của tôi</a>
-            <a href="#" class="nav-item fw-medium">Tin tức</a>
-            <a href="#" class="nav-item fw-medium">Tài khoản</a>
+            <a href="/home" class="nav-item fw-medium" wire:navigate wire:current="active">Trang chủ</a>
+            <a href="/my-ticket" class="nav-item fw-medium" wire:navigate wire:current="active">Vé xe của tôi</a>
+            <a href="/news" class="nav-item fw-medium" wire:navigate wire:current="active">Tin tức</a>
+            <a href="/user" class="nav-item fw-medium" wire:navigate wire:current="active">Tài khoản</a>
         </div>
         <div class="hotline-wrap d-flex align-items-center">
 
