@@ -50,8 +50,79 @@
         .trip-show-more {
 
             display: none;
+            .left {
+                .seat-type-text {}
+
+                .seat-note {
+                    .seat-item {
+                        border-radius: 50%;
+                    }
+
+                    .seat-item.item1 {
+                        background: #00f400;
+                    }
+                    .seat-item.item2 {
+                        background: #00c0f4;
+                    }
+                    .seat-item.item3 {
+                        background: #f4ab00;
+                    }
+                    .seat-item.item4 {
+                        background: #f400ef;
+                    }
+                }
+            }
+
+            .right {
+                .seat-diagram-wrap {
+
+                    .seat-diagram {
+                        padding: 12px 8px;
+                        border-radius: 12px;
+                        background: $border-gray;
+
+                        .line-A {
+                            .seat-item {
+                                background: #00c0f4;
+                            }
+                        }
+                        .line-B, .line-C, .line-D {
+                            .seat-item {
+                                background: #f4ab00;
+                            }
+                        }
+                        .line-E {
+                            .seat-item {
+                                background: #f400ef;
+                            }
+                        }
+
+                        .line {
+                            display: flex;
+                            justify-content: space-between;
+                            column-gap: 8px;
+
+                            .seat-item {
+                                border-radius: 50%;
+
+                            }
+
+                            .seat-item.active {
+                                background: #00f400;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
-
+    }
+}
+.seat-checked {
+    height: max-content;
+}
+.total-ticket {
+    .total, .price {
+        height: max-content;
     }
 }
