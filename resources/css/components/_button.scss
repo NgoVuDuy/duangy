@@ -3,24 +3,39 @@
     border-radius: 12px;
     color: $white;
     background: $orange;
-    padding: 12px 18px;
     height: fit-content;
     width: max-content;
     transition: transform .3s ease-in;
+
+}
+
+.main-btn.small-btn {
+    padding: 6px 8px;
+}
+
+.main-btn.lg-btn {
+
+    padding: 12px 18px;
+
+}
+
+.main-btn.hover {
 
     &:hover {
 
         transform: scale(1.05);
     }
+
 }
 
-.main-btn.small-btn {
-    border: none;
+.outline-btn.small-btn {
+
+    border: 1px $orange solid;
     border-radius: 12px;
-    color: $white;
-    background: $orange;
+    color: $orange;
+    background: $white;
     padding: 6px 8px;
-    transition: transform .3s ease-in;
+    transition: transform .3s linear;
 
     &:hover {
 

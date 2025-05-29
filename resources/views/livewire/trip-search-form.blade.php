@@ -37,6 +37,6 @@
             <label for="">Ngày đi</label>
             <input class="main-input" type="date" name="" id="">
         </div>
-        <button type="submit" class="main-btn">Tìm kiếm</button>
+        <button type="submit" class="main-btn lg-btn hover">Tìm kiếm</button>
     </form>
 </div>

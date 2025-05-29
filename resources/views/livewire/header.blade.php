@@ -14,7 +14,7 @@
         </div>
         <div class="hotline-wrap d-flex align-items-center">
 
-            <div class="hotline d-flex align-items-center column-gap-4" data-bs-html="true" data-bs-toggle="popover"
+            <div class="hotline d-flex align-items-center column-gap-3" data-bs-html="true" data-bs-toggle="popover"
                 data-bs-title="Hotline 24/7" data-bs-placement="bottom"
                 data-bs-content="<span class='light-blue-text'>1900553422</span> - Để đặt vé qua điện thoại <br> <span class='light-blue-text'>1900553368</span> - Để phản hồi về dịch vụ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -26,7 +26,6 @@
 
                 <div class="text fw-medium">Hotline 24/7</div>
             </div>
-
         </div>
     </div>
     <script>

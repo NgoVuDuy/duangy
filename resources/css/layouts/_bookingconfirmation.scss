@@ -1,0 +1,93 @@
+.booking-confirmation {
+    .form {
+        label {
+            width: 140px;
+        }
+
+        input {
+            border: none;
+            padding: 8px;
+            background: $input;
+            border-radius: 12px;
+            width: 300px;
+        }
+    }
+
+    .confirmation-btn {
+        width: 100%;
+    
+    }
+
+    .address-details {
+        font-size: 14px;
+        margin-top: 4px;
+        color: $gray;
+    }
+
+
+
+    .content {
+
+        .left {
+            img {
+                width: 100px;
+                height: 60px;
+                border-radius: 12px;
+            }
+        }
+
+        .right {
+            .bus-name {
+                font-size: 14px;
+                color: $gray;
+            }
+        }
+
+        .address-wrap {
+            border: 1px $border-gray solid;
+            padding: 8px;
+            border-radius: 8px;
+
+        }
+
+    }
+
+    .trip-details {
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
+        margin-bottom: 16px;
+
+        .items {
+            display: flex;
+            justify-content: space-between;
+
+            span {
+                font-weight: 500;
+            }
+        }
+    }
+
+    .offcanvas-header {
+        background: $light-blue;
+
+        .offcanvas-title {
+            color: white;
+        }
+
+    }
+
+    .ticket-details {
+        .ticket-price {
+
+            padding: 12px;
+            border: 1px $border-gray solid;
+            border-radius: 12px;
+
+            .ticket-number {
+                font-size: 14px;
+                color: $gray;
+            }
+        }
+    }
+}

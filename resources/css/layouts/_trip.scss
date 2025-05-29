@@ -50,6 +50,7 @@
         .trip-show-more {
 
             display: none;
+
             .left {
                 .seat-type-text {}
 
@@ -61,12 +62,15 @@
                     .seat-item.item1 {
                         background: #00f400;
                     }
+
                     .seat-item.item2 {
                         background: #00c0f4;
                     }
+
                     .seat-item.item3 {
                         background: #f4ab00;
                     }
+
                     .seat-item.item4 {
                         background: #f400ef;
                     }
@@ -86,11 +90,15 @@
                                 background: #00c0f4;
                             }
                         }
-                        .line-B, .line-C, .line-D {
+
+                        .line-B,
+                        .line-C,
+                        .line-D {
                             .seat-item {
                                 background: #f4ab00;
                             }
                         }
+
                         .line-E {
                             .seat-item {
                                 background: #f400ef;
@@ -118,11 +126,72 @@
 
     }
 }
+
 .seat-checked {
     height: max-content;
 }
+
 .total-ticket {
-    .total, .price {
+
+    .total,
+    .price {
         height: max-content;
+    }
+}
+
+.points-cover {
+    .title h5 {
+        margin-bottom: 28px;
+    }
+
+    .start-point {
+        flex: 1;
+    }
+
+    .end-point {
+        flex: 1;
+    }
+
+    .form-check {
+        border-radius: 12px;
+        background: #ebebeb;
+
+        .points {
+            padding: 12px;
+
+            .address-details {
+                color: #606060;
+                font-size: 14px;
+            }
+        }
+
+        .trans-start-details {
+            display: none;
+        }
+
+        .trans-show-more {
+            cursor: pointer;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .trans-start-details {
+            .form-wrap {
+                cursor: pointer;
+                textarea {
+                    padding: 8px;
+                    border-radius: 12px;
+                    width: 100%;
+                    border: 1px #a3a3a3 solid;
+        
+                    &:focus-visible {
+                        outline: none;
+                    }
+                }
+            }
+        }
+
     }
 }
