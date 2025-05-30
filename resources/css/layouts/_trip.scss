@@ -178,19 +178,36 @@
         }
 
         .trans-start-details {
+
             .form-wrap {
                 cursor: pointer;
+
                 textarea {
+                    display: none;
                     padding: 8px;
                     border-radius: 12px;
                     width: 100%;
-                    border: 1px #a3a3a3 solid;
-        
+                    height: 80px;
+                    border: 1px #c8c8c8 solid;
+
                     &:focus-visible {
                         outline: none;
                     }
+
+                }
+
+
+
+            }
+
+            .form-wrap {
+                form.active {
+                    border-radius: 12px;
+                    background: $outline_blue;
                 }
             }
+
+
         }
 
     }

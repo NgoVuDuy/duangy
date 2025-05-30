@@ -132,7 +132,8 @@
                                             <div class="seat-empty mb-3">
                                                 <span>Còn 5 chỗ trống</span>
                                             </div>
-                                            <button class="main-btn small-btn hover trip-show-more-btn">Chọn chuyến</button>
+                                            <button class="main-btn small-btn hover trip-show-more-btn">Chọn
+                                                chuyến</button>
                                         </div>
                                     </div>
                                 </div>
@@ -141,7 +142,7 @@
                                     <hr>
 
                                     <div
-                                        class="seat-wrap mt-5 ps-5 pe-5 d-flex justify-content-between {{ isset($isShowPoints[$i]) && $isShowPoints[$i]   ? 'd-none' : 'd-flex' }}">
+                                        class="seat-wrap mt-5 ps-5 pe-5 d-flex justify-content-between {{ isset($isShowPoints[$i]) && $isShowPoints[$i] ? 'd-none' : 'd-flex' }}">
                                         <div class="left">
                                             <div class="seat-note">
                                                 <h6 class="title mb-4">Chú thích</h6>
@@ -399,7 +400,7 @@
 
                                                 <div class="form-check">
 
-                                                    <div class="points">
+                                                    <div class="points start">
 
                                                         <input class="form-check-input trans_start_input"
                                                             type="radio" name="radioDefault"
@@ -408,7 +409,7 @@
                                                         <div class="d-flex justify-content-between">
 
                                                             <label class="form-check-label" for="trans_start_input">
-                                                                <h6 class="fw-medium">Trung chuyển tại Bạc Liêu</h6>
+                                                                <h6 class="fw-medium">Trung chuyển tại Cần Thơ</h6>
                                                             </label>
 
                                                             <div class="trans-show-more">
@@ -436,38 +437,43 @@
 
                                                         <div class="trans-start-details">
 
-                                                            <div class="form-wrap">
+                                                            <div class="form-wrap mt-4">
 
                                                                 <form action=""
-                                                                    class="m-3 d-flex flex-column row-gap-2">
-                                                                    <div class="time">
-                                                                        <h6 class="fw-medium"></h6>
-                                                                    </div>
-                                                                    <div class="address">
-                                                                        <span class="fw-medium">Thành phố Bạc
-                                                                            Liêu</span>
-                                                                    </div>
-                                                                    <div class="address-details">
-                                                                        Bạc liêu
-                                                                    </div>
+                                                                    class="p-3 d-flex flex-column row-gap-2">
+                                                                    <div class="trans-info">
 
-                                                                    <textarea name="" id="" cols="30" rows="3" placeholder="Nhập địa chỉ trung chuyển"></textarea>
+                                                                        <div class="time">
+                                                                            <h6 class="fw-medium m-0">19:00</h6>
+                                                                        </div>
+                                                                        <div class="address">
+                                                                            <span class="fw-medium">Thành phố Cần Thơ</span>
+                                                                        </div>
+                                                                        <div class="address-details">
+                                                                            Cần Thơ
+
+                                                                            <textarea name="" id="" cols="30" rows="3" placeholder="Nhập địa chỉ trung chuyển"></textarea>
+                                                                        </div>
+                                                                    </div>
                                                                 </form>
-
+                                                                <hr>
                                                                 <form action=""
-                                                                    class="m-3 d-flex flex-column row-gap-2">
-                                                                    <div class="time">
-                                                                        <h6 class="fw-medium"></h6>
-                                                                    </div>
-                                                                    <div class="address">
-                                                                        <span class="fw-medium">Đông Hải, Bạc
-                                                                            Liêu</span>
-                                                                    </div>
-                                                                    <div class="address-details">
-                                                                        Bạc Liêu
+                                                                    class="p-3 d-flex flex-column row-gap-2">
+                                                                    <div class="trans-info">
+
+                                                                        <div class="time m-0">
+                                                                            <h6 class="fw-medium">19:20</h6>
+                                                                        </div>
+                                                                        <div class="address">
+                                                                            <span class="fw-medium">Đông Hải, Bạc
+                                                                                Liêu</span>
+                                                                        </div>
+                                                                        <div class="address-details">
+                                                                            Cần Thơ
+                                                                        </div>
+                                                                        <textarea name="" id="" cols="30" rows="3" placeholder="Nhập địa chỉ trung chuyển"></textarea>
                                                                     </div>
 
-                                                                    <textarea name="" id="" cols="30" rows="3" placeholder="Nhập địa chỉ trung chuyển"></textarea>
                                                                 </form>
                                                             </div>
                                                         </div>
@@ -487,10 +493,10 @@
                                                             </label>
 
                                                             <div class="address">
-                                                                <span class="fw-medium">Đông Hải, Bạc Liêu</span>
+                                                                <span class="fw-medium">Ninh Kiều, Cần Thơ</span>
                                                             </div>
                                                             <div class="address-details">
-                                                                Ấp Kinh Xáng, Xã Định Thành, Huyện Đông Hải, Bạc Liêu
+                                                                Ấp Kinh Xáng, Xã Định Thành, Huyện Ninh Kiều, Cần Thơ
                                                             </div>
                                                         </div>
                                                     </div>
@@ -508,10 +514,10 @@
                                                             </label>
 
                                                             <div class="address">
-                                                                <span class="fw-medium">Đông Hải, Bạc Liêu</span>
+                                                                <span class="fw-medium">Ninh Kiều, Cần Thơ</span>
                                                             </div>
                                                             <div class="address-details">
-                                                                Ấp Kinh Xáng, Xã Định Thành, Huyện Đông Hải, Bạc Liêu
+                                                                Ấp Kinh Xáng, Xã Định Thành, Huyện Ninh Kiều, Cần Thơ
                                                             </div>
                                                         </div>
                                                     </div>
@@ -527,16 +533,16 @@
 
                                                 <div class="form-check">
 
-                                                    <div class="points">
+                                                    <div class="points end">
 
                                                         <input class="form-check-input trans_start_input"
                                                             type="radio" name="radioDefault"
-                                                            id="trans_start_input">
+                                                            id="trans_start_input" />
 
                                                         <div class="d-flex justify-content-between">
 
                                                             <label class="form-check-label" for="trans_start_input">
-                                                                <h6 class="fw-medium">Trung chuyển tại Bạc Liêu</h6>
+                                                                <h6 class="fw-medium">Trung chuyển tại Cần Thơ</h6>
                                                             </label>
 
                                                             <div class="trans-show-more">
@@ -564,38 +570,44 @@
 
                                                         <div class="trans-start-details">
 
-                                                            <div class="form-wrap">
+                                                            <div class="form-wrap mt-4">
 
                                                                 <form action=""
-                                                                    class="m-3 d-flex flex-column row-gap-2">
-                                                                    <div class="time">
-                                                                        <h6 class="fw-medium"></h6>
-                                                                    </div>
-                                                                    <div class="address">
-                                                                        <span class="fw-medium">Thành phố Bạc
-                                                                            Liêu</span>
-                                                                    </div>
-                                                                    <div class="address-details">
-                                                                        Bạc liêu
+                                                                    class="p-3 d-flex flex-column row-gap-2">
+                                                                    <div class="trans-info">
+
+                                                                        <div class="time">
+                                                                            <h6 class="fw-medium m-0">18:00</h6>
+                                                                        </div>
+                                                                        <div class="address">
+                                                                            <span class="fw-medium">Thành phố Bạc Liêu</span>
+                                                                        </div>
+                                                                        <div class="address-details">
+                                                                            Cần Thơ
+                                                                        </div>
+
+                                                                        <textarea name="" id="" cols="30" rows="3" placeholder="Nhập địa chỉ trung chuyển"></textarea>
                                                                     </div>
 
-                                                                    <textarea name="" id="" cols="30" rows="3" placeholder="Nhập địa chỉ trung chuyển"></textarea>
                                                                 </form>
-
+                                                                <hr>
                                                                 <form action=""
-                                                                    class="m-3 d-flex flex-column row-gap-2">
-                                                                    <div class="time">
-                                                                        <h6 class="fw-medium"></h6>
-                                                                    </div>
-                                                                    <div class="address">
-                                                                        <span class="fw-medium">Đông Hải, Bạc
-                                                                            Liêu</span>
-                                                                    </div>
-                                                                    <div class="address-details">
-                                                                        Bạc Liêu
+                                                                    class="p-3 d-flex flex-column row-gap-2">
+                                                                    <div class="trans-info">
+
+                                                                        <div class="time">
+                                                                            <h6 class="fw-medium m-0">18:00</h6>
+                                                                        </div>
+                                                                        <div class="address">
+                                                                            <span class="fw-medium">Đông Hải, Bạc
+                                                                                Liêu</span>
+                                                                        </div>
+                                                                        <div class="address-details">
+                                                                            Cần Thơ
+                                                                        </div>
+                                                                        <textarea name="" id="" cols="30" rows="3" placeholder="Nhập địa chỉ trung chuyển"></textarea>
                                                                     </div>
 
-                                                                    <textarea name="" id="" cols="30" rows="3" placeholder="Nhập địa chỉ trung chuyển"></textarea>
                                                                 </form>
                                                             </div>
                                                         </div>
@@ -607,7 +619,7 @@
                                                     <div class="points">
 
                                                         <input class="form-check-input" type="radio"
-                                                            name="radioDefault" id="radioDefault1">
+                                                            name="radio" id="radioDefault1">
                                                         <div class="d-flex flex-column row-gap-1">
 
                                                             <label class="form-check-label" for="radioDefault1">
@@ -615,10 +627,10 @@
                                                             </label>
 
                                                             <div class="address">
-                                                                <span class="fw-medium">Đông Hải, Bạc Liêu</span>
+                                                                <span class="fw-medium">Ninh Kiều, Cần Thơ</span>
                                                             </div>
                                                             <div class="address-details">
-                                                                Ấp Kinh Xáng, Xã Định Thành, Huyện Đông Hải, Bạc Liêu
+                                                                Ấp Kinh Xáng, Xã Định Thành, Huyện Ninh Kiều, Cần Thơ
                                                             </div>
                                                         </div>
                                                     </div>
@@ -628,7 +640,7 @@
                                                     <div class="points">
 
                                                         <input class="form-check-input" type="radio"
-                                                            name="radioDefault" id="radioDefault2">
+                                                            name="radio" id="radioDefault2">
                                                         <div class="d-flex flex-column row-gap-1">
 
                                                             <label class="form-check-label" for="radioDefault2">
@@ -636,10 +648,10 @@
                                                             </label>
 
                                                             <div class="address">
-                                                                <span class="fw-medium">Đông Hải, Bạc Liêu</span>
+                                                                <span class="fw-medium">Ninh Kiều, Cần Thơ</span>
                                                             </div>
                                                             <div class="address-details">
-                                                                Ấp Kinh Xáng, Xã Định Thành, Huyện Đông Hải, Bạc Liêu
+                                                                Ấp Kinh Xáng, Xã Định Thành, Huyện Ninh Kiều, Cần Thơ
                                                             </div>
                                                         </div>
                                                     </div>
@@ -666,10 +678,12 @@
 
                                             <button
                                                 class="outline-btn small-btn hover {{ isset($isShowPoints[$i]) && $isShowPoints[$i] ? 'd-block' : 'd-none' }}"
-                                                wire:click="hide_points({{$i}})">Quay lại</button>
+                                                wire:click="hide_points({{ $i }})">Quay lại</button>
 
-                                            <button class="main-btn small-btn hover" wire:click="show_points({{$i}})">Tiếp
+                                            <button class="main-btn small-btn hover"
+                                                wire:click="{{ isset($isShowPoints[$i]) && $isShowPoints[$i] ? 'show_booking_confirmation' : 'show_points(' . $i . ')' }}">Tiếp
                                                 tục</button>
+
                                         </div>
                                     </div>
                                 </div>
@@ -688,6 +702,33 @@
 
         let isTransShowMore = false
 
+        //Hiện chi tiết ô nhập địa chỉ trung chuyển
+        $('.start .trans-info').click(function() {
+
+            const index = $('.start .trans-info').index(this)
+
+            $('.start .trans-info textarea').not(':eq(' + index + ')').slideUp("fast")
+            $('.start .form-wrap form').not(':eq(' + index + ')').removeClass('active')
+
+            $('.start .trans-info textarea').eq(index).slideDown("fast")
+            $('.start .form-wrap form').eq(index).addClass('active')
+
+        })
+
+        //Hiện chi tiết ô nhập địa chỉ trung chuyển
+        $('.end .trans-info').click(function() {
+
+            const index = $('.end .trans-info').index(this)
+
+            $('.end .trans-info textarea').not(':eq(' + index + ')').slideUp("fast")
+            $('.end .form-wrap form').not(':eq(' + index + ')').removeClass('active')
+
+            $('.end .trans-info textarea').eq(index).slideDown("fast")
+            $('.end .form-wrap form').eq(index).addClass('active')
+
+        })
+
+        // Ẩn Hiện thông tin chi tiết địa điểm trung chuyển
         $('.trans-show-more').click(function() {
 
             const index = $('.trans-show-more').index(this)
@@ -707,6 +748,7 @@
             }
         })
 
+        // Hiện thông tin chi tiết địa điểm trung chuyển
         $('.trans_start_input').click(function() {
 
             const index = $('.trans_start_input').index(this)
@@ -722,7 +764,8 @@
 
             const index = $('.trip-show-more-btn').index(this) // Lấy vị trí của nút
 
-            $('.trip-show-more').not(':eq(' + index + ')').slideUp("fast")// Ẩn tất cả các chi tiết khác
+            $('.trip-show-more').not(':eq(' + index + ')').slideUp(
+                "fast") // Ẩn tất cả các chi tiết khác
 
             $('.trip-show-more').eq(index).slideToggle("fast") // Hiện chi tiết của nút tương ứng
         })

@@ -21,6 +21,11 @@ class Trip extends Component
         // dd($this->isShowPoints);
     }
 
+    public function show_booking_confirmation() {
+        
+        return $this->redirect('/bookingconfirmation', navigate:true);
+    }
+
     public function render()
     {
         return view('livewire.trip');

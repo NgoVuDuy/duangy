@@ -121,7 +121,7 @@
                                                 <span class="fw-medium">Điểm đón</span>
                                             </div>
                                             <div class="d-flex flex-column">
-                                                <span class="fw-medium">Đông Hải, Bạc Liêu</span>
+                                                <span class="fw-medium">Ninh Kiều, Cần Thơ</span>
                                                 <span class="address-details">Ấp Kinh Xáng, Xã Định Thành, Huyện Đông
                                                     Hải, Tỉnh Bạc Liêu</span>
 
@@ -144,7 +144,7 @@
                                                 <span class="fw-medium">Điểm trả</span>
                                             </div>
                                             <div class="d-flex flex-column">
-                                                <span class="fw-medium">Đông Hải, Bạc Liêu</span>
+                                                <span class="fw-medium">Ninh Kiều, Cần Thơ</span>
                                                 <span class="address-details">Ấp Kinh Xáng, Xã Định Thành, Huyện Đông
                                                     Hải, Tỉnh Bạc
                                                     Liêu</span>
@@ -197,7 +197,7 @@
                                     <span class="fw-medium">Điểm đón</span>
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <span class="fw-medium">Đông Hải, Bạc Liêu</span>
+                                    <span class="fw-medium">Ninh Kiều, Cần Thơ</span>
                                     <span class="address-details">Ấp Kinh Xáng, Xã Định Thành, Huyện Đông Hải, Tỉnh Bạc
                                         Liêu</span>
                                 </div>
@@ -216,7 +216,7 @@
                                     <span class="fw-medium">Điểm trả</span>
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <span class="fw-medium">Đông Hải, Bạc Liêu</span>
+                                    <span class="fw-medium">Ninh Kiều, Cần Thơ</span>
                                     <span class="address-details">Ấp Kinh Xáng, Xã Định Thành, Huyện Đông Hải, Tỉnh Bạc
                                         Liêu</span>
                                 </div>
