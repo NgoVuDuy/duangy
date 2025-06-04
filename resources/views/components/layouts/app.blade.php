@@ -22,7 +22,11 @@
 
     @livewire('header')
 
-    {{ $slot }}
+
+    <div class="" style="padding-top: 86px">
+
+        {{ $slot }}
+    </div>
 
     @livewire('footer')
 

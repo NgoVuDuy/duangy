@@ -1,6 +1,7 @@
 .header-wrap {
 
     background: $light_blue;
+    
 
     .header {
 
@@ -50,6 +51,39 @@
 
             }
 
+        }
+    }
+
+    .header-login {
+        height: fit-content;
+        padding: 10px;
+        border-radius: 12px;
+        border: none;
+        background: $orange;
+        color: white;
+    }
+}
+
+.header-form-wrap {
+
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    background: white;
+    border: 1px $border-gray solid;
+
+
+
+    .login-form, .register-form {
+
+        .to-other {
+            cursor: pointer ;
+        }
+    
+        input {
+            border: none;
+            padding: 8px;
+            background: $input;
+            border-radius: 12px;
         }
     }
 }

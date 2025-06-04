@@ -1,47 +1,107 @@
 <div>
-    {{-- Success is as dangerous as failure. --}}
-    <div class="container booking-confirmation mt-5 mb-5">
-        <div class="row justify-content-evenly">
-            <div class="col-7 ">
+    {{-- Close your eyes. Count to one. That is how long forever feels. --}}
+    <div class="container mt-5 mb-5 payment booking-confirmation">
+        <div class="row">
+            <div class="col-5">
                 <div class="shadow p-5">
-                    <h5>Thông tin liên hệ</h5>
-                    <form action="" class="form p-3">
-                        <div class="d-flex flex-column row-gap-4">
 
-                            <div class="">
+                    <h5 class="mb-4">
+                        Phương thức thanh toán
+                    </h5>
+                    <div class="d-flex flex-column row-gap-4">
 
-                                <label class="fw-medium" for="">Họ và Tên</label>
-                                <input type="text" name="" id="">
-                            </div>
-                            <div class="">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1">
+                            <label class="form-check-label" for="radioDefault1">
 
-                                <label class="fw-medium" for="">Số điện thoại</label>
-                                <input type="text" name="" id="">
-                            </div>
+                                <div class="">
 
-                            <div class="alert alert-success d-flex align-items-center m-0" role="alert">
+                                    <img src="{{ asset('images/logo/vnpay-logo.jpg') }}" alt="" width="70px"
+                                        height="70px">
+                                    <span class="fw-medium">
 
-                                <svg class="me-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="lucide lucide-shield-check-icon lucide-shield-check">
-                                    <path
-                                        d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
-                                    <path d="m9 12 2 2 4-4" />
-                                </svg>
-                                <div>
-                                    Thông tin vé xe sẽ được gửi về Zalo thông qua số điện thoại của bạn
+                                        VNPay - Chuyển khoản thẻ ATM nội địa
+                                    </span>
+
                                 </div>
-                            </div>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault2"
+                                checked>
+                            <label class="form-check-label" for="radioDefault2">
+                                <span class="fw-medium">
+
+                                    Thanh toán khi lên xe
+                                </span>
+                            </label>
                         </div>
 
-                    </form>
-
+                    </div>
                 </div>
-                <button class="confirmation-btn main-btn lg-btn mt-5">
+
+                <button class="w-100 main-btn lg-btn mt-5">
                     Tiếp tục
                 </button>
             </div>
+
+            <div class="col-3">
+                <div class="shadow p-3 ticket-details">
+                    <div class="d-flex justify-content-between">
+
+                        <h5>Thông tin vé</h5>
+
+                        <h5>240.000đ</h5>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-3 ticket-price">
+
+                        <div class="left">
+                            <span class="fw-medium">Giá vé</span>
+                        </div>
+                        <div class="right d-flex flex-column row-gap-2">
+                            <div class="items d-flex flex-column">
+                                <span class="fw-medium">140.000đ x1</span>
+                                <span class="ticket-number">Mã ghế: A1</span>
+                            </div>
+                            <div class="items d-flex flex-column">
+                                <span class="fw-medium">100.000đ x1</span>
+                                <span class="ticket-number">Mã ghế: A2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="shadow p-3 ticket-details mt-4">
+                    <div class="d-flex justify-content-between">
+
+                        <h5>Thông tin người đặt</h5>
+
+                    </div>
+
+                    <div class="mt-3 ticket-price">
+
+                        <div class="d-flex flex-column row-gap-3">
+                            <div class="d-flex justify-content-between">
+                                <div class="">
+                                    Khách hàng
+                                </div>
+                                <div class="fw-medium">Ngô Vũ Duy</div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <div class="">
+                                    Số điện thoại
+                                </div>
+                                <div class="fw-medium">0957422058</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
             <div class="col-4">
                 <div class="shadow p-5">
 
@@ -58,7 +118,7 @@
                                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                                     aria-label="Close"></button>
                             </div>
-                            
+
                             <div class="offcanvas-body">
                                 <div class="trip-details">
 
@@ -114,9 +174,12 @@
                                                     stroke-linejoin="round"
                                                     class="lucide lucide-locate-icon lucide-locate">
                                                     <line x1="2" x2="5" y1="12" y2="12" />
-                                                    <line x1="19" x2="22" y1="12" y2="12" />
-                                                    <line x1="12" x2="12" y1="2" y2="5" />
-                                                    <line x1="12" x2="12" y1="19" y2="22" />
+                                                    <line x1="19" x2="22" y1="12"
+                                                        y2="12" />
+                                                    <line x1="12" x2="12" y1="2"
+                                                        y2="5" />
+                                                    <line x1="12" x2="12" y1="19"
+                                                        y2="22" />
                                                     <circle cx="12" cy="12" r="7" />
                                                 </svg>
                                                 <span class="fw-medium">Điểm đón</span>
@@ -226,32 +289,9 @@
                     </div>
                 </div>
 
-                <div class="shadow p-5 mt-4 ticket-details">
-                    <div class="d-flex justify-content-between">
 
-                        <h5>Thông tin vé</h5>
-
-                        <h5>240.000đ</h5>
-                    </div>
-
-                    <div class="d-flex justify-content-between mt-3 ticket-price">
-
-                        <div class="left">
-                            <span class="fw-medium">Giá vé</span>
-                        </div>
-                        <div class="right d-flex flex-column row-gap-2">
-                            <div class="items d-flex flex-column">
-                                <span class="fw-medium">140.000đ x1</span>
-                                <span class="ticket-number">Mã ghế: A1</span>
-                            </div>
-                            <div class="items d-flex flex-column">
-                                <span class="fw-medium">100.000đ x1</span>
-                                <span class="ticket-number">Mã ghế: A2</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
+
         </div>
     </div>
 </div>
