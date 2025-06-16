@@ -11,7 +11,7 @@ Route::get('/', function () {
     return redirect('/home');
 });
 Route::get('/home', Home::class);
-Route::get('/trips', Trip::class);
+Route::get('/trips', Trip::class)->name('trips');
 Route::get('/payments', Payment::class);
 Route::get('/bookingconfirmation', BookingConfirmation::class);
 Route::get('/user', User::class);

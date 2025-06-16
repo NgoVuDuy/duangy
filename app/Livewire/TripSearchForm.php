@@ -2,14 +2,100 @@
 
 namespace App\Livewire;
 
+use App\Http\Controllers\RouteController;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
+use Livewire\Attributes\Url;
+use Carbon\Carbon;
 
 
 class TripSearchForm extends Component
 {
-    public function trip_search() {
-        return $this->redirect('trips', navigate:true);
+
+    public $routes = []; // Danh sách chuyến đi
+
+    public $start_points = []; // Các điểm bắt đầu
+    public $end_points = []; // Các điểm kết thúc
+
+    // Các lựa chọn hiện tại
+    #[Url]
+    public $start_point_value = '';
+    #[Url]
+    public $end_point_value = '';
+    #[Url]
+    public $date_value = '';
+
+    public $today; // Ngày hiện tại
+
+
+    public function mount()
+    {
+
+        // $this->date_value = Carbon::today()->format('Y-m-d');
+
+        $this->today = Carbon::today()->format('Y-m-d');
+
+
+        $routeController = new RouteController();
+
+        // $this->start_points = $routeController->index()->getData();
+        // $this->end_points = $routeController->index()->getData();
+
+
     }
+    public function getStartPoint()
+    {
+
+        $routeController = new RouteController();
+        $this->start_points = $routeController->search_start_point($this->start_point_value, $this->end_point_value)->getData();
+    }
+    public function getEndPoint()
+    {
+
+        $routeController = new RouteController();
+        $this->end_points = $routeController->search_end_point($this->start_point_value, $this->end_point_value)->getData();
+    }
+
+    public function setStartPointValue($value)
+    {
+        $this->start_point_value = $value;
+    }
+
+    public function setEndPointValue($value)
+    {
+        $this->end_point_value = $value;
+    }
+
+    // Ấn nút tìm kiếm
+    public function trip_search()
+    {
+        if ($this->start_point_value == '' || $this->end_point_value == '' || $this->date_value == '') {
+
+            return $this->js("alert('Vui lòng nhập đầy đủ thông tin tìm kiếm')");
+        }
+
+        // Redirect kèm query string
+        return $this->redirect("/trips?start_point_value={$this->start_point_value}&end_point_value={$this->end_point_value}&date_value={$this->date_value}", navigate: true);
+    }
+
+    // Khi dữ liệu ô input về điểm bắt đầu thay đổi
+    public function updatedStartPointValue($value)
+    {
+
+        $routeController = new RouteController();
+
+        $this->start_points = $routeController->search_start_point($value, $this->end_point_value)->getData();
+    }
+
+    public function updatedEndPointValue($value)
+    {
+        $routeController = new RouteController();
+
+        $this->end_points = $routeController->search_end_point($this->start_point_value, $value)->getData();
+    }
+
+
+
     public function render()
     {
         return view('livewire.trip-search-form');

@@ -1,0 +1,12 @@
+.user {
+    .user-form {
+        label {
+            width: 200px;
+        }
+    }
+
+    .user-information-nav.active {
+        color: $light_blue;
+        text-decoration: none;
+    }
+}

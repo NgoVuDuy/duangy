@@ -13,7 +13,7 @@ class BusController extends Controller
     public function index()
     {
         //
-        $bus = Bus::all();
+        $bus = Bus::with('seat_types')->get();
         return response()->json($bus);
     }
 

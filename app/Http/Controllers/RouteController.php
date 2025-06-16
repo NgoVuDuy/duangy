@@ -48,4 +48,36 @@ class RouteController extends Controller
     {
         //
     }
+
+    // Tìm kiếm điểm kết thúc
+    public function search_start_point(string $start_point_value, string $end_point_value)
+    {
+        $routes = [];
+
+        if ($end_point_value == '') {
+
+            $routes = Route::where('start_point', 'like', "%$start_point_value%")->get();
+        } else {
+            $routes = Route::where('start_point', 'like', "%$start_point_value%")
+                ->where('end_point', 'like', "%$end_point_value%")->get();
+        }
+
+        return response()->json($routes);
+    }
+
+    // Tìm kiếm điểm bắt đầu
+    public function search_end_point(string $start_point_value, string $end_point_value)
+    {
+        $routes = [];
+
+        if ($start_point_value == '') {
+
+            $routes = Route::where('end_point', 'like', "%$end_point_value%")->get();
+        } else {
+            $routes = Route::where('start_point', 'like', "%$start_point_value%")
+                ->where('end_point', 'like', "%$end_point_value%")->get();
+        }
+
+        return response()->json($routes);
+    }
 }

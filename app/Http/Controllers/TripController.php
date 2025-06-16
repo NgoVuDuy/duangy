@@ -48,4 +48,21 @@ class TripController extends Controller
     {
         //
     }
+
+    // Tìm kiếm chuyến đi
+    public function search(string $start_point, string $end_point, string $date)
+    {
+
+        $trips = Trip::where('departure_date', $date)
+
+            ->whereHas('route', function ($query) use ($start_point, $end_point) {
+                $query->where('start_point', 'like', "%$start_point%")
+                    ->where('end_point', 'like', "%$end_point%");
+            })
+            ->with('bus.seat_types')
+            ->with('route')
+            ->get();
+
+        return response()->json($trips);
+    }
 }

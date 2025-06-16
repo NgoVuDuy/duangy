@@ -38,7 +38,7 @@
                     </form>
 
                 </div>
-                <button class="confirmation-btn main-btn lg-btn mt-5">
+                <button class="confirmation-btn main-btn lg-btn mt-5" wire:click="next_button">
                     Tiếp tục
                 </button>
             </div>

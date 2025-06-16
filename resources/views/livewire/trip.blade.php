@@ -8,7 +8,6 @@
                 @livewire('trip-search-form')
             </div>
         </div>
-
     </div>
     <div class="container">
         <div class="row">
@@ -50,10 +49,10 @@
             </div>
             <div class="col-8">
                 <div class="trip-list">
-                    <h4 class="result mb-3">Kết quả: <span class="ms-4">12 Chuyến</span></h4>
+                    <h4 class="result mb-3">Kết quả: <span class="ms-4">{{ count($trips) }} Chuyến</span></h4>
                     <div class="d-flex flex-column row-gap-5">
 
-                        @for ($i = 1; $i <= 4; $i++)
+                        @foreach ($trips as $key => $trip)
                             <div class="item-wrap d-flex flex-column shadow">
                                 <div class="item d-flex justify-content-between">
                                     <div class="left d-flex column-gap-4">
@@ -67,7 +66,8 @@
                                                     Hạ Long Travel Limousine
                                                 </h5>
                                                 <div class="bus-name mt-3">
-                                                    Limousine 10 chỗ
+
+                                                    {{ $trip->bus->bus_type . '  ' . $trip->bus->total_seat }} chỗ
                                                 </div>
                                             </div>
                                             <div class="d-flex column-gap-2">
@@ -104,19 +104,19 @@
                                                     <div class="start-point d-flex align-items-center column-gap-3">
 
                                                         <h4 class="time m-0">
-                                                            14:02
+                                                            {{ $trip->departure_time }}
                                                         </h4>
                                                         <div class="address fw-medium">
-                                                            Văn phòng Hạ Long
+                                                            {{ $trip->route->start_point }}
                                                         </div>
 
                                                     </div>
                                                     <div class="end-point d-flex align-items-center column-gap-3">
                                                         <h4 class="time m-0">
-                                                            17:32
+                                                            {{ $trip->arrival_time }}
                                                         </h4>
                                                         <div class="address fw-medium">
-                                                            Văn phòng Long Biên
+                                                            {{ $trip->route->end_point }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -124,13 +124,14 @@
                                         </div>
                                     </div>
                                     <div class="right d-flex flex-column justify-content-between">
+
                                         <h5 class="price-ticket">
-                                            Từ 260.000đ
+                                            Từ {{ $trip->price }}đ
                                         </h5>
                                         <div class="">
 
                                             <div class="seat-empty mb-3">
-                                                <span>Còn 5 chỗ trống</span>
+                                                {{-- <span>{{ $trip->bus->total_seat }} chỗ</span> --}}
                                             </div>
                                             <button class="main-btn small-btn hover trip-show-more-btn">Chọn
                                                 chuyến</button>
@@ -142,7 +143,7 @@
                                     <hr>
 
                                     <div
-                                        class="seat-wrap mt-5 ps-5 pe-5 d-flex justify-content-between {{ isset($isShowPoints[$i]) && $isShowPoints[$i] ? 'd-none' : 'd-flex' }}">
+                                        class="seat-wrap mt-5 ps-5 pe-5 justify-content-between {{ $isShowPoints[$key] ? 'd-none' : 'd-flex' }}">
                                         <div class="left">
                                             <div class="seat-note">
                                                 <h6 class="title mb-4">Chú thích</h6>
@@ -162,80 +163,41 @@
                                                         </svg>
                                                         <div class="">
 
-                                                            <span class="seat-type-text fw-medium">Ghế đang
-                                                                chọn</span>
-                                                            <div class="price">
-                                                                140.000đ
-                                                            </div>
+                                                            <span class="seat-type-text fw-medium">Ghế đang chọn</span>
+
                                                         </div>
 
                                                     </div>
-                                                    <div class="item d-flex align-items-center column-gap-4">
-                                                        <svg class="seat-item item2"
-                                                            xmlns="http://www.w3.org/2000/svg" width="32"
-                                                            height="32" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="1"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="lucide lucide-armchair-icon lucide-armchair">
-                                                            <path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3" />
-                                                            <path
-                                                                d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z" />
-                                                            <path d="M5 18v2" />
-                                                            <path d="M19 18v2" />
-                                                        </svg>
-                                                        <div class="">
 
-                                                            <span class="seat-type-text fw-medium">Ghế đầu</span>
-                                                            <div class="price">
-                                                                140.000đ
+                                                    @foreach ($trip->bus->seat_types as $i => $seat_type)
+                                                        <div class="item d-flex align-items-center column-gap-4">
+                                                            <svg class="seat-item item{{ $i + 2 }}"
+                                                                xmlns="http://www.w3.org/2000/svg" width="32"
+                                                                height="32" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="1"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-armchair-icon lucide-armchair">
+                                                                <path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3" />
+                                                                <path
+                                                                    d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z" />
+                                                                <path d="M5 18v2" />
+                                                                <path d="M19 18v2" />
+                                                            </svg>
+                                                            <div class="">
+
+                                                                <span
+                                                                    class="seat-type-text fw-medium">{{ $seat_type->name }}</span>
+                                                                <div class="price">
+                                                                    {{-- 140.000đ --}}
+                                                                    {{ number_format((int) str_replace('.', '', $trip->price) + (int) str_replace('.', '', $seat_type->extra_price), 0, '', '.') }}đ
+
+                                                                </div>
                                                             </div>
+
                                                         </div>
+                                                    @endforeach
 
-                                                    </div>
-                                                    <div class="item d-flex align-items-center column-gap-4">
-                                                        <svg class="seat-item item3"
-                                                            xmlns="http://www.w3.org/2000/svg" width="32"
-                                                            height="32" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="1"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="lucide lucide-armchair-icon lucide-armchair">
-                                                            <path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3" />
-                                                            <path
-                                                                d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z" />
-                                                            <path d="M5 18v2" />
-                                                            <path d="M19 18v2" />
-                                                        </svg>
-                                                        <div class="">
 
-                                                            <span class="seat-type-text fw-medium">Ghế giữa</span>
-                                                            <div class="price">
-                                                                140.000đ
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="item d-flex align-items-center column-gap-4">
-                                                        <svg class="seat-item item4"
-                                                            xmlns="http://www.w3.org/2000/svg" width="32"
-                                                            height="32" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="1"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="lucide lucide-armchair-icon lucide-armchair">
-                                                            <path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3" />
-                                                            <path
-                                                                d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z" />
-                                                            <path d="M5 18v2" />
-                                                            <path d="M19 18v2" />
-                                                        </svg>
-                                                        <div class="">
-
-                                                            <span class="seat-type-text fw-medium">Ghế cuối</span>
-                                                            <div class="price">
-                                                                140.000đ
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -382,14 +344,13 @@
                                                             <path d="M19 18v2" />
                                                         </svg>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div
-                                        class="points-cover d-flex {{ isset($isShowPoints[$i]) && $isShowPoints[$i] ? 'd-block' : 'd-none' }} column-gap-5">
+                                        class="points-cover {{ $isShowPoints[$key] ? 'd-flex' : 'd-none' }} column-gap-5">
 
                                         <div class="start-points p-3">
                                             <div class="title">
@@ -447,7 +408,8 @@
                                                                             <h6 class="fw-medium m-0">19:00</h6>
                                                                         </div>
                                                                         <div class="address">
-                                                                            <span class="fw-medium">Thành phố Cần Thơ</span>
+                                                                            <span class="fw-medium">Thành phố Cần
+                                                                                Thơ</span>
                                                                         </div>
                                                                         <div class="address-details">
                                                                             Cần Thơ
@@ -465,8 +427,7 @@
                                                                             <h6 class="fw-medium">19:20</h6>
                                                                         </div>
                                                                         <div class="address">
-                                                                            <span class="fw-medium">Đông Hải, Bạc
-                                                                                Liêu</span>
+                                                                            <span class="fw-medium">Cần Thơ</span>
                                                                         </div>
                                                                         <div class="address-details">
                                                                             Cần Thơ
@@ -580,7 +541,8 @@
                                                                             <h6 class="fw-medium m-0">18:00</h6>
                                                                         </div>
                                                                         <div class="address">
-                                                                            <span class="fw-medium">Thành phố Bạc Liêu</span>
+                                                                            <span class="fw-medium">Thành phố Bạc
+                                                                                Liêu</span>
                                                                         </div>
                                                                         <div class="address-details">
                                                                             Cần Thơ
@@ -599,8 +561,7 @@
                                                                             <h6 class="fw-medium m-0">18:00</h6>
                                                                         </div>
                                                                         <div class="address">
-                                                                            <span class="fw-medium">Đông Hải, Bạc
-                                                                                Liêu</span>
+                                                                            <span class="fw-medium">Cần Thơ</span>
                                                                         </div>
                                                                         <div class="address-details">
                                                                             Cần Thơ
@@ -618,8 +579,8 @@
 
                                                     <div class="points">
 
-                                                        <input class="form-check-input" type="radio"
-                                                            name="radio" id="radioDefault1">
+                                                        <input class="form-check-input" type="radio" name="radio"
+                                                            id="radioDefault1">
                                                         <div class="d-flex flex-column row-gap-1">
 
                                                             <label class="form-check-label" for="radioDefault1">
@@ -639,8 +600,8 @@
 
                                                     <div class="points">
 
-                                                        <input class="form-check-input" type="radio"
-                                                            name="radio" id="radioDefault2">
+                                                        <input class="form-check-input" type="radio" name="radio"
+                                                            id="radioDefault2">
                                                         <div class="d-flex flex-column row-gap-1">
 
                                                             <label class="form-check-label" for="radioDefault2">
@@ -677,18 +638,18 @@
                                             </div>
 
                                             <button
-                                                class="outline-btn small-btn hover {{ isset($isShowPoints[$i]) && $isShowPoints[$i] ? 'd-block' : 'd-none' }}"
-                                                wire:click="hide_points({{ $i }})">Quay lại</button>
+                                                class="outline-btn small-btn hover {{ $isShowPoints[$key] ? 'd-block' : 'd-none' }}"
+                                                wire:click="hide_points({{ $key }})">Quay lại</button>
 
                                             <button class="main-btn small-btn hover"
-                                                wire:click="{{ isset($isShowPoints[$i]) && $isShowPoints[$i] ? 'show_booking_confirmation' : 'show_points(' . $i . ')' }}">Tiếp
+                                                wire:click="{{ $isShowPoints[$key] ? 'show_booking_confirmation' : 'show_points(' . $key . ')' }}">Tiếp
                                                 tục</button>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @endfor
+                        @endforeach
 
                     </div>
                 </div>
@@ -697,89 +658,103 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function() {
 
-        let isTransShowMore = false
+@script
+    <script>
+        $(document).ready(function() {
 
-        //Hiện chi tiết ô nhập địa chỉ trung chuyển
-        $('.start .trans-info').click(function() {
+            let isTransShowMore = false
 
-            const index = $('.start .trans-info').index(this)
+            //Hiện chi tiết ô nhập địa chỉ trung chuyển
+            $('.start .trans-info').click(function() {
 
-            $('.start .trans-info textarea').not(':eq(' + index + ')').slideUp("fast")
-            $('.start .form-wrap form').not(':eq(' + index + ')').removeClass('active')
+                const index = $('.start .trans-info').index(this)
 
-            $('.start .trans-info textarea').eq(index).slideDown("fast")
-            $('.start .form-wrap form').eq(index).addClass('active')
+                $('.start .trans-info textarea').not(':eq(' + index + ')').slideUp("fast")
+                $('.start .form-wrap form').not(':eq(' + index + ')').removeClass('active')
 
+                $('.start .trans-info textarea').eq(index).slideDown("fast")
+                $('.start .form-wrap form').eq(index).addClass('active')
+
+            })
+
+            //Hiện chi tiết ô nhập địa chỉ trung chuyển
+            $('.end .trans-info').click(function() {
+
+                const index = $('.end .trans-info').index(this)
+
+                $('.end .trans-info textarea').not(':eq(' + index + ')').slideUp("fast")
+                $('.end .form-wrap form').not(':eq(' + index + ')').removeClass('active')
+
+                $('.end .trans-info textarea').eq(index).slideDown("fast")
+                $('.end .form-wrap form').eq(index).addClass('active')
+
+            })
+
+            // Ẩn Hiện thông tin chi tiết địa điểm trung chuyển
+            $('.trans-show-more').click(function() {
+
+                const index = $('.trans-show-more').index(this)
+
+                $('.trans-start-details').eq(index).slideToggle("fast")
+
+                isTransShowMore = !isTransShowMore
+
+                if (isTransShowMore) {
+
+                    $('.hide').eq(index).show()
+                    $('.show').eq(index).hide()
+                } else {
+
+                    $('.hide').eq(index).hide()
+                    $('.show').eq(index).show()
+                }
+            })
+
+            // Hiện thông tin chi tiết địa điểm trung chuyển
+            $('.trans_start_input').click(function() {
+
+                const index = $('.trans_start_input').index(this)
+
+                $('.trans-start-details').eq(index).slideDown("fast")
+
+                isTransShowMore = true
+
+            })
+
+            // Ẩn hiện chi tiết chuyến (gồm ghế ngồi và điểm đón trả)
+            $('.trip-show-more-btn').click(function() {
+
+
+                const index = $('.trip-show-more-btn').index(this) // Lấy vị trí của nút
+                $wire.$set('isShowPoints.' + index, false)
+
+                $('.trip-show-more').not(':eq(' + index + ')').slideUp(
+                    "fast") // Ẩn tất cả các chi tiết khác
+
+                $('.trip-show-more').eq(index).slideToggle("fast") // Hiện chi tiết của nút tương ứng
+            })
+
+            // Chọn và bỏ chọn ghế ngồi
+            $('.seat-diagram .line .seat-item').click(function() {
+
+                if ($(this).hasClass('active')) {
+
+                    $(this).removeClass('active')
+                } else {
+
+                    $(this).addClass('active')
+                }
+            })
         })
+    </script>
+    {{-- <script>
+        $(document).ready(function() {
 
-        //Hiện chi tiết ô nhập địa chỉ trung chuyển
-        $('.end .trans-info').click(function() {
+            // $('.trip-show-more-btn').click(function() {
 
-            const index = $('.end .trans-info').index(this)
-
-            $('.end .trans-info textarea').not(':eq(' + index + ')').slideUp("fast")
-            $('.end .form-wrap form').not(':eq(' + index + ')').removeClass('active')
-
-            $('.end .trans-info textarea').eq(index).slideDown("fast")
-            $('.end .form-wrap form').eq(index).addClass('active')
-
+            //     $wire.$set('isShowPoints', false)
+            // })
         })
-
-        // Ẩn Hiện thông tin chi tiết địa điểm trung chuyển
-        $('.trans-show-more').click(function() {
-
-            const index = $('.trans-show-more').index(this)
-
-            $('.trans-start-details').eq(index).slideToggle("fast")
-
-            isTransShowMore = !isTransShowMore
-
-            if (isTransShowMore) {
-
-                $('.hide').eq(index).show()
-                $('.show').eq(index).hide()
-            } else {
-
-                $('.hide').eq(index).hide()
-                $('.show').eq(index).show()
-            }
-        })
-
-        // Hiện thông tin chi tiết địa điểm trung chuyển
-        $('.trans_start_input').click(function() {
-
-            const index = $('.trans_start_input').index(this)
-
-            $('.trans-start-details').eq(index).slideDown("fast")
-
-            isTransShowMore = true
-
-        })
-
-        // Ẩn hiện chi tiết chuyến (gồm ghế ngồi và điểm đón trả)
-        $('.trip-show-more-btn').click(function() {
-
-            const index = $('.trip-show-more-btn').index(this) // Lấy vị trí của nút
-
-            $('.trip-show-more').not(':eq(' + index + ')').slideUp(
-                "fast") // Ẩn tất cả các chi tiết khác
-
-            $('.trip-show-more').eq(index).slideToggle("fast") // Hiện chi tiết của nút tương ứng
-        })
-
-        // Chọn và bỏ chọn ghế ngồi
-        $('.seat-diagram .line .seat-item').click(function() {
-
-            if ($(this).hasClass('active')) {
-
-                $(this).removeClass('active')
-            } else {
-
-                $(this).addClass('active')
-            }
-        })
-    })
-</script>
+    </script> --}}
+@endscript

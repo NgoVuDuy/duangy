@@ -2,7 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Http\Controllers\UserController;
 use Livewire\Component;
+
+use Livewire\Attributes\Session;
 
 class LoginRegisterForm extends Component
 {
@@ -10,17 +13,65 @@ class LoginRegisterForm extends Component
     public $isShowLogin = true;
     public $isShowRegister = false;
 
-    public function close_header_form() {
+    public $phoneNumber;
+
+    public $result = null; // Dữ liệu người dùng 
+
+    // #[Session(key: 'user')]
+    // public $user;
+
+    public function mount() {
+
+        // dd($this->user);
+            // dd(session()->get('user'));
 
     }
 
-    public function setShowOther() {
+    public function close_header_form() {}
+
+    // Hàm chuyển đổi form đăng nhập - đăng ký
+    public function setShowOther()
+    {
         $this->isShowLogin = !$this->isShowLogin;
         $this->isShowRegister = !$this->isShowRegister;
     }
 
+    // Hàm đăng nhập
+    public function login() {
+
+        $userController = new UserController();
+
+        $this->result = $userController->login($this->phoneNumber)->getData();
+
+        if($this->result->code == 0) {
+
+            return $this->js("alert('Đăng nhập thất bại')");
+
+        } else {
+
+            // $this->user = $this->result->user;
+            session()->put('user', $this->result->user);
+
+            // Phát sự kiện cho header cập nhật lại giao diện
+            $this->dispatch('login-success');
+
+            
+        }
+    }
+
+    // Hàm đăng ký
+    public function register()
+    {
+        $userController = new UserController();
+
+        $userController->register($this->phoneNumber);
+
+        return $this->js("alert('Đăng ký thành công')");
+    }
+
     public function render()
     {
+
         return view('livewire.login-register-form');
     }
 }

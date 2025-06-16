@@ -1,6 +1,7 @@
 <div class="form-search-wrap">
     <form wire:submit="trip_search" class="form-search d-flex column-gap-5 align-items-center">
-        <div class="start-point d-flex flex-column row-gap-2">
+
+        <div class="start-point d-flex flex-column row-gap-2 position-relative">
             <label for="">
                 Nơi xuất phát
             </label>
@@ -14,12 +15,29 @@
                     <line x1="12" x2="12" y1="19" y2="22" />
                     <circle cx="12" cy="12" r="7" />
                 </svg>
-                <input class="main-input" type="text" name="" id=""
-                    placeholder="Nhập nơi xuất phát">
+                <input class="main-input" type="text" name="" id="startPointInput"
+                    placeholder="Nhập nơi xuất phát" wire:model.live="start_point_value" autocomplete="off"
+                    wire:click="getStartPoint">
+
             </div>
+
+            <div class="start-point-result position-absolute top-100 start-50 translate-middle-x rounded d-none"
+                wire:ignore.self>
+
+                <div class="local d-flex flex-column">
+
+                    @foreach ($start_points as $start_point)
+                        <span class="p-2 rounded" wire:click="setStartPointValue('{{ $start_point->start_point }}')">
+                            {{ $start_point->start_point }}
+                        </span>
+                    @endforeach
+
+                </div>
+            </div>
+
         </div>
 
-        <div class="end-point d-flex flex-column row-gap-2">
+        <div class="end-point d-flex flex-column row-gap-2 position-relative ">
             <label for="">Nơi đến</label>
             <div class="d-flex align-items-center">
                 <svg class="red-text" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -29,14 +47,62 @@
                         d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
                     <circle cx="12" cy="10" r="3" />
                 </svg>
-                <input class="main-input" type="text" name="" id="" placeholder="Nhập nơi đến">
+                <input class="main-input" type="text" name="" id="endPointInput" placeholder="Nhập nơi đến"
+                    wire:model.live="end_point_value" autocomplete="off" wire:click="getEndPoint">
+            </div>
+
+
+            <div class="end-point-result position-absolute top-100 start-50 translate-middle-x rounded d-none"
+                wire:ignore.self>
+                <div class="local d-flex flex-column">
+
+                    @foreach ($end_points as $end_point)
+                        <span class="p-2 rounded" wire:click="setEndPointValue('{{ $end_point->end_point }}')">
+
+                            {{ $end_point->end_point }}
+                        </span>
+                    @endforeach
+
+                </div>
             </div>
         </div>
 
         <div class="date-point d-flex flex-column row-gap-2">
+
             <label for="">Ngày đi</label>
-            <input class="main-input" type="date" name="" id="">
+            <input class="main-input" type="date" name="" id="datePoint" wire:model.live="date_value" min="{{ $today }}">
+
         </div>
+
         <button type="submit" class="main-btn lg-btn hover">Tìm kiếm</button>
     </form>
+    <script>
+        $(document).ready(function() {
+
+            // Ngăn chọn ngày trước ngày hiện tại
+            // Lấy ngày hiện tại
+
+            $('#startPointInput').on("click", function(e) {
+                e.stopPropagation(); // ngăn click lan ra document
+                $('.start-point-result').removeClass('d-none');
+            });
+
+            $('#endPointInput').on("click", function(e) {
+                e.stopPropagation(); // ngăn click lan ra document
+                $('.end-point-result').removeClass('d-none');
+            });
+
+            // Ngăn ẩn khi click vào kết quả
+            $('.start-point-result, .end-point-result').on("click", function(e) {
+                e.stopPropagation();
+            });
+
+            $(document).on('click', () => {
+
+                $('.start-point-result').addClass('d-none')
+                $('.end-point-result').addClass('d-none')
+
+            })
+        })
+    </script>
 </div>

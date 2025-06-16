@@ -21,13 +21,35 @@
                 color: #9d9d9d;
                 font-size: 12px;
             }
+
+
         }
     }
 
     background: $outline_blue;
 }
 
+.start-point,
+.end-point {
+
+    .start-point-result,
+    .end-point-result {
+        // overflow-y: scroll;
+        // border: 1px $border_gray solid;
+        width: 200px;
+        // height: 200px;
+        background: white;
+
+        .local {
+            span:hover {
+                background: $outline_blue;
+            }
+        }
+    }
+}
+
 .trip {
+
     .search {
         input:focus-visible {
             outline: none;

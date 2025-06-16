@@ -11,22 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('trips', function (Blueprint $table) {
+        Schema::create('bus_seat_type', function (Blueprint $table) {
+
             $table->id();
-
+            $table->unsignedBigInteger('seat_type_id')->nullable();
             $table->unsignedBigInteger('bus_id')->nullable();
-            $table->unsignedBigInteger("route_id")->nullable();
-            
-            $table->string('departure_time');
-            $table->string('arrival_time');
-            $table->string('departure_date');
-            $table->string("status");
-            $table->string("price");
-
             $table->timestamps();
 
+            $table->foreign('seat_type_id')->references('id')->on('seat_types')->onDelete('set null');
             $table->foreign('bus_id')->references('id')->on('buses')->onDelete('set null');
-            $table->foreign('route_id')->references('id')->on('routes')->onDelete('set null');
 
         });
     }
@@ -36,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('trips');
+        Schema::dropIfExists('bus_seat_type');
     }
 };

@@ -28,7 +28,18 @@
                     <div class="text fw-medium">Hotline 24/7</div>
                 </div>
             </div>
-            <button class="header-login" wire:click="setShowLoginForm">Đăng nhập</button>
+            <button class="header-login {{ $isShowUserIcon ? 'd-none' : 'd-block' }}" wire:click="setShowLoginForm">Đăng
+                nhập</button>
+            <a class="link-to-user {{ $isShowUserIcon ? 'd-block' : 'd-none' }}" href="/user" wire:navigate >
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-user-icon lucide-user">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+            </a>
+
+
         </div>
     </div>
 

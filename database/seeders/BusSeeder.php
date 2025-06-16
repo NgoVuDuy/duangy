@@ -18,14 +18,14 @@ class BusSeeder extends Seeder
             [
                 "bus_type" => "Giường nằm",
                 "license_plate" => "51B-79834",
-                "total_seat" => 40,
+                "total_seat" => 7,
                 "created_at" => now(),
                 "updated_at" => now()
             ],
             [
                 "bus_type" => "Ghế ngồi",
                 "license_plate" => "51B-79877",
-                "total_seat" => 12,
+                "total_seat" => 11,
                 "created_at" => now(),
                 "updated_at" => now()
             ]

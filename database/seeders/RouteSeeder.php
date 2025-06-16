@@ -24,14 +24,21 @@ class RouteSeeder extends Seeder
                     'updated_at' => now()
                 ],
                 [
-                    'start_point' => 'Cần Thơ',
-                    'end_point' => 'Cà Mau',
+                    'start_point' => 'Cà Mau',
+                    'end_point' => 'Cần Thơ',
                     'created_at' => now(),
                     'updated_at' => now()
                 ],
                 [
-                    'start_point' => 'Cần Thơ',
-                    'end_point' => 'Cà Mau',
+                    'start_point' => 'Hà Nội',
+                    'end_point' => 'Bắc Ninh',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+                
+                [
+                    'start_point' => 'Bắc Ninh',
+                    'end_point' => 'Hà Nội',
                     'created_at' => now(),
                     'updated_at' => now()
                 ],
