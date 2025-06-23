@@ -4,9 +4,18 @@
             width: 200px;
         }
     }
+    .user-logout {
+        cursor: pointer;
+    }
 
-    .user-information-nav.active {
-        color: $light_blue;
+    .user-ticket-nav,
+    .user-information-nav {
         text-decoration: none;
+        color: black;
+
+    }
+
+    .user-information-nav.active, .user-ticket-nav.active {
+        color: $light_blue !important;
     }
 }

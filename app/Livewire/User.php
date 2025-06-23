@@ -52,13 +52,7 @@ class User extends Component
 
     }
 
-    public function logout() {
 
-        session()->forget('user');
-
-        $this->dispatch('logout-success');
-
-    }
 
     public function render()
     {

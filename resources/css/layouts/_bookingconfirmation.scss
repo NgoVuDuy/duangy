@@ -52,42 +52,42 @@
 
     }
 
-    .trip-details {
+}
+.trip-details {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    margin-bottom: 16px;
+
+    .items {
         display: flex;
-        flex-direction: column;
-        row-gap: 8px;
-        margin-bottom: 16px;
+        justify-content: space-between;
 
-        .items {
-            display: flex;
-            justify-content: space-between;
-
-            span {
-                font-weight: 500;
-            }
+        span {
+            font-weight: 500;
         }
     }
+}
 
-    .offcanvas-header {
-        background: $light-blue;
+.offcanvas-header {
+    background: $light-blue;
 
-        .offcanvas-title {
-            color: white;
-        }
-
+    .offcanvas-title {
+        color: white;
     }
 
-    .ticket-details {
-        .ticket-price {
+}
 
-            padding: 12px;
-            border: 1px $border-gray solid;
-            border-radius: 12px;
+.ticket-details {
+    .ticket-price {
 
-            .ticket-number {
-                font-size: 14px;
-                color: $gray;
-            }
+        padding: 12px;
+        border: 1px $border-gray solid;
+        border-radius: 12px;
+
+        .ticket-number {
+            font-size: 14px;
+            color: $gray;
         }
     }
 }

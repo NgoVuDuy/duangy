@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PickupDropoffPoint;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,7 +23,9 @@ class DatabaseSeeder extends Seeder
             BusSeeder::class,
             TripSeeder::class,
             SeatTypeSeeder::class,
-            BusSeatTypeSeeder::class
+            BusSeatTypeSeeder::class,
+            SeatSeeder::class,
+            PickupDropoffPointSeeder::class
         ]);
 
 

@@ -7,12 +7,14 @@
 
                     <h5 class="mb-4">
                         Phương thức thanh toán
+
                     </h5>
                     <div class="d-flex flex-column row-gap-4">
 
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1">
-                            <label class="form-check-label" for="radioDefault1">
+                            <input class="form-check-input" type="radio" name="payment" id="1" value="opt-1"
+                                wire:model.live="pym_option">
+                            <label class="form-check-label" for="1">
 
                                 <div class="">
 
@@ -27,9 +29,9 @@
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault2"
-                                checked>
-                            <label class="form-check-label" for="radioDefault2">
+                            <input class="form-check-input" type="radio" name="payment" id="2" checked
+                                value="opt-2" wire:model.live="pym_option">
+                            <label class="form-check-label" for="2">
                                 <span class="fw-medium">
 
                                     Thanh toán khi lên xe
@@ -40,7 +42,7 @@
                     </div>
                 </div>
 
-                <button class="w-100 main-btn lg-btn mt-5">
+                <button class="w-100 main-btn lg-btn mt-5 payment-btn" wire:click="payment">
                     Tiếp tục
                 </button>
             </div>
@@ -173,7 +175,8 @@
                                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                                     stroke-linejoin="round"
                                                     class="lucide lucide-locate-icon lucide-locate">
-                                                    <line x1="2" x2="5" y1="12" y2="12" />
+                                                    <line x1="2" x2="5" y1="12"
+                                                        y2="12" />
                                                     <line x1="19" x2="22" y1="12"
                                                         y2="12" />
                                                     <line x1="12" x2="12" y1="2"
@@ -295,3 +298,18 @@
         </div>
     </div>
 </div>
+
+@script
+    <script>
+        $(document).ready(function() {
+
+            // $('.payment-btn').click(function() {
+
+            //     if(confirm("Bạn có chắc muốn đặt vé không ?")) {
+                    
+            //         alert("Đặt vé thành công")
+            //     }
+            // })
+        })
+    </script>
+@endscript

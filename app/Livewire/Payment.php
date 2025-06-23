@@ -6,6 +6,24 @@ use Livewire\Component;
 
 class Payment extends Component
 {
+    public $pym_option = 'opt-2';
+
+    public function payment()
+    {
+        if ($this->pym_option == 'opt-2') {
+
+            return $this->js(
+
+                'if(confirm("Bạn có chắc muốn đặt vé không ?")) {
+                        
+                    alert("Đặt vé thành công")
+                }'
+            );
+        }
+
+        dd("VNPay xử lý");
+    }
+
     public function render()
     {
         return view('livewire.payment');

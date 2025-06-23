@@ -10,13 +10,13 @@
 
                             <div class="">
 
-                                <label class="fw-medium" for="">Họ và Tên</label>
-                                <input type="text" name="" id="">
+                                <label class="fw-medium" for="name">Họ và Tên</label>
+                                <input type="text" name="" id="name" wire:model.live="name">
                             </div>
                             <div class="">
 
-                                <label class="fw-medium" for="">Số điện thoại</label>
-                                <input type="text" name="" id="">
+                                <label class="fw-medium" for="phone">Số điện thoại</label>
+                                <input type="text" name="" id="phone" wire:model.live="phone">
                             </div>
 
                             <div class="alert alert-success d-flex align-items-center m-0" role="alert">
@@ -48,7 +48,7 @@
                     <div class="d-flex justify-content-between align-items-center mb-4">
 
                         <h5>Thông tin chuyến đi</h5>
-                        <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="offcanvas"
+                        <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="offcanvas"  
                             data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Chi tiết</button>
 
                         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"

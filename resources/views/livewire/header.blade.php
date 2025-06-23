@@ -8,7 +8,7 @@
 
         <div class="header-nav d-flex align-items-center column-gap-4">
             <a href="/home" class="nav-item fw-medium" wire:navigate wire:current="active">Trang chủ</a>
-            <a href="/my-ticket" class="nav-item fw-medium" wire:navigate wire:current="active">Vé xe của tôi</a>
+            <a href="/ticket" class="nav-item fw-medium" wire:navigate wire:current="active">Vé xe của tôi</a>
             <a href="/news" class="nav-item fw-medium" wire:navigate wire:current="active">Tin tức</a>
         </div>
         <div class="d-flex align-items-center column-gap-4">

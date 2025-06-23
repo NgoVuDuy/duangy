@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('seats', function (Blueprint $table) {
 
             $table->id();
-            
+            $table->unsignedBigInteger('bus_seat_type_id');
+            $table->string('name');
             $table->timestamps();
+
+            $table->foreign('bus_seat_type_id')->references('id')->on('bus_seat_type')->onDelete('cascade');
         });
     }
 

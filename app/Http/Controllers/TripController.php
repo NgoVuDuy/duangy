@@ -13,9 +13,30 @@ class TripController extends Controller
     public function index()
     {
         //
-        $trips = Trip::all();
+        $trips = Trip::with('pickup_dropoff_points')->get();
+
         return response()->json($trips);
     }
+
+    // public function get_pickups()
+    // {
+    //     //
+    //     $trips = Trip::with(['pickups' => function ($query) {
+    //         $query->where('type', 'pickup');
+    //     }])->get();
+
+    //     return response()->json($trips);
+    // }
+
+    // public function get_dropoffs()
+    // {
+    //     //
+    //     $trips = Trip::with(['dropoffs' => function ($query) {
+    //         $query->where('type', 'dropoff');
+    //     }])->get();
+
+    //     return response()->json($trips);
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -53,14 +74,17 @@ class TripController extends Controller
     public function search(string $start_point, string $end_point, string $date)
     {
 
+        // Lấy các chuyến đi 
         $trips = Trip::where('departure_date', $date)
 
             ->whereHas('route', function ($query) use ($start_point, $end_point) {
                 $query->where('start_point', 'like', "%$start_point%")
                     ->where('end_point', 'like', "%$end_point%");
             })
-            ->with('bus.seat_types')
-            ->with('route')
+            ->with('bus.busSeatTypes.seatType') // Kèm theo loại ghế
+            ->with('bus.busSeatTypes.seats')
+            ->with('route') // Kèm theo tuyến đường
+            ->with('pickup_dropoff_points') // Kèm theo điểm đón trả
             ->get();
 
         return response()->json($trips);

@@ -81,6 +81,7 @@
                 .seat-diagram-wrap {
 
                     .seat-diagram {
+                        width: 100px;
                         padding: 12px 8px;
                         border-radius: 12px;
                         background: $border-gray;
@@ -91,24 +92,25 @@
                             }
                         }
 
-                        .line-B,
-                        .line-C,
-                        .line-D {
+                        .line-B{
                             .seat-item {
                                 background: #f4ab00;
                             }
                         }
 
-                        .line-E {
+                        .line-C {
                             .seat-item {
                                 background: #f400ef;
                             }
                         }
 
                         .line {
-                            display: flex;
                             justify-content: space-between;
                             column-gap: 8px;
+
+                            div {
+                                text-align: center;
+                            }
 
                             .seat-item {
                                 border-radius: 50%;
