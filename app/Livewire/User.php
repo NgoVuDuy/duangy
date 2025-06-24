@@ -4,8 +4,7 @@ namespace App\Livewire;
 
 use App\Http\Controllers\UserController;
 use Livewire\Component;
-
-use Livewire\Attributes\Session;
+use Livewire\Attributes\On;
 
 class User extends Component
 {
@@ -19,16 +18,31 @@ class User extends Component
 
     public $user;
 
+    public $isLogin = false;
+
     public function mount()
     {
-        $this->user = session()->get('user');
+        if (session()->get('user')) {
 
-        // dd(session()->get('user'));
+            $this->isLogin = true;
 
-        // dd($this->user); 
+            $this->user = session()->get('user');
 
+            $this->set_user();
+        }
+    }
 
-        $this->set_user();
+    #[On('login-success')]
+    public function login_success()
+    {
+
+        $this->isLogin = true;
+    }
+    #[On('logout-success')]
+    public function logout_success()
+    {
+
+        $this->isLogin = false;
     }
 
     public function set_user()
@@ -49,7 +63,6 @@ class User extends Component
         $this->user = $this->result->user;
 
         session()->put('user', $this->user);
-
     }
 
 

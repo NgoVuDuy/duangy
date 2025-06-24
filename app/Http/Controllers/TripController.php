@@ -82,9 +82,10 @@ class TripController extends Controller
                     ->where('end_point', 'like', "%$end_point%");
             })
             ->with('bus.busSeatTypes.seatType') // Kèm theo loại ghế
-            ->with('bus.busSeatTypes.seats')
+            ->with('bus.busSeatTypes.seats') // Kèm theo các ghế ngồi
             ->with('route') // Kèm theo tuyến đường
             ->with('pickup_dropoff_points') // Kèm theo điểm đón trả
+            ->with('bus.busOperator') // Kèm theo nhà xe
             ->get();
 
         return response()->json($trips);

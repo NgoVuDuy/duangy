@@ -6,35 +6,43 @@
             <div class="col-3">
                 @livewire('user-sidebar')
             </div>
-            <div class="col-5">
+            <div class="col-7">
                 <div class="shadow p-3">
 
-                    <form wire:submit="save" action="" class="d-flex flex-column row-gap-4 user-form">
+                    <div class="{{ $isLogin ? 'd-none' : 'd-block' }}">
+                        <div class="fw-bold text-center">Vui lòng đăng nhập</div>
+                    </div>
+                    <div class="{{ $isLogin ? 'd-block' : 'd-none' }}">
 
-                        <div class="">
-                            <label for="">Họ và tên</label>
-                            <input class="input" type="text" name="" id="" wire:model.live="name">
-                        </div>
-                        <div class="">
-                            <label for="">Số điện thoại</label>
-                            <input class="input" type="text" name="" id="" wire:model.live="phone">
-                        </div>
-                        <div class="">
-                            <label for="">Ngày sinh</label>
-                            <input class="input" type="date" wire:model.live="date">
-                        </div>
-                        <div class="">
-                            <label for="">Giới tính</label>
-                            <select class="input" name="" id="" wire:model.live="gender">
-                                <option value="">Chọn giới tính</option>
-                                <option value="Nam">Nam</option>
-                                <option value="Nữ">Nữ</option>
-                                <option value="Other">Khác</option>
-                            </select>
-                        </div>
+                        <form wire:submit="save" action="" class="d-flex flex-column row-gap-4 user-form">
 
-                        <button class="main-btn small-btn w-100">Lưu</button>
-                    </form>
+                            <div class="">
+                                <label for="">Họ và tên</label>
+                                <input class="input" type="text" name="" id=""
+                                    wire:model.live="name">
+                            </div>
+                            <div class="">
+                                <label for="">Số điện thoại</label>
+                                <input class="input" type="text" name="" id=""
+                                    wire:model.live="phone">
+                            </div>
+                            <div class="">
+                                <label for="">Ngày sinh</label>
+                                <input class="input" type="date" wire:model.live="date">
+                            </div>
+                            <div class="">
+                                <label for="">Giới tính</label>
+                                <select class="input" name="" id="" wire:model.live="gender">
+                                    <option value="">Chọn giới tính</option>
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                    <option value="Other">Khác</option>
+                                </select>
+                            </div>
+
+                            <button class="main-btn small-btn w-100">Lưu</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

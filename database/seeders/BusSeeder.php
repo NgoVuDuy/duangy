@@ -16,6 +16,7 @@ class BusSeeder extends Seeder
         //
         Bus::insert([
             [
+                "bus_operator_id" => 1,
                 "bus_type" => "Giường nằm",
                 "license_plate" => "51B-79834",
                 "total_seat" => 7,
@@ -23,6 +24,7 @@ class BusSeeder extends Seeder
                 "updated_at" => now()
             ],
             [
+                "bus_operator_id" => 1,
                 "bus_type" => "Ghế ngồi",
                 "license_plate" => "51B-79877",
                 "total_seat" => 11,

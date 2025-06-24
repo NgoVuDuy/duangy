@@ -24,7 +24,7 @@
             <a href="/ticket" class="fw-medium user-ticket-nav" wire:current="active" wire:navigate
                 wire:ignore>Vé của tôi</a>
         </div>
-        <div class="logout d-flex align-items-center column-gap-3">
+        <div class="logout d-flex align-items-center column-gap-3 {{ $isLogin ? 'd-flex' : 'd-none' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="lucide lucide-circle-power-icon lucide-circle-power">

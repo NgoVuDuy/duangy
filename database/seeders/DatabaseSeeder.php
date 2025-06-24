@@ -20,12 +20,13 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             RouteSeeder::class,
+            BusOperatorSeeder::class ,       
             BusSeeder::class,
             TripSeeder::class,
             SeatTypeSeeder::class,
             BusSeatTypeSeeder::class,
             SeatSeeder::class,
-            PickupDropoffPointSeeder::class
+            PickupDropoffPointSeeder::class,
         ]);
 
 

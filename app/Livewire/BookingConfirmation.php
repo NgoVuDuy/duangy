@@ -9,10 +9,17 @@ class BookingConfirmation extends Component
 {
     public $name = '';
     public $phone = '';
+    public $trip_details = null;
 
     public function mount() {
 
         $this->get_user();
+
+        if(session()->get('ticket')) {
+
+            $this->trip_details = session()->get('ticket');
+        }
+        // dd(session()->get('ticket'));
     }
     // Lấy thông tin người dùng
     public function get_user()
@@ -40,6 +47,10 @@ class BookingConfirmation extends Component
 
             return $this->js("alert('Vui lòng nhập thông tin liên hệ')");
         }
+        // Lưu tên người dùng và số điện thoại vào session
+        session()->put('ticket.name', $this->name);
+        session()->put('ticket.phone', $this->phone);
+        
         return $this->redirect('/payments', navigate: true);
     }
 

@@ -11,17 +11,24 @@ class Payment extends Component
     public function payment()
     {
         if ($this->pym_option == 'opt-2') {
+            session()->put('ticket.method', "Thanh toán khi lên xe");
 
-            return $this->js(
+            // return $this->js(
 
-                'if(confirm("Bạn có chắc muốn đặt vé không ?")) {
+            //     'if(confirm("Bạn có chắc muốn đặt vé không ?")) {
                         
-                    alert("Đặt vé thành công")
-                }'
-            );
+            //         alert("Đặt vé thành công")
+            //     }'
+            // );
+
         }
 
-        dd("VNPay xử lý");
+        if($this->pym_option == 'opt-1') {
+
+            session()->put('ticket.method', "VNPay");
+
+        }
+
     }
 
     public function render()

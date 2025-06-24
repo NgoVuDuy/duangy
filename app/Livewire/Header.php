@@ -43,10 +43,10 @@ class Header extends Component
     public function logout_success()
     {
 
-        $this->isShowUserIcon = false; // Hiện icon
+        $this->isShowUserIcon = false; // Ẩn icon
         $this->isShowLoginForm = false; // Ẩn form đăng nhập
 
-        return $this->redirect('/', navigate: true);
+        // return $this->redirect('/', navigate: true);
     }
 
     public function render()

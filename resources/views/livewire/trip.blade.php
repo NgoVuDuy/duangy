@@ -63,7 +63,7 @@
                                             <div class="">
 
                                                 <h5 class="bus-operator-name">
-                                                    Hạ Long Travel Limousine
+                                                    {{ $trip->bus->bus_operator->name }}
                                                 </h5>
                                                 <div class="bus-name mt-3">
 
@@ -249,7 +249,7 @@
                                                                 @endphp
 
                                                                 @foreach ($bus_seat_type->seats as $i => $seat)
-                                                                    <svg wire:click="setSeat('{{ $seat->name }}', '{{ $seat_price }}')"
+                                                                    <svg wire:click="setSeat({{ $seat->id }},'{{ $seat->name }}', '{{ $seat_price }}')"
                                                                         wire:ignore class="seat-item"
                                                                         xmlns="http://www.w3.org/2000/svg"
                                                                         width="32" height="32"
@@ -561,7 +561,7 @@
                                                 wire:click="hide_points({{ $key }})">Quay lại</button>
 
                                             <button class="main-btn small-btn hover"
-                                                wire:click="{{ $isShowPoints[$key] ? 'show_booking_confirmation' : 'show_points(' . $key . ')' }}">Tiếp
+                                                wire:click="{{ $isShowPoints[$key] ? 'show_booking_confirmation(' . $trip->id . ',' . $key . ')' : 'show_points(' . $key . ')' }}">Tiếp
                                                 tục</button>
 
                                         </div>
