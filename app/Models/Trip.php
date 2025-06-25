@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Trip extends Model
 {
     //
-    protected $fillable = ["bus_id", "route_id", "departure_time", "arrival_time", "status", "price"];
+    protected $fillable = ["bus_id", "route_id", "departure_time", "arrival_time", "departure_date", "arrival_date", "status", "price"];
 
     // Một chuyến đi thuộc về một tuyến đi
     public function route()

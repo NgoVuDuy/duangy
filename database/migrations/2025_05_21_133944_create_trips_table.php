@@ -18,8 +18,11 @@ return new class extends Migration
             $table->unsignedBigInteger("route_id")->nullable();
             
             $table->string('departure_time');
-            $table->string('arrival_time');
             $table->string('departure_date');
+
+            $table->string('arrival_time');
+            $table->string('arrival_date');
+
             $table->string("status");
             $table->string("price");
 
