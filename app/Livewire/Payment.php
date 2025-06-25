@@ -10,6 +10,7 @@ class Payment extends Component
     public $pym_option = 'opt-2';
     public $trip_details = null;
     public $user  = null;
+    public $user_phone = null;
 
     public function mount()
     {
@@ -18,29 +19,35 @@ class Payment extends Component
 
             $this->trip_details = session()->get('ticket');
         }
-
         // dd(session()->get('ticket'));
-
     }
 
     public function payment()
     {
+
+
+        if (session()->get('user')) {
+
+            $this->user = session()->get('user');
+            $this->user_phone = $this->user->phone ?? null;
+        }
+
+                // session()->put('')
+        $array_phone = session()->get('phone', []);
+        $array_phone[] = $this->trip_details["phone"];
+        session()->put('phone', $array_phone);
+
         if ($this->pym_option == 'opt-2') {
 
             session()->put('ticket.method', "Thanh toán khi lên xe");
 
             // Thêm vé xe vào database
             $ticketController = new TicketController();
-            // $ticketController->store($this->trip_details["name"], $this->trip_details["phone"], $this->trip_details[""]);
 
-            // return $this->js(
+            foreach ($this->trip_details["seat_id"] as $key => $seat_id) {
 
-            //     'if(confirm("Bạn có chắc muốn đặt vé không ?")) {
-
-            //         alert("Đặt vé thành công")
-            //     }'
-            // );
-
+                $ticketController->store($this->trip_details["name"], $this->trip_details["phone"], $this->user_phone, $this->trip_details["trip"]["id"], $this->trip_details["pickup"]["id"], $this->trip_details["dropoff"]["id"], $seat_id, "pending", "Thanh toán khi lên xe", $this->trip_details["seat_list"][$key]);
+            }
         }
 
         if ($this->pym_option == 'opt-1') {

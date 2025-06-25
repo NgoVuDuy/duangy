@@ -8,7 +8,34 @@ use Illuminate\Http\Request;
 class TicketController extends Controller
 {
     //
-    public function store(string $name, string $phone, $user_phone, $trip_id, string $pickup, string $dropoff, $seat_id, string $status, string $method) {
+    public function getTicketByPhone($phone)
+    {
+
+        $tickets = Ticket::with('user')
+            ->with('trip')
+            ->with('pickup')
+            ->with('dropoff')
+            ->with('seat')
+            ->where('phone', $phone)
+            ->get();
+        return response()->json($tickets);
+    }
+
+    public function getTicketById($phone)
+    {
+
+        $tickets = Ticket::with('user')
+            ->with('trip')
+            ->with('pickup')
+            ->with('dropoff')
+            ->with('seat')
+            ->where('user_phone', $phone)
+            ->get();
+        return response()->json($tickets);
+    }
+
+    public function store(string $name, string $phone, $user_phone, $trip_id,  $pickup,  $dropoff, $seat_id, string $status, string $method, string $price)
+    {
 
         $ticket = new Ticket();
         $ticket->name = $name;
@@ -20,6 +47,7 @@ class TicketController extends Controller
         $ticket->seat_id = $seat_id;
         $ticket->status = $status;
         $ticket->method = $method;
+        $ticket->price = $price;
 
         $ticket->save();
     }

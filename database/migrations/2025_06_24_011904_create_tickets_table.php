@@ -17,16 +17,20 @@ return new class extends Migration
             $table->string('phone');
             $table->string('user_phone')->nullable();
             $table->unsignedBigInteger('trip_id')->nullable();
-            $table->string('pickup');
-            $table->string('dropoff');
+            $table->unsignedBigInteger('pickup')->nullable();
+            $table->unsignedBigInteger('dropoff')->nullable();
             $table->unsignedBigInteger('seat_id')->nullable();
+            $table->string('price');
             $table->string('status');
             $table->string('method');
             $table->timestamps();
 
             $table->foreign('user_phone')->references('phone')->on('users')->onDelete('set null');
             $table->foreign('trip_id')->references('id')->on('trips')->onDelete('set null');
-            // $table->foreign('pickup_dropoff_point_id')->references('id')->on('pickup_dropoff_points')->onDelete('set null');
+
+            $table->foreign('pickup')->references('id')->on('pickup_dropoff_points')->onDelete('set null');
+            $table->foreign('dropoff')->references('id')->on('pickup_dropoff_points')->onDelete('set null');
+
             $table->foreign('seat_id')->references('id')->on('seats')->onDelete('set null');
 
         });
