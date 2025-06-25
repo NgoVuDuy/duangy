@@ -30,19 +30,89 @@ class RouteSeeder extends Seeder
                     'updated_at' => now()
                 ],
                 [
-                    'start_point' => 'Hà Nội',
-                    'end_point' => 'Bắc Ninh',
+                    'start_point' => 'Cần Thơ',
+                    'end_point' => 'Sóc Trăng',
                     'created_at' => now(),
                     'updated_at' => now()
                 ],
-                
+
                 [
-                    'start_point' => 'Bắc Ninh',
-                    'end_point' => 'Hà Nội',
+                    'start_point' => 'Sóc Trăng',
+                    'end_point' => 'Cần Thơ',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+
+                [
+                    'start_point' => 'Sóc Trăng',
+                    'end_point' => 'Bạc Liêu',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+
+                [
+                    'start_point' => 'Bạc Liêu',
+                    'end_point' => 'Sóc Trăng',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+
+                [
+                    'start_point' => 'An Giang',
+                    'end_point' => 'Vĩnh Long',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+
+                [
+                    'start_point' => 'Vĩnh Long',
+                    'end_point' => 'An Giang',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+
+                [
+                    'start_point' => 'Bến Tre',
+                    'end_point' => 'Đồng Tháp',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+
+                [
+                    'start_point' => 'Đồng Tháp',
+                    'end_point' => 'Bến Tre',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+
+                [
+                    'start_point' => 'Kiên Giang',
+                    'end_point' => 'Long An',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+
+                [
+                    'start_point' => 'Long An',
+                    'end_point' => 'Kiên Giang',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+
+                [
+                    'start_point' => 'Tiền Giang',
+                    'end_point' => 'Trà Vinh',
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+
+                [
+                    'start_point' => 'Trà Vinh',
+                    'end_point' => 'Tiền Giang',
                     'created_at' => now(),
                     'updated_at' => now()
                 ],
             ]
-            );
+        );
     }
 }
