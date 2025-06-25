@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bus extends Model
 {
     //
-    protected $fillable = ["bus_type", "license_plate", "total_seat", "bus_operator_id"];
+    protected $fillable = ["bus_type", "license_plate", "total_seat", "bus_operator_id", "image"];
 
     // Một xe buýt thì có nhiều loại ghế ngồi
     public function seat_types()

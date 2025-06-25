@@ -48,7 +48,7 @@
 
                         <h5>Thông tin vé</h5>
 
-                        <h5>240.000đ</h5>
+                        <h5>{{ number_format(array_sum($trip_details['seat_list']) * 1000, 0, ',', '.') }}đ</h5>
                     </div>
 
                     <div class="d-flex justify-content-between mt-3 ticket-price">
@@ -57,14 +57,14 @@
                             <span class="fw-medium">Giá vé</span>
                         </div>
                         <div class="right d-flex flex-column row-gap-2">
-                            <div class="items d-flex flex-column">
-                                <span class="fw-medium">140.000đ x1</span>
-                                <span class="ticket-number">Mã ghế: A1</span>
-                            </div>
-                            <div class="items d-flex flex-column">
-                                <span class="fw-medium">100.000đ x1</span>
-                                <span class="ticket-number">Mã ghế: A2</span>
-                            </div>
+                            {{-- Ở đây --}}
+                            @foreach ($trip_details['seat_list'] as $index => $seat_list)
+                                <div class="items d-flex flex-column">
+                                    <span class="fw-medium">{{ $seat_list }}đ</span>
+                                    <span class="ticket-number">Mã ghế: {{ $index }}</span>
+                                </div>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
@@ -147,8 +147,7 @@
                                                     class="lucide lucide-locate-icon lucide-locate">
                                                     <line x1="2" x2="5" y1="12" y2="12" />
                                                     <line x1="19" x2="22" y1="12" y2="12" />
-                                                    <line x1="12" x2="12" y1="2"
-                                                        y2="5" />
+                                                    <line x1="12" x2="12" y1="2" y2="5" />
                                                     <line x1="12" x2="12" y1="19"
                                                         y2="22" />
                                                     <circle cx="12" cy="12" r="7" />
@@ -205,13 +204,14 @@
                             <div class="right bus-operator">
 
                                 <div class="name">
-                                    <span class="fw-medium">Dàng Limousine</span>
+                                    <span class="fw-medium">{{ $trip_details['bus_operator'] }}</span>
                                 </div>
                                 <div class="bus-name">
-                                    <span>Limousine 9 chỗ</span>
+                                    <span>{{ $trip_details['bus'] }}</span>
                                 </div>
                                 <div class="time">
-                                    T5, 10/09/2025
+                                    {{ $trip_details['trip']['departure_time'] }} -
+                                    {{ $trip_details['trip']['departure_date'] }}
                                 </div>
                             </div>
                         </div>
@@ -233,9 +233,8 @@
                                     <span class="fw-medium">Điểm đón</span>
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <span class="fw-medium">Ninh Kiều, Cần Thơ</span>
-                                    <span class="address-details">Ấp Kinh Xáng, Xã Định Thành, Huyện Đông Hải, Tỉnh Bạc
-                                        Liêu</span>
+                                    <span class="fw-medium">{{ $trip_details['pickup']['name'] }}</span>
+                                    <span class="address-details">{{ $trip_details['pickup']['address'] }}</span>
                                 </div>
                             </div>
                             <div class="address-wrap">
@@ -252,9 +251,8 @@
                                     <span class="fw-medium">Điểm trả</span>
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <span class="fw-medium">Ninh Kiều, Cần Thơ</span>
-                                    <span class="address-details">Ấp Kinh Xáng, Xã Định Thành, Huyện Đông Hải, Tỉnh Bạc
-                                        Liêu</span>
+                                    <span class="fw-medium">{{ $trip_details['dropoff']['name'] }}</span>
+                                    <span class="address-details">{{ $trip_details['dropoff']['address'] }}</span>
                                 </div>
                             </div>
                         </div>

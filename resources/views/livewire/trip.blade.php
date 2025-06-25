@@ -10,8 +10,8 @@
         </div>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="col-4">
+        <div class="row justify-content-center">
+            {{-- <div class="col-4">
                 <div class="filter">
                     <div class="sort-wrap shadow">
                         <h5 class="title">Sắp xếp</h5>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-8">
                 <div class="trip-list">
                     <h4 class="result mb-3">Kết quả: <span class="ms-4">{{ count($trips) }} Chuyến</span></h4>

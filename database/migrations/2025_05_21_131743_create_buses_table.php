@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('bus_operator_id')->nullable();
             $table->string('bus_type');
+            $table->string('image');
             $table->string('license_plate');
             $table->integer('total_seat');
             $table->timestamps();
