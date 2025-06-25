@@ -59,6 +59,17 @@ class TripSeeder extends Seeder
                 "created_at" => now(),
                 "updated_at" => now()
             ],
+            [
+                "bus_id" => 1,
+                "route_id" => 2,
+                "departure_time" => "12:30",
+                "departure_date" => "2025-06-29",
+                "arrival_time" => "20:00",
+                "status" => "pending",
+                "price" => "120.000",
+                "created_at" => now(),
+                "updated_at" => now()
+            ],
         ]);
     }
 }
