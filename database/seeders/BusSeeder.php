@@ -19,6 +19,7 @@ class BusSeeder extends Seeder
                 "bus_operator_id" => 1,
                 "bus_type" => "Giường nằm",
                 "license_plate" => "51B-79834",
+                "image" => "",
                 "total_seat" => 7,
                 "created_at" => now(),
                 "updated_at" => now()
@@ -27,6 +28,7 @@ class BusSeeder extends Seeder
                 "bus_operator_id" => 1,
                 "bus_type" => "Ghế ngồi",
                 "license_plate" => "51B-79877",
+                "image" => "",
                 "total_seat" => 11,
                 "created_at" => now(),
                 "updated_at" => now()

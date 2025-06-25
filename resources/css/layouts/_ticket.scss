@@ -1,6 +1,9 @@
 table {
     width: 100%;
 }
+thead {
+    background: yellow;
+}
 th, td {
     border: 2px $border-gray solid;
     padding: 4px;
