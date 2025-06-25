@@ -16,23 +16,24 @@ class BusOperatorSeeder extends Seeder
         //
         BusOperator::insert([
             [
-                'name' => 'Hà Tuấn Travel',
-                'phone' => '01',
+                'name' => 'Tân Trào Travel',
+                'phone' => '19001980',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'name' => 'Phát Đạt Travel',
-                'phone' => '01',
+                'name' => 'An Khang Travel',
+                'phone' => '19002019',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'name' => 'Bình Kinh Travel',
-                'phone' => '01',
+                'name' => 'Thịnh Phát Travel',
+                'phone' => '19009091',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
+            
         ]);
     }
 }
