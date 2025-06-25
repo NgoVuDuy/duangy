@@ -6,6 +6,7 @@ use App\Http\Controllers\PickupDropoffPointController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\SeatTypeController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TripController;
 use App\Models\PickupDropoffPoint;
 use App\Models\Seat;
@@ -24,4 +25,6 @@ Route::apiResource('seat-types', SeatTypeController::class);
 Route::apiResource('seats', SeatController::class);
 Route::apiResource('bus-seat-types', BusSeatTypeController::class);
 Route::apiResource('pickup-dropoff-points', PickupDropoffPointController::class);
+Route::apiResource('tickets', TicketController::class);
+
 

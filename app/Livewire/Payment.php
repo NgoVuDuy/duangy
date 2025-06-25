@@ -2,13 +2,14 @@
 
 namespace App\Livewire;
 
+use App\Http\Controllers\TicketController;
 use Livewire\Component;
 
 class Payment extends Component
 {
     public $pym_option = 'opt-2';
     public $trip_details = null;
-
+    public $user  = null;
 
     public function mount()
     {
@@ -17,6 +18,7 @@ class Payment extends Component
 
             $this->trip_details = session()->get('ticket');
         }
+
         // dd(session()->get('ticket'));
 
     }
@@ -28,6 +30,8 @@ class Payment extends Component
             session()->put('ticket.method', "Thanh toán khi lên xe");
 
             // Thêm vé xe vào database
+            $ticketController = new TicketController();
+            // $ticketController->store($this->trip_details["name"], $this->trip_details["phone"], $this->trip_details[""]);
 
             // return $this->js(
 
