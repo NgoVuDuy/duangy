@@ -12,7 +12,7 @@ class TicketController extends Controller
     {
 
         $tickets = Ticket::with('user')
-            ->with('trip')
+            ->with('trip.route')
             ->with('pickup')
             ->with('dropoff')
             ->with('seat')
@@ -25,7 +25,7 @@ class TicketController extends Controller
     {
 
         $tickets = Ticket::with('user')
-            ->with('trip')
+            ->with('trip.route')
             ->with('pickup')
             ->with('dropoff')
             ->with('seat')

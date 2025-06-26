@@ -6,20 +6,25 @@
     transform: translate(-50%, -50%);
     border-radius: 12px;
 
+    input {
+        background: $input;
+        margin-left: 12px;
+    }
+
     input:focus-visible {
         outline: none;
     }
 
     .form-search-wrap {
         background: white;
-        padding: 18px 40px;
+        padding: 26px 40px;
         border-radius: 12px;
         width: max-content;
 
         .form-search {
             label {
                 color: #9d9d9d;
-                font-size: 12px;
+                font-size: 16px;
             }
 
 
@@ -32,12 +37,18 @@
 .start-point,
 .end-point {
 
+    .local.active {
+        
+        height: 200px;
+        overflow-y: scroll;
+
+    }
+
     .start-point-result,
     .end-point-result {
-        // overflow-y: scroll;
+
         // border: 1px $border_gray solid;
-        width: 200px;
-        // height: 200px;
+        width: 300px;
         background: white;
 
         .local {
@@ -45,6 +56,8 @@
                 background: $outline_blue;
             }
         }
+
+
     }
 }
 
@@ -60,4 +73,15 @@
             font-size: 12px;
         }
     }
+}
+
+.accordion-button:not(.collapsed)
+ {
+    // color: var(--bs-accordion-active-color);
+    background-color:unset !important;
+    box-shadow: none !important;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
 }

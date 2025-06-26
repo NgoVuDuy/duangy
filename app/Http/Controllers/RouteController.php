@@ -49,7 +49,7 @@ class RouteController extends Controller
         //
     }
 
-    // Tìm kiếm điểm kết thúc
+    // Tìm kiếm điểm bắt đầu
     public function search_start_point(string $start_point_value, string $end_point_value)
     {
         $routes = [];
@@ -62,10 +62,12 @@ class RouteController extends Controller
                 ->where('end_point', 'like', "%$end_point_value%")->get();
         }
 
-        return response()->json($routes);
+        $uniqueRoutes = $routes->unique('start_point')->values();
+
+        return response()->json($uniqueRoutes);
     }
 
-    // Tìm kiếm điểm bắt đầu
+    // Tìm kiếm điểm kết thúc
     public function search_end_point(string $start_point_value, string $end_point_value)
     {
         $routes = [];
@@ -78,6 +80,10 @@ class RouteController extends Controller
                 ->where('end_point', 'like', "%$end_point_value%")->get();
         }
 
-        return response()->json($routes);
+
+        $uniqueRoutes = $routes->unique('end_point')->values();
+
+        return response()->json($uniqueRoutes);
+
     }
 }
