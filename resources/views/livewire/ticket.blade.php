@@ -12,7 +12,6 @@
                     <table>
                         <thead>
                             <tr>
-
                                 <th>Mã vé</th>
                                 <th>Tuyến xe</th>
                                 <th>Ngày giờ</th>
@@ -23,19 +22,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>VD35463</td>
-                                <td>Cần Thơ - Cà Mau</td>
-                                <td>12/06 - 10h:30</td>
-                                <td>A1</td>
-                                <td>120.000đ</td>
-                                <td class="text-success fw-bold">Chưa đi</td>
-                                <td class="text-center"><button class="main-btn tiny-btn" type="button" data-bs-toggle="offcanvas"
-                                        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Chi tiết</button>
-                                </td>
-                            </tr>
+                            {{-- Ở đây --}}
+                            @foreach ($tickets as $ticket)
+                                <tr>
+                                    <td>
+                                        {{ $ticket->id }}
+                                    </td>
+                                    <td>{{ $ticket->trip->route->start_point }} - {{ $ticket->trip->route->end_point }}</td>
+                                    <td>{{ $ticket->trip->departure_time }} - {{ $ticket->trip->departure_date }}</td>
+                                    <td>{{ $ticket->seat->name }}</td>
+                                    <td>{{ $ticket->price }}đ</td>
+                                    <td class="text-success fw-bold">{{ $ticket->status }}</td>
+                                    <td class="text-center"><button class="main-btn tiny-btn" type="button"
+                                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                                            aria-controls="offcanvasRight">Chi tiết</button>
+                                    </td>
+                                </tr>
+                            @endforeach
 
-                            <tr>
+
+                            {{-- <tr>
                                 <td>VD35463</td>
                                 <td>Cần Thơ - Cà Mau</td>
                                 <td>12/06 - 10h:30</td>
@@ -45,7 +51,7 @@
                                 <td class="text-center"><button class="main-btn tiny-btn" type="button" data-bs-toggle="offcanvas"
                                         data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Chi
                                         tiết</button></td>
-                            </tr>
+                            </tr> --}}
                         </tbody>
                     </table>
                 </div>

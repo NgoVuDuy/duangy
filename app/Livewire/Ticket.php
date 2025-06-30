@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Http\Controllers\TicketController;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class Ticket extends Component
 {
@@ -14,7 +15,7 @@ class Ticket extends Component
 
         $ticketController = new TicketController();
 
-
+        // Nếu đã đăng nhập
         if (session()->get('user')) {
 
             $result = $ticketController->getTicketById(session()->get('user')->phone)->getData();
@@ -34,6 +35,37 @@ class Ticket extends Component
         }
 
         // dd($this->tickets);
+    }
+
+    #[On('login-success')]
+    public function login_success()
+    {
+        // Nếu đã đăng nhập
+        if (session()->get('user')) {
+
+            $this->reset('tickets');
+
+            $ticketController = new TicketController();
+            $result = $ticketController->getTicketById(session()->get('user')->phone)->getData();
+
+            $this->tickets = array_merge($this->tickets, $result);
+        }
+    }
+    #[On('logout-success')]
+    public function logout_success()
+    {
+        if (session()->get('phone')) {
+
+            $this->reset('tickets');
+
+            foreach (session()->get('phone') as $phone) {
+
+                $ticketController = new TicketController();
+                $result = $ticketController->getTicketByPhone($phone)->getData();
+
+                $this->tickets = array_merge($this->tickets, $result);
+            }
+        }
     }
 
     public function render()

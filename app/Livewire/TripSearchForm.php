@@ -38,8 +38,10 @@ class TripSearchForm extends Component
 
         $routeController = new RouteController();
 
-        // $this->start_points = $routeController->index()->getData();
-        // $this->end_points = $routeController->index()->getData();
+
+        $this->start_points = $routeController->search_start_point($this->start_point_value, $this->end_point_value)->getData();
+        $this->end_points = $routeController->search_end_point($this->start_point_value, $this->end_point_value)->getData();
+
 
 
     }
