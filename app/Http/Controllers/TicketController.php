@@ -34,7 +34,7 @@ class TicketController extends Controller
         return response()->json($tickets);
     }
 
-    public function store(string $name, string $phone, $user_phone, $trip_id,  $pickup,  $dropoff, $seat_id, string $status, string $method, string $price)
+    public function store(string $name, string $phone, $user_phone, $trip_id,  $pickup,  $dropoff, $seat_id, string $status, string $method, string $price, string $payment_id)
     {
 
         $ticket = new Ticket();
@@ -48,6 +48,7 @@ class TicketController extends Controller
         $ticket->status = $status;
         $ticket->method = $method;
         $ticket->price = $price;
+        $ticket->payment_id = $payment_id;
 
         $ticket->save();
     }

@@ -36,7 +36,6 @@ class BusSeatTypeSeeder extends Seeder
                 'updated_at' => now()
             ],
 
-
             // Xe 2
             [
                 'bus_id' => 2,

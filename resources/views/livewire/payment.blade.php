@@ -42,7 +42,7 @@
                     </div>
                 </div>
 
-                <button class="w-100 main-btn lg-btn mt-5 payment-btn" wire:click="payment">
+                <button class="w-100 main-btn lg-btn mt-5 payment-btn">
                     Tiếp tục
                 </button>
             </div>
@@ -88,14 +88,14 @@
                                 <div class="">
                                     Khách hàng
                                 </div>
-                                <div class="fw-medium">{{ $trip_details["name"] }}</div>
+                                <div class="fw-medium">{{ $trip_details['name'] }}</div>
                             </div>
 
                             <div class="d-flex justify-content-between">
                                 <div class="">
                                     Số điện thoại
                                 </div>
-                                <div class="fw-medium">{{ $trip_details["phone"] }}</div>
+                                <div class="fw-medium">{{ $trip_details['phone'] }}</div>
                             </div>
 
                         </div>
@@ -182,8 +182,7 @@
                                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                                     stroke-linejoin="round"
                                                     class="lucide lucide-locate-icon lucide-locate">
-                                                    <line x1="2" x2="5" y1="12"
-                                                        y2="12" />
+                                                    <line x1="2" x2="5" y1="12" y2="12" />
                                                     <line x1="19" x2="22" y1="12"
                                                         y2="12" />
                                                     <line x1="12" x2="12" y1="2"
@@ -309,13 +308,88 @@
     <script>
         $(document).ready(function() {
 
-            // $('.payment-btn').click(function() {
+            $('.payment-btn').click(function() {
 
-            //     if(confirm("Bạn có chắc muốn đặt vé không ?")) {
+                Swal.fire({
 
-            //         alert("Đặt vé thành công")
-            //     }
-            // })
+                    title: "Thông báo",
+                    text: "Bạn có đồng ý đặt vé không ?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Đồng ý"
+
+                }).then((result) => {
+
+                    if (result.isConfirmed) {
+
+                        $wire.dispatch('payment')
+
+                    }
+                });
+            })
+
+            $wire.on('payment-success', () => {
+
+                Swal.fire({
+                    title: "Thông báo",
+                    text: "Đặt vé thành công ?",
+                    icon: "success",
+                    showCancelButton: false,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Xem vé xe"
+                }).then((result) => {
+
+                    if (result.isConfirmed) {
+
+                        window.location.href = '/ticket'
+                    }
+                });
+            })
+
+            $wire.on('payment-error', () => {
+
+                Swal.fire({
+                    title: "Đặt vé thất bại !",
+                    icon: "error",
+                    draggable: true
+                });
+            })
+
+            const payment_result = $wire.get('payment_result')
+
+            if (payment_result != null) {
+
+                if (payment_result == true) {
+
+                    Swal.fire({
+
+                        title: "Thông báo",
+                        text: "Đặt vé thành công ?",
+                        icon: "success",
+                        showCancelButton: false,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Xem vé xe"
+
+                    }).then((result) => {
+
+                        if (result.isConfirmed) {
+
+                            window.location.href = '/ticket'
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Đặt vé thất bại !",
+                        icon: "error",
+                        draggable: true
+                    });
+                }
+            }
         })
     </script>
+    
 @endscript
