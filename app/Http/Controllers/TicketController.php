@@ -26,10 +26,13 @@ class TicketController extends Controller
 
         $tickets = Ticket::with('user')
             ->with('trip.route')
+            ->with('trip.bus')
+            ->with('trip.bus.busOperator')
             ->with('pickup')
             ->with('dropoff')
             ->with('seat')
             ->where('user_phone', $phone)
+            ->orderBy('created_at', 'desc')
             ->get();
         return response()->json($tickets);
     }

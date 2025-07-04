@@ -49,41 +49,49 @@ class RouteController extends Controller
         //
     }
 
-    // Tìm kiếm điểm bắt đầu
     public function search_start_point(string $start_point_value, string $end_point_value)
     {
-        $routes = [];
-
         if ($end_point_value == '') {
-
-            $routes = Route::where('start_point', 'like', "%$start_point_value%")->get();
+            $routes = Route::where('start_point', 'like', "%$start_point_value%")->pluck('start_point')->toArray();
         } else {
             $routes = Route::where('start_point', 'like', "%$start_point_value%")
-                ->where('end_point', 'like', "%$end_point_value%")->get();
+                // ->where('end_point', 'like', "%$end_point_value%")
+                ->pluck('start_point')->toArray();
         }
 
-        $uniqueRoutes = $routes->unique('start_point')->values();
+        // Lấy tất cả start_point trong bảng
+        $allRoutes = Route::pluck('start_point')->toArray();
 
-        return response()->json($uniqueRoutes);
+        // Gộp 2 mảng và loại trùng
+        $result = array_values(array_unique(array_merge($routes, $allRoutes)));
+
+        // dd($result);
+
+        return response()->json($result);
     }
+
 
     // Tìm kiếm điểm kết thúc
     public function search_end_point(string $start_point_value, string $end_point_value)
     {
-        $routes = [];
-
+        // Lấy các end_point khớp điều kiện tìm kiếm
         if ($start_point_value == '') {
-
-            $routes = Route::where('end_point', 'like', "%$end_point_value%")->get();
+            $routes = Route::where('end_point', 'like', "%$end_point_value%")
+                ->pluck('end_point')
+                ->toArray();
         } else {
-            $routes = Route::where('start_point', 'like', "%$start_point_value%")
-                ->where('end_point', 'like', "%$end_point_value%")->get();
+            $routes = Route::where('end_point', 'like', "%$end_point_value%")
+                // ->where('start_point', 'like', "%$start_point_value%") 
+                ->pluck('end_point')
+                ->toArray();
         }
 
+        // Lấy tất cả end_point trong bảng
+        $allRoutes = Route::pluck('end_point')->toArray();
 
-        $uniqueRoutes = $routes->unique('end_point')->values();
+        // Gộp lại và loại trùng
+        $result = array_values(array_unique(array_merge($routes, $allRoutes)));
 
-        return response()->json($uniqueRoutes);
-
+        return response()->json($result);
     }
 }

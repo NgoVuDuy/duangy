@@ -38,12 +38,8 @@ class TripSearchForm extends Component
 
         $routeController = new RouteController();
 
-
-        $this->start_points = $routeController->search_start_point($this->start_point_value, $this->end_point_value)->getData();
-        $this->end_points = $routeController->search_end_point($this->start_point_value, $this->end_point_value)->getData();
-
-
-
+        // $this->start_points = $routeController->search_start_point($this->start_point_value, $this->end_point_value)->getData();
+        // $this->end_points = $routeController->search_end_point($this->start_point_value, $this->end_point_value)->getData();
     }
     public function getStartPoint()
     {
@@ -60,12 +56,23 @@ class TripSearchForm extends Component
 
     public function setStartPointValue($value)
     {
+        // $routeController = new RouteController();
+// 
         $this->start_point_value = $value;
+        // $this->end_points = $routeController->search_end_point($this->start_point_value, $this->end_point_value)->getData();
+
+
+        $this->dispatch('hide-start-point');
     }
 
     public function setEndPointValue($value)
     {
+        // $routeController = new RouteController();
+
         $this->end_point_value = $value;
+        // $this->start_points = $routeController->search_start_point($this->start_point_value, $this->end_point_value)->getData();
+
+        $this->dispatch('hide-end-point');
     }
 
     // Ấn nút tìm kiếm
@@ -87,6 +94,7 @@ class TripSearchForm extends Component
         $routeController = new RouteController();
 
         $this->start_points = $routeController->search_start_point($value, $this->end_point_value)->getData();
+        // $this->end_points = $routeController->search_end_point($value, $this->end_point_value)->getData();
     }
 
     public function updatedEndPointValue($value)
@@ -94,6 +102,7 @@ class TripSearchForm extends Component
         $routeController = new RouteController();
 
         $this->end_points = $routeController->search_end_point($this->start_point_value, $value)->getData();
+        // $this->start_points = $routeController->search_start_point($this->start_point_value, $value)->getData();
     }
 
 

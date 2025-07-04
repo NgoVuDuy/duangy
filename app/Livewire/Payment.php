@@ -24,6 +24,12 @@ class Payment extends Component
 
             $this->trip_details = session()->get('ticket');
         }
+
+        if (session()->get('user')) {
+
+            $this->user = session()->get('user');
+            $this->user_phone = $this->user->phone ?? null;
+        }
         // dd(session()->get('ticket'));
         if ($request->query('query')) {
 
@@ -38,9 +44,25 @@ class Payment extends Component
         }
     }
 
+    #[On('login-success')]
+    public function login_success()
+    {
+        if (session()->get('user')) {
+
+            $this->user = session()->get('user');
+            $this->user_phone = $this->user->phone ?? null;
+        }
+    }
+
     #[On('payment')]
     public function payment()
     {
+        // Kiểm tra đăng nhập
+        // if(!session()->get('user')) {
+
+        //     return $this->dispatch('not-login');
+        // }
+
 
         if (session()->get('user')) {
 

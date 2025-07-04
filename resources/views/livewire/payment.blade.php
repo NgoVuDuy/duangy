@@ -310,24 +310,39 @@
 
             $('.payment-btn').click(function() {
 
-                Swal.fire({
+                if (!$wire.get('user')) {
 
-                    title: "Thông báo",
-                    text: "Bạn có đồng ý đặt vé không ?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Đồng ý"
+                    console.log("add")
 
-                }).then((result) => {
+                    Swal.fire({
+                        title: "Vui lòng đăng nhập để đặt vé !",
+                        icon: "warning",
+                        draggable: true
+                    });
+                } else {
+                    console.log("ff")
 
-                    if (result.isConfirmed) {
 
-                        $wire.dispatch('payment')
+                    Swal.fire({
+    
+                        title: "Thông báo",
+                        text: "Bạn có đồng ý đặt vé không ?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Đồng ý"
+    
+                    }).then((result) => {
+    
+                        if (result.isConfirmed) {
+    
+                            $wire.dispatch('payment')
+    
+                        }
+                    });
+                }
 
-                    }
-                });
             })
 
             $wire.on('payment-success', () => {
@@ -357,6 +372,15 @@
                     draggable: true
                 });
             })
+
+            // $wire.on('not-login', () => {
+
+            //     Swal.fire({
+            //         title: "Vui lòng đăng nhập để đặt vé !",
+            //         icon: "warning",
+            //         draggable: true
+            //     });
+            // })
 
             const payment_result = $wire.get('payment_result')
 
@@ -391,5 +415,4 @@
             }
         })
     </script>
-    
 @endscript

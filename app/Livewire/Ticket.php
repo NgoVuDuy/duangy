@@ -9,30 +9,39 @@ use Livewire\Attributes\On;
 class Ticket extends Component
 {
     public $tickets = [];
+    public $isLogin = false;
+
 
     public function mount()
     {
+        if (session()->get('user')) {
+
+            $this->isLogin = true;
+        }
 
         $ticketController = new TicketController();
 
         // Nếu đã đăng nhập
         if (session()->get('user')) {
 
-            $result = $ticketController->getTicketById(session()->get('user')->phone)->getData();
+            $this->tickets = $ticketController->getTicketById(session()->get('user')->phone)->getData();
 
-            $this->tickets = array_merge($this->tickets, $result);
-        } else {
-
-            if (session()->get('phone')) {
-
-                foreach (session()->get('phone') as $phone) {
-
-                    $result = $ticketController->getTicketByPhone($phone)->getData();
-
-                    $this->tickets = array_merge($this->tickets, $result);
-                }
-            }
+            // dd($this->tickets);
+            // $this->tickets = array_merge($this->tickets, $result);
         }
+
+        // else {
+
+        //     if (session()->get('phone')) {
+
+        //         foreach (session()->get('phone') as $phone) {
+
+        //             $result = $ticketController->getTicketByPhone($phone)->getData();
+
+        //             $this->tickets = array_merge($this->tickets, $result);
+        //         }
+        //     }
+        // }
 
         // dd($this->tickets);
     }
@@ -40,32 +49,39 @@ class Ticket extends Component
     #[On('login-success')]
     public function login_success()
     {
+
+        if (session()->get('user')) {
+
+            $this->isLogin = true;
+        }
         // Nếu đã đăng nhập
         if (session()->get('user')) {
 
-            $this->reset('tickets');
+            // $this->reset('tickets');
 
             $ticketController = new TicketController();
-            $result = $ticketController->getTicketById(session()->get('user')->phone)->getData();
+            $this->tickets = $ticketController->getTicketById(session()->get('user')->phone)->getData();
 
-            $this->tickets = array_merge($this->tickets, $result);
+            // $this->tickets = array_merge($this->tickets, $result);
         }
     }
     #[On('logout-success')]
     public function logout_success()
     {
-        if (session()->get('phone')) {
+        $this->reset('tickets');
+        $this->reset('isLogin');
 
-            $this->reset('tickets');
+        // if (session()->get('phone')) {
 
-            foreach (session()->get('phone') as $phone) {
 
-                $ticketController = new TicketController();
-                $result = $ticketController->getTicketByPhone($phone)->getData();
+            // foreach (session()->get('phone') as $phone) {
 
-                $this->tickets = array_merge($this->tickets, $result);
-            }
-        }
+            //     $ticketController = new TicketController();
+            //     $result = $ticketController->getTicketByPhone($phone)->getData();
+
+            //     $this->tickets = array_merge($this->tickets, $result);
+            // }
+        // }
     }
 
     public function render()
