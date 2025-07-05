@@ -16,7 +16,7 @@ class BusSeeder extends Seeder
         //
         Bus::insert([
             [
-                "bus_operator_id" => 1,
+                "bus_operator_phone" => '19001980',
                 "bus_type" => "Giường nằm",
                 "license_plate" => "51B-79834",
                 "image" => "bus-1.jpg",
@@ -25,7 +25,7 @@ class BusSeeder extends Seeder
                 "updated_at" => now()
             ],
             [
-                "bus_operator_id" => 1,
+                "bus_operator_phone" => '19001980',
                 "bus_type" => "Ghế ngồi",
                 "license_plate" => "51B-79877",
                 "image" => "bus-2.jpg",
@@ -34,7 +34,7 @@ class BusSeeder extends Seeder
                 "updated_at" => now()
             ],
             [
-                "bus_operator_id" => 2,
+                "bus_operator_phone" => '19002019',
                 "bus_type" => "Ghế ngồi",
                 "license_plate" => "59B-81899",
                 "image" => "bus-3.jpg",
@@ -43,7 +43,7 @@ class BusSeeder extends Seeder
                 "updated_at" => now()
             ],
             [
-                "bus_operator_id" => 2,
+                "bus_operator_phone" => '19002019',
                 "bus_type" => "Giường nằm",
                 "license_plate" => "59B-89296",
                 "image" => "bus-4.jpg",
@@ -52,7 +52,7 @@ class BusSeeder extends Seeder
                 "updated_at" => now()
             ],
             [
-                "bus_operator_id" => 3,
+                "bus_operator_phone" => '19009091',
                 "bus_type" => "Ghế ngồi",
                 "license_plate" => "55B-69387",
                 "image" => "bus-5.jpg",
@@ -61,7 +61,7 @@ class BusSeeder extends Seeder
                 "updated_at" => now()
             ],
             [
-                "bus_operator_id" => 3,
+                "bus_operator_phone" => '19009091',
                 "bus_type" => "Giường nằm",
                 "license_plate" => "55B-80819",
                 "image" => "bus-6.jpg",

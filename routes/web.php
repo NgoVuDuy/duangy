@@ -1,16 +1,17 @@
 <?php
 
 use App\Http\Controllers\PaymentController;
+use App\Livewire\Admin\Bus;
+use App\Livewire\Admin\Index;
+use App\Livewire\Admin\Route as AdminRoute;
+use App\Livewire\Admin\Trip as AdminTrip;
 use App\Livewire\BookingConfirmation;
-use App\Livewire\ErrorPayment;
-use Illuminate\Support\Facades\Route;
 use App\Livewire\Home;
 use App\Livewire\Payment;
-use App\Livewire\PaymentResult;
-use App\Livewire\SuccessPayment;
 use App\Livewire\Ticket;
 use App\Livewire\Trip;
 use App\Livewire\User;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect('/home');
@@ -30,3 +31,11 @@ Route::get('/vnpay/error', function() {
 });
 
 Route::get('payment/callback', [PaymentController::class, 'callback'])->name('vnpay.callback');
+
+Route::get('/admin', Index::class);
+Route::get('/routes', AdminRoute::class);
+Route::get('/trips', AdminTrip::class);
+Route::get('/buses', Bus::class);
+
+
+

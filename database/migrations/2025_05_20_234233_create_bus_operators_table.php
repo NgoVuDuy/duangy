@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('bus_operators', function (Blueprint $table) {
             
-            $table->id();
+            // $table->id();
             $table->string('name');
-            $table->string('phone');
+            $table->string('phone')->primary();
             $table->timestamps();
         });
     }

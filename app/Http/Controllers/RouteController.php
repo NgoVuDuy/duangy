@@ -13,16 +13,30 @@ class RouteController extends Controller
     public function index()
     {
         //
-        $routes = Route::all();
+        $routes = Route::orderBy('created_at', 'desc')->get();
         return response()->json($routes);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(string $start_point, string $end_point)
     {
-        //
+
+        $route = Route::where('start_point', $start_point)
+            ->where('end_point', $end_point)->exists();
+
+        if ($route) {
+
+            return response()->json(["code" => 0, "route" => null]);
+        }
+
+        $route = Route::create([
+            "start_point" => $start_point,
+            "end_point" => $end_point
+        ]);
+
+        return response()->json(["code" => 1, "route" => $route]);
     }
 
     /**
