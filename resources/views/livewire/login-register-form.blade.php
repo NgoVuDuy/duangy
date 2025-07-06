@@ -18,11 +18,11 @@
             <div class="">
 
                 <label for="login-phone" class="fw-medium me-3">Số điện thoại</label>
-                <input id="login-phone" type="text" class="main-input" wire:model.live="phoneNumber">
+                <input id="login-phone" type="text" class="main-input" wire:model.live="phoneNumber" required>
 
             </div>
 
-            <button class="main-btn lg-btn w-100" wire:click="login">Đăng nhập</button>
+            <button class="main-btn lg-btn w-100">Đăng nhập</button>
         </div>
     </form>
 
@@ -37,7 +37,7 @@
             <div class="">
 
                 <label for="register-form" class="fw-medium me-3">Số điện thoại</label>
-                <input id="register-form" type="text" class="main-input" wire:model.live="phoneNumber">
+                <input id="register-form" type="text" class="main-input" wire:model.live="phoneNumber" required>
             </div>
 
             <button class="main-btn lg-btn w-100">Đăng ký</button>

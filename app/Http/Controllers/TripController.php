@@ -41,10 +41,25 @@ class TripController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
+    public function store($bus_id, $route_id, $departure_date, $departure_time, $arrival_time, $arrival_date, $status, $price) {
+
+        $trip = new Trip();
+
+        $trip->bus_id = $bus_id;
+        $trip->route_id = $route_id;
+        $trip->departure_date = $departure_date;
+        $trip->departure_time = $departure_time;
+        $trip->arrival_time = $arrival_time;
+        $trip->arrival_date = $arrival_date;
+        $trip->status = $status;
+        $trip->price = $price;
+
+        $trip->save();
+
+        return response()->json(["code" => 1, "message" => "Tạo chuyến đi thành công"]);
+
     }
+
 
     /**
      * Display the specified resource.
@@ -68,6 +83,7 @@ class TripController extends Controller
     public function destroy(string $id)
     {
         //
+        $trip = Trip::find($id)->delete();
     }
 
     // Tìm kiếm chuyến đi

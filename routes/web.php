@@ -34,7 +34,7 @@ Route::get('payment/callback', [PaymentController::class, 'callback'])->name('vn
 
 Route::get('/admin', Index::class);
 Route::get('/routes', AdminRoute::class);
-Route::get('/trips', AdminTrip::class);
+Route::get('/admin-trips', AdminTrip::class);
 Route::get('/buses', Bus::class);
 
 

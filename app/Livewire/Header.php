@@ -17,7 +17,7 @@ class Header extends Component
 
     public function mount()
     {
-        
+
 
         if (!empty(session()->get('user'))) {
 
@@ -37,6 +37,27 @@ class Header extends Component
 
         $this->isShowUserIcon = true; // Hiện icon
         $this->isShowLoginForm = false; // Ẩn form đăng nhập
+    }
+
+    #[On('login-error')]
+    public function login_error()
+    {
+
+        $this->dispatch('lg-error');
+    }
+
+    #[On('rr-error')]
+    public function register_error()
+    {
+        // dd("loi");
+        $this->dispatch('reg-error');
+    }
+
+    #[On('rr-success')]
+    public function register_success()
+    {
+        // dd("thanh cong");
+        $this->dispatch('reg-success');
     }
 
     #[On('logout-success')]

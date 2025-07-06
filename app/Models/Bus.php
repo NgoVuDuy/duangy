@@ -24,7 +24,7 @@ class Bus extends Model
     // Một xe buýt thuộc về một nhà xe
     public function busOperator()
     {
-        return $this->belongsTo(BusOperator::class);
+        return $this->belongsTo(BusOperator::class, 'bus_operator_phone', 'phone');
     }
 
     public function trips()

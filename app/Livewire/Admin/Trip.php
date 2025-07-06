@@ -36,6 +36,29 @@ class Trip extends Component
         // dd($this->trips); 
     }
 
+    public function save()
+    {
+
+
+        if (!empty($this->route_value) && !empty($this->bus_value) && !empty($this->departure_value) && !empty($this->arrival_value) && !empty($this->price_value)) {
+
+            list($departure_date, $departure_time) = explode('T', $this->departure_value);
+            list($arrival_date, $arrival_time) = explode('T', $this->arrival_value);
+
+            $tripController = new TripController();
+
+            $response = $tripController->store($this->bus_value, $this->route_value, $departure_date, $departure_time, $arrival_time, $arrival_date, "pending", $this->price_value)->getData();
+
+            $busOperator = new BusOperatorController();
+            $this->trips = $busOperator->showTrips('19001980')->getData();
+            
+            if ($response->code == 1) {
+
+                $this->dispatch('add-trip-success');
+            }
+        }
+    }
+
     public function delete_trip($id)
     {
         $tripController = new TripController();

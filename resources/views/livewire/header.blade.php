@@ -86,3 +86,36 @@
         }
     </script>
 </div>
+
+@script
+    <script>
+        $(document).ready(function() {
+
+
+            $wire.on('lg-error', () => {
+                Swal.fire({
+                    title: "Số điện thoại chưa được dùng để đăng ký tài khoản!",
+                    icon: "error",
+                    draggable: true
+                });
+            })
+            $wire.on('reg-success', () => {
+                Swal.fire({
+                    title: "Đăng ký thành công",
+                    icon: "success",
+                    draggable: true
+                });
+            })
+
+            $wire.on('reg-error', () => {
+                Swal.fire({
+                    title: "Số điện thoại đã tồn tại!",
+                    icon: "error",
+                    draggable: true
+                });
+            })
+
+
+        })
+    </script>
+@endscript

@@ -20,10 +20,11 @@ class LoginRegisterForm extends Component
     // #[Session(key: 'user')]
     // public $user;
 
-    public function mount() {
+    public function mount()
+    {
 
         // dd($this->user);
-            // dd(session()->get('user'));
+        // dd(session()->get('user'));
 
     }
 
@@ -37,36 +38,61 @@ class LoginRegisterForm extends Component
     }
 
     // Hàm đăng nhập
-    public function login() {
+    public function login()
+    {
 
-        $userController = new UserController();
+        if (!empty($this->phoneNumber)) {
 
-        $this->result = $userController->login($this->phoneNumber)->getData();
+            $userController = new UserController();
 
-        if($this->result->code == 0) {
+            $this->result = $userController->login($this->phoneNumber)->getData();
 
-            return $this->js("alert('Đăng nhập thất bại')");
+            if ($this->result->code == 0) {
 
-        } else {
+                // return $this->js("alert('Đăng nhập thất bại')");
+                $this->dispatch('login-error');
+            } else {
 
-            // $this->user = $this->result->user;
-            session()->put('user', $this->result->user);
 
-            // Phát sự kiện cho header cập nhật lại giao diện
-            $this->dispatch('login-success');
+                if ($this->result->role == "user") {
 
-            
+                    // $this->user = $this->result->user;
+                    session()->put('user', $this->result->user);
+
+                    // Phát sự kiện cho header cập nhật lại giao diện
+                    $this->dispatch('login-success');
+                } else {
+
+                    session()->put('admin', $this->result->user);
+
+                    return $this->redirect('/routes');
+                }
+            }
         }
     }
 
     // Hàm đăng ký
     public function register()
     {
-        $userController = new UserController();
+        if (!empty($this->phoneNumber)) {
 
-        $userController->register($this->phoneNumber);
+            $userController = new UserController();
 
-        return $this->js("alert('Đăng ký thành công')");
+            $result = $userController->register($this->phoneNumber)->getData();
+
+            // dd($result);
+
+            if($result->code == 1) {
+
+                // dd("loi");
+                $this->dispatch('rr-success');
+            } else {
+                // dd("thanh cong");
+                $this->dispatch('rr-error');
+            }
+
+            // return $this->js("alert('Đăng ký thành công')");
+        }
     }
 
     public function render()

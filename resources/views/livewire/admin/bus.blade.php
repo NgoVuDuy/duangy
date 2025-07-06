@@ -49,10 +49,13 @@
                                     {{ $bus->total_seat }}
                                 </td>
                                 <td>
-                                    <button>Xem</button>
+                                    <button class="btn btn-success">Xem</button>
                                 </td>
                                 <td>
-                                    <button type="">Sự cố</button>
+                                    <span>Hoạt động</span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger">Báo sự cố</button>
                                 </td>
                             </tr>
                         @endforeach

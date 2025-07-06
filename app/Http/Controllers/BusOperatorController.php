@@ -17,10 +17,23 @@ class BusOperatorController extends Controller
         return response()->json($buses);
     }
 
+    // public function showTrips(string $phone)
+    // {
+
+    //     $trips = BusOperator::where('phone', $phone)->with('buses.trips.route')->first();
+
+    //     return response()->json($trips);
+    // }
     public function showTrips(string $phone)
     {
-
-        $trips = BusOperator::where('phone', $phone)->with('buses.trips.route')->first();
+        $trips = BusOperator::where('phone', $phone)
+            ->with([
+                'buses.trips' => function ($query) {
+                    $query->orderBy('created_at', 'desc');
+                },
+                'buses.trips.route'
+            ])
+            ->first();
 
         return response()->json($trips);
     }

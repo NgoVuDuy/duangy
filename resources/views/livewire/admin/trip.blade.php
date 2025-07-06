@@ -26,7 +26,7 @@
                             <th>Biển số xe</th>
                             <th>Giá</th>
                             {{-- <th>Trạng thái</th> --}}
-                            <td>Hành động</td>
+                            <th>Hành động</th>
 
                         </tr>
                     </thead>
@@ -54,7 +54,7 @@
                                                     {{ $trip->status }}
                                                 </td> --}}
                                     <td class="text-center">
-                                        <button class="btn btn-warning">Sửa</button>
+                                        <button class="btn btn-warning" wire:click="update_trip('{{ $trip->id }}')">Sửa</button>
                                         <button class="btn btn-danger"
                                             wire:click="delete_trip('{{ $trip->id }}')">Xóa</button>
                                     </td>
@@ -71,6 +71,9 @@
     <!-- Modal -->
     <div class="modal fade" id="tripModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
         wire:ignore.self>
+        {{-- {{ $departure_value }}
+    {{ $bus_value }} --}}
+
         <div class="modal-dialog modal-dialog-centered">
 
             <div class="modal-content">
@@ -79,7 +82,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form wire:submit="save">
 
                         {{-- {{ $route_value }} --}}
 
@@ -124,13 +127,14 @@
                             <input type="text" class="form-control" id="" placeholder="120.000"
                                 wire:model.live="price_value">
                         </div>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
 
                     </form>
                 </div>
-                <div class="modal-footer">
+                {{-- <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                     <button type="button" class="btn btn-primary">Lưu</button>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -150,6 +154,18 @@
                     showConfirmButton: false,
                     timer: 1500
                 });
+            })
+
+            $wire.on('add-trip-success', () => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Thêm chuyến đi thành công",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
+                $('.btn-close').click()
             })
 
             let now = new Date();
