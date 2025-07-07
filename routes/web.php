@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PaymentController;
+use App\Livewire\Admin\Account;
 use App\Livewire\Admin\Bus;
 use App\Livewire\Admin\Index;
 use App\Livewire\Admin\Route as AdminRoute;
@@ -36,6 +37,8 @@ Route::get('/admin', Index::class);
 Route::get('/routes', AdminRoute::class);
 Route::get('/admin-trips', AdminTrip::class);
 Route::get('/buses', Bus::class);
+Route::get('/admin-account', Account::class);
+
 
 
 

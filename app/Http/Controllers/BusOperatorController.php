@@ -12,7 +12,12 @@ class BusOperatorController extends Controller
     public function showBuses(string $phone)
     {
 
-        $buses = BusOperator::where('phone', $phone)->with('buses')->first();
+        $buses = BusOperator::where('phone', $phone)
+        ->with('buses.busSeatTypes.seatType')
+        ->with('buses.busSeatTypes.seats')
+        ->first();
+
+        // dd($buses);
 
         return response()->json($buses);
     }

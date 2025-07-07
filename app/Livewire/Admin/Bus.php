@@ -11,11 +11,17 @@ class Bus extends Component
 {
 
     public $buses = [];
+    public $user;
 
     public function mount() {
 
+        if(session()->get('admin')) {
+
+            $this->user = session()->get('admin');
+        }
+
         $busOperator = new BusOperatorController();
-        $this->buses = $busOperator->showBuses('19001980')->getData();
+        $this->buses = $busOperator->showBuses($this->user->phone)->getData();
 
         // dd($this->buses);
     }

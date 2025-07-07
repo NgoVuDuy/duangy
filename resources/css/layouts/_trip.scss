@@ -86,46 +86,82 @@
                         border-radius: 12px;
                         background: $border-gray;
 
-                        .line-A {
-                            .seat-item {
-                                background: #00c0f4;
-                            }
-                        }
+                        // .line-A {
+                        //     .seat-item {
+                        //         background: #00c0f4;
+                        //     }
+                        // }
 
-                        .line-B{
-                            .seat-item {
-                                background: #f4ab00;
-                            }
-                        }
+                        // .line-B{
+                        //     .seat-item {
+                        //         background: #f4ab00;
+                        //     }
+                        // }
 
-                        .line-C {
-                            .seat-item {
-                                background: #f400ef;
-                            }
-                        }
+                        // .line-C {
+                        //     .seat-item {
+                        //         background: #f400ef;
+                        //     }
+                        // }
 
-                        .line {
-                            justify-content: space-between;
-                            column-gap: 8px;
+                        // .line {
+                        //     justify-content: space-between;
+                        //     column-gap: 8px;
 
-                            div {
-                                text-align: center;
-                            }
+                        //     div {
+                        //         text-align: center;
+                        //     }
 
-                            .seat-item {
-                                border-radius: 50%;
+                        //     .seat-item {
+                        //         border-radius: 50%;
 
-                            }
+                        //     }
 
-                            .seat-item.active {
-                                background: #00f400;
-                            }
-                        }
+                        //     .seat-item.active {
+                        //         background: #00f400;
+                        //     }
+                        // }
                     }
                 }
             }
         }
 
+    }
+}
+
+.line-A {
+    .seat-item {
+        background: #00c0f4;
+    }
+}
+
+.line-B {
+    .seat-item {
+        background: #f4ab00;
+    }
+}
+
+.line-C {
+    .seat-item {
+        background: #f400ef;
+    }
+}
+
+.line {
+    justify-content: space-between;
+    column-gap: 8px;
+
+    div {
+        text-align: center;
+    }
+
+    .seat-item {
+        border-radius: 50%;
+
+    }
+
+    .seat-item.active {
+        background: #00f400;
     }
 }
 

@@ -30,15 +30,27 @@ class Trip extends Component
     public $arrival_update;
     public $price_update;
 
+    public $user;
+
     public function mount()
     {
+
+        if(session()->get('admin')) {
+
+            $this->user = session()->get('admin');
+        }
+        
+        // dd($this->user);
+        // else {
+        //     abort(404);
+        // }
 
         $busOperator = new BusOperatorController();
         $routeController = new RouteController();
         $busOperator = new BusOperatorController();
 
-        $this->trips = $busOperator->showTrips('19001980')->getData();
-        $this->buses = $busOperator->showBuses('19001980')->getData();
+        $this->trips = $busOperator->showTrips($this->user->phone)->getData();
+        $this->buses = $busOperator->showBuses($this->user->phone)->getData();
         $this->routes = $routeController->index()->getData();
 
         // dd($this->trips); 
@@ -58,7 +70,7 @@ class Trip extends Component
             $response = $tripController->store($this->bus_value, $this->route_value, $departure_date, $departure_time, $arrival_time, $arrival_date, "pending", $this->price_value)->getData();
 
             $busOperator = new BusOperatorController();
-            $this->trips = $busOperator->showTrips('19001980')->getData();
+            $this->trips = $busOperator->showTrips($this->user->phone)->getData();
 
             if ($response->code == 1) {
 
@@ -74,7 +86,7 @@ class Trip extends Component
         $tripController->destroy($id);
 
         $busOperator = new BusOperatorController();
-        $this->trips = $busOperator->showTrips('19001980')->getData();
+        $this->trips = $busOperator->showTrips($this->user->phone)->getData();
 
         $this->dispatch('delete-trip-success');
     }
@@ -90,7 +102,7 @@ class Trip extends Component
         $response = $tripController->update($id, $this->bus_update, $this->route_update, $departure_date, $departure_time, $arrival_time, $arrival_date, "pending", $this->price_update)->getData();
 
         $busOperator = new BusOperatorController();
-        $this->trips = $busOperator->showTrips('19001980')->getData();
+        $this->trips = $busOperator->showTrips($this->user->phone)->getData();
 
         if ($response->code == 1) {
 
