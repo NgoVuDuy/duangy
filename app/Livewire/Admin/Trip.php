@@ -22,6 +22,14 @@ class Trip extends Component
     public $arrival_value;
     public $price_value;
 
+    // Các giá trị cần cập nhật
+    public $route_update;
+    public $trip_update;
+    public $bus_update;
+    public $departure_update;
+    public $arrival_update;
+    public $price_update;
+
     public function mount()
     {
 
@@ -51,7 +59,7 @@ class Trip extends Component
 
             $busOperator = new BusOperatorController();
             $this->trips = $busOperator->showTrips('19001980')->getData();
-            
+
             if ($response->code == 1) {
 
                 $this->dispatch('add-trip-success');
@@ -69,6 +77,41 @@ class Trip extends Component
         $this->trips = $busOperator->showTrips('19001980')->getData();
 
         $this->dispatch('delete-trip-success');
+    }
+
+    public function update_trip($id)
+    {
+
+        $tripController = new TripController();
+
+        list($departure_date, $departure_time) = explode('T', $this->departure_update);
+        list($arrival_date, $arrival_time) = explode('T', $this->arrival_update);
+
+        $response = $tripController->update($id, $this->bus_update, $this->route_update, $departure_date, $departure_time, $arrival_time, $arrival_date, "pending", $this->price_update)->getData();
+
+        $busOperator = new BusOperatorController();
+        $this->trips = $busOperator->showTrips('19001980')->getData();
+
+        if ($response->code == 1) {
+
+            $this->dispatch('update-trip-success');
+        }
+    }
+
+    public function edit($id)
+    {
+
+        $tripController = new TripController();
+
+        $trip = $tripController->show($id)->getData();
+
+        if ($trip->code == 1) {
+            $this->route_update = $trip->data->route_id;
+            $this->bus_update = $trip->data->bus_id;
+            $this->departure_update = $trip->data->departure_date . 'T' . $trip->data->departure_time;
+            $this->arrival_update = $trip->data->arrival_date . 'T' . $trip->data->arrival_time;
+            $this->price_update = $trip->data->price;
+        }
     }
 
     public function render()

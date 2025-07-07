@@ -41,7 +41,8 @@ class TripController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store($bus_id, $route_id, $departure_date, $departure_time, $arrival_time, $arrival_date, $status, $price) {
+    public function store($bus_id, $route_id, $departure_date, $departure_time, $arrival_time, $arrival_date, $status, $price)
+    {
 
         $trip = new Trip();
 
@@ -57,25 +58,58 @@ class TripController extends Controller
         $trip->save();
 
         return response()->json(["code" => 1, "message" => "Tạo chuyến đi thành công"]);
-
     }
 
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $trip = Trip::find($id);
+
+        if (!$trip) {
+            return response()->json([
+                "code" => 0,
+                "message" => "Không tìm thấy chuyến đi"
+            ], 404);
+        }
+
+        return response()->json([
+            "code" => 1,
+            "data" => $trip
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    // public function update(Request $request, string $id)
+    // {
+    //     //
+    // }
+    public function update($id, $bus_id, $route_id, $departure_date, $departure_time, $arrival_time, $arrival_date, $status, $price)
     {
-        //
+        $trip = Trip::find($id);
+
+        if (!$trip) {
+            return response()->json(["code" => 0, "message" => "Không tìm thấy chuyến đi"]);
+        }
+
+        $trip->bus_id = $bus_id;
+        $trip->route_id = $route_id;
+        $trip->departure_date = $departure_date;
+        $trip->departure_time = $departure_time;
+        $trip->arrival_time = $arrival_time;
+        $trip->arrival_date = $arrival_date;
+        $trip->status = $status;
+        $trip->price = $price;
+
+        $trip->save();
+
+        return response()->json(["code" => 1, "message" => "Cập nhật chuyến đi thành công"]);
     }
+
 
     /**
      * Remove the specified resource from storage.
