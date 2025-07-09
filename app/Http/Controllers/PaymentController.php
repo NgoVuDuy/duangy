@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UserMail;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -36,7 +38,6 @@ class PaymentController extends Controller
         $vnp_BankCode = 'VNBANK'; // Phương thức thanh toán bằng tài khoản ngân hàng
         $vnp_IpAddr = $ipaddr; // Địa chỉ ip của khách hàng thực hiện giao dịch
         // $desc = $data['desc']; // Địa chỉ ip của khách hàng thực hiện giao dịch
-
 
         $inputData = array(
             "vnp_Version" => "2.1.0",
@@ -133,7 +134,6 @@ class PaymentController extends Controller
                     $user = session()->get('user');
 
                     $user_phone = $user->phone ?? null;
-
                 }
 
                 $ticketController = new TicketController();
@@ -144,10 +144,10 @@ class PaymentController extends Controller
                 }
             }
 
-
             // $url = 'http://localhost:8000/success' . '?query=' . $payment['vnp_TxnRef'];
 
             // return view('payment-success');
+            Mail::to($trip_details["email"])->send(new UserMail($trip_details));
 
             return redirect('/payments?query=success');
         } else {

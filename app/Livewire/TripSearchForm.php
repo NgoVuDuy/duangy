@@ -3,11 +3,12 @@
 namespace App\Livewire;
 
 use App\Http\Controllers\RouteController;
+use App\Mail\UserMail;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Livewire\Attributes\Url;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Mail;
 
 class TripSearchForm extends Component
 {
@@ -41,6 +42,7 @@ class TripSearchForm extends Component
         // $this->start_points = $routeController->search_start_point($this->start_point_value, $this->end_point_value)->getData();
         // $this->end_points = $routeController->search_end_point($this->start_point_value, $this->end_point_value)->getData();
     }
+    
     public function getStartPoint()
     {
 

@@ -9,6 +9,7 @@ class BookingConfirmation extends Component
 {
     public $name = '';
     public $phone = '';
+    public $email = '';
     public $trip_details = null;
 
     public function mount() {
@@ -30,6 +31,7 @@ class BookingConfirmation extends Component
 
             $this->name  = $user->name;
             $this->phone = $user->phone;
+            $this->email = $user->email;
         }
     }
     // 
@@ -43,13 +45,15 @@ class BookingConfirmation extends Component
     // Chuyển đến trang thanh toán
     public function next_button()
     {
-        if ($this->name == '' || $this->phone == '') {
+        if ($this->name == '' || $this->phone == '' || $this->email == '') {
 
             return $this->js("alert('Vui lòng nhập thông tin liên hệ')");
         }
         // Lưu tên người dùng và số điện thoại vào session
         session()->put('ticket.name', $this->name);
         session()->put('ticket.phone', $this->phone);
+        session()->put('ticket.email', $this->email);
+
         
         return $this->redirect('/payments', navigate: true);
     }

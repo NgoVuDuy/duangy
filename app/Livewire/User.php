@@ -13,6 +13,7 @@ class User extends Component
     public $phone = '';
     public $date = '';
     public $gender = '';
+    public $email = '';
 
     public $result = null;
 
@@ -51,6 +52,7 @@ class User extends Component
         $this->phone = $this->user->phone;
         $this->date = $this->user->date;
         $this->gender = $this->user->gender;
+        $this->email = $this->user->email;
     }
 
     public function save()
@@ -58,7 +60,7 @@ class User extends Component
 
         $userController = new UserController();
 
-        $this->result = $userController->updated($this->user->id, $this->name, $this->phone, $this->date, $this->gender)->getData();
+        $this->result = $userController->updated($this->user->id, $this->name, $this->phone, $this->date, $this->gender, $this->email)->getData();
 
         $this->user = $this->result->user;
 

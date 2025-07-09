@@ -40,7 +40,6 @@ class Trip extends Component
 
         $this->trips = $tripController->search($this->start_point_value, $this->end_point_value, $this->date_value)->getData();
 
-
         // dd($this->trips);
 
         foreach ($this->trips as $i => $trip) {
@@ -63,7 +62,6 @@ class Trip extends Component
     // Ấn nút quay lại
     public function hide_points(string $i)
     {
-
         $this->isShowPoints[$i] = false;
     }
 

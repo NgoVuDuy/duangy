@@ -22,6 +22,11 @@
                                     wire:model.live="name">
                             </div>
                             <div class="">
+                                <label for="">Email</label>
+                                <input class="input" type="text" name="" id=""
+                                    wire:model.live="email">
+                            </div>
+                            <div class="">
                                 <label for="">Số điện thoại</label>
                                 <input class="input" type="text" name="" id=""
                                     wire:model.live="phone">

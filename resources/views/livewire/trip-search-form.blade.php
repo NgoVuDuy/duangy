@@ -1,4 +1,5 @@
 <div class="form-search-wrap">
+    {{-- <button wire:click="sendmail">Send mail</button> --}}
     <form wire:submit="trip_search" class="form-search d-flex column-gap-5 align-items-center">
 
         <div class="start-point d-flex flex-column row-gap-2 position-relative">

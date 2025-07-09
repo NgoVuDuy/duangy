@@ -15,6 +15,11 @@
                             </div>
                             <div class="">
 
+                                <label class="fw-medium" for="phone">Email</label>
+                                <input type="text" name="" id="phone" wire:model.live="email">
+                            </div>
+                            <div class="">
+
                                 <label class="fw-medium" for="phone">Số điện thoại</label>
                                 <input type="text" name="" id="phone" wire:model.live="phone">
                             </div>
@@ -30,7 +35,7 @@
                                     <path d="m9 12 2 2 4-4" />
                                 </svg>
                                 <div>
-                                    Thông tin vé xe sẽ được gửi về Zalo thông qua số điện thoại của bạn
+                                    Thông tin vé xe sẽ được gửi về Email của bạn
                                 </div>
                             </div>
                         </div>
@@ -146,8 +151,10 @@
                                                     stroke-linejoin="round"
                                                     class="lucide lucide-locate-icon lucide-locate">
                                                     <line x1="2" x2="5" y1="12" y2="12" />
-                                                    <line x1="19" x2="22" y1="12" y2="12" />
-                                                    <line x1="12" x2="12" y1="2" y2="5" />
+                                                    <line x1="19" x2="22" y1="12"
+                                                        y2="12" />
+                                                    <line x1="12" x2="12" y1="2"
+                                                        y2="5" />
                                                     <line x1="12" x2="12" y1="19"
                                                         y2="22" />
                                                     <circle cx="12" cy="12" r="7" />

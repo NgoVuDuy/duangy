@@ -22,6 +22,7 @@ class UserController extends Controller
             $user->phone = $phone;
             $user->date = '';
             $user->gender = '';
+            $user->email = '';
             $user->save();
 
             return response()->json(["code" => 1, "message" => "Đăng ký tài khoản thành công"]);
@@ -50,7 +51,7 @@ class UserController extends Controller
         return response()->json(["code" => 0, "user" => $user, "role" => ""]);;
     }
 
-    public function updated(string $user_id, string $name, string $phone, string $date, string $gender)
+    public function updated(string $user_id, string $name, string $phone, string $date, string $gender, string $email)
     {
         $user = User::find($user_id);
 
@@ -60,6 +61,7 @@ class UserController extends Controller
             $user->phone = $phone;
             $user->date = $date;
             $user->gender = $gender;
+            $user->email = $email;
 
             $user->save();
 

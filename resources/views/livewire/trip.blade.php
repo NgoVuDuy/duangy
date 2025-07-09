@@ -53,11 +53,12 @@
                     <div class="d-flex flex-column row-gap-5">
 
                         @foreach ($trips as $key => $trip)
+                        
                             <div class="item-wrap d-flex flex-column shadow">
                                 <div class="item d-flex justify-content-between">
                                     <div class="left d-flex column-gap-4">
 
-                                        <img src="{{ asset('images/bus.jpeg') }}" alt="">
+                                        <img src="{{ asset('images/' . $trip->bus->image) }}" alt="" width="200px">
                                         <div class="d-flex flex-column justify-content-between">
 
                                             <div class="">
@@ -196,7 +197,6 @@
 
                                                         </div>
                                                     @endforeach
-
 
                                                 </div>
                                             </div>

@@ -4,7 +4,9 @@ namespace App\Livewire;
 
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TicketController;
+use App\Mail\UserMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
@@ -57,6 +59,7 @@ class Payment extends Component
     #[On('payment')]
     public function payment()
     {
+        // dd($this->trip_details);
         // Kiểm tra đăng nhập
         // if(!session()->get('user')) {
 
@@ -101,6 +104,9 @@ class Payment extends Component
 
             // Thông báo thành công
             $this->dispatch('payment-success');
+
+            Mail::to($this->trip_details["email"])->send(new UserMail($this->trip_details));
+
             //
         }
 
