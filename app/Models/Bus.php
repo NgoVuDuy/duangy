@@ -16,12 +16,19 @@ class Bus extends Model
     }
 
     // Quan hệ với bảng liên kết
-    public function busSeatTypes() {
-         
+    public function busSeatTypes()
+    {
+
         return $this->hasMany(BusSeatType::class);
     }
     // Một xe buýt thuộc về một nhà xe
-    public function busOperator() {
-        return $this->belongsTo(BusOperator::class);
+    public function busOperator()
+    {
+        return $this->belongsTo(BusOperator::class, 'bus_operator_phone', 'phone');
+    }
+
+    public function trips()
+    {
+        return $this->hasMany(Trip::class);
     }
 }

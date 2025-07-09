@@ -39,9 +39,8 @@
                         <div class="local d-flex flex-column {{ count($start_points) > 5 ? 'active' : '' }}">
 
                             @foreach ($start_points as $start_point)
-                                <span class="p-2 rounded"
-                                    wire:click="setStartPointValue('{{ $start_point->start_point }}')">
-                                    {{ $start_point->start_point }}
+                                <span class="p-2 rounded" wire:click="setStartPointValue('{{ $start_point }}')">
+                                    {{ $start_point }}
                                 </span>
                             @endforeach
 
@@ -90,10 +89,9 @@
                         <div class="local d-flex flex-column {{ count($end_points) > 5 ? 'active' : '' }}">
 
                             @foreach ($end_points as $end_point)
-                                <span class="p-2 rounded"
-                                    wire:click="setEndPointValue('{{ $end_point->end_point }}')">
+                                <span class="p-2 rounded" wire:click="setEndPointValue('{{ $end_point }}')">
 
-                                    {{ $end_point->end_point }}
+                                    {{ $end_point }}
                                 </span>
                             @endforeach
 
@@ -116,66 +114,78 @@
 
         <button type="submit" class="main-btn lg-btn hover">Tìm kiếm</button>
     </form>
-    <script>
-        $(document).ready(function() {
 
-            $('#startPointInput').on("click", function(e) {
-                // e.stopPropagation(); // ngăn click lan ra document
-                // $('.start-point-result').removeClass('d-none');
-                startPointCollapse.show()
-                $('#arrow-start-point').removeClass('collapsed')
+    @script
+        <script>
+            $(document).ready(function() {
 
-
-            });
-
-            $('#endPointInput').on("click", function(e) {
-                // e.stopPropagation(); // ngăn click lan ra document
-                // $('.end-point-result').removeClass('d-none');
-                endPointCollapse.show()
-                $('#arrow-end-point').removeClass('collapsed')
-
-            });
-
-
-            const startPointCollapse = new bootstrap.Collapse('#startPoint', {
-                toggle: false // Không tự động mở khi tạo instance
-            });
-            const endPointCollapse = new bootstrap.Collapse('#endPoint', {
-                toggle: false // Không tự động mở khi tạo instance
-            });
-
-            startPointCollapse.hide()
-            endPointCollapse.hide()
-
-
-            $('#arrow-start-point').on('click', function() {
-
-                if ($('#startPoint').hasClass('show')) {
-
-                    startPointCollapse.hide()
-                    $('#arrow-start-point').addClass('collapsed')
-
-                } else {
+                $('#startPointInput').on("click", function(e) {
+                    // e.stopPropagation(); // ngăn click lan ra document
+                    // $('.start-point-result').removeClass('d-none');
                     startPointCollapse.show()
                     $('#arrow-start-point').removeClass('collapsed')
 
-                }
-            })
+                });
 
-            $('#arrow-end-point').on('click', function() {
-
-                if ($('#endPoint').hasClass('show')) {
-
-                    endPointCollapse.hide()
-                    $('#arrow-end-point').addClass('collapsed')
-
-                } else {
+                $('#endPointInput').on("click", function(e) {
+                    // e.stopPropagation(); // ngăn click lan ra document
+                    // $('.end-point-result').removeClass('d-none');
                     endPointCollapse.show()
                     $('#arrow-end-point').removeClass('collapsed')
 
-                }
-            })
+                });
 
-        })
-    </script>
+
+                const startPointCollapse = new bootstrap.Collapse('#startPoint', {
+                    toggle: false // Không tự động mở khi tạo instance
+                });
+                const endPointCollapse = new bootstrap.Collapse('#endPoint', {
+                    toggle: false // Không tự động mở khi tạo instance
+                });
+
+                startPointCollapse.hide()
+                endPointCollapse.hide()
+
+
+                $('#arrow-start-point').on('click', function() {
+
+                    if ($('#startPoint').hasClass('show')) {
+
+                        startPointCollapse.hide()
+                        $('#arrow-start-point').addClass('collapsed')
+
+                    } else {
+                        startPointCollapse.show()
+                        $('#arrow-start-point').removeClass('collapsed')
+
+                    }
+                })
+
+                $('#arrow-end-point').on('click', function() {
+
+                    if ($('#endPoint').hasClass('show')) {
+
+                        endPointCollapse.hide()
+                        $('#arrow-end-point').addClass('collapsed')
+
+                    } else {
+                        endPointCollapse.show()
+                        $('#arrow-end-point').removeClass('collapsed')
+
+                    }
+                })
+
+                $wire.on('hide-start-point', () => {
+                    startPointCollapse.hide()
+                    $('#arrow-start-point').addClass('collapsed')
+                })
+
+                $wire.on('hide-end-point', () => {
+                    endPointCollapse.hide()
+                    $('#arrow-end-point').addClass('collapsed')
+                })
+
+            })
+        </script>
+    @endscript
 </div>

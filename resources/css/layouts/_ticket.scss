@@ -1,10 +1,13 @@
 table {
     width: 100%;
 }
+
 thead {
     background: yellow;
 }
-th, td {
+
+th,
+td {
     border: 2px $border-gray solid;
     padding: 10px;
 }

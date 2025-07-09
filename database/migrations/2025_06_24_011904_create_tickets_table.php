@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tickets', function (Blueprint $table) {
+
             $table->id();
             $table->string('name');
             $table->string('phone');
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('pickup')->nullable();
             $table->unsignedBigInteger('dropoff')->nullable();
             $table->unsignedBigInteger('seat_id')->nullable();
+            $table->unsignedBigInteger('payment_id')->nullable();
             $table->string('price');
             $table->string('status');
             $table->string('method');
@@ -32,6 +34,7 @@ return new class extends Migration
             $table->foreign('dropoff')->references('id')->on('pickup_dropoff_points')->onDelete('set null');
 
             $table->foreign('seat_id')->references('id')->on('seats')->onDelete('set null');
+            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('set null');
 
         });
     }

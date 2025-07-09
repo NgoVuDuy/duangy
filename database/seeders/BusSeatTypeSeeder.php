@@ -36,7 +36,6 @@ class BusSeatTypeSeeder extends Seeder
                 'updated_at' => now()
             ],
 
-
             // Xe 2
             [
                 'bus_id' => 2,
@@ -57,7 +56,8 @@ class BusSeatTypeSeeder extends Seeder
                 'updated_at' => now()
             ],
 
-            // Xe 3
+            // xe 3
+
             [
                 'bus_id' => 3,
                 'seat_type_id' => 1,
@@ -77,7 +77,8 @@ class BusSeatTypeSeeder extends Seeder
                 'updated_at' => now()
             ],
 
-            // Xe 4
+            // xe 4
+
             [
                 'bus_id' => 4,
                 'seat_type_id' => 1,
@@ -97,7 +98,8 @@ class BusSeatTypeSeeder extends Seeder
                 'updated_at' => now()
             ],
 
-            // Xe 5
+            // xe 5
+
             [
                 'bus_id' => 5,
                 'seat_type_id' => 1,
@@ -117,7 +119,8 @@ class BusSeatTypeSeeder extends Seeder
                 'updated_at' => now()
             ],
 
-            // Xe 6
+            // xe 6
+
             [
                 'bus_id' => 6,
                 'seat_type_id' => 1,

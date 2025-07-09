@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BusOperator;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,26 +13,41 @@ class UserController extends Controller
 
     public function register(string $phone)
     {
+        $exists = User::where('phone', $phone)->exists();
 
-        $user = new User();
-        $user->name = '';
-        $user->phone = $phone;
-        $user->date = '';
-        $user->gender = '';
-        $user->save();
+        if (!$exists) {
+
+            $user = new User();
+            $user->name = '';
+            $user->phone = $phone;
+            $user->date = '';
+            $user->gender = '';
+            $user->save();
+
+            return response()->json(["code" => 1, "message" => "Đăng ký tài khoản thành công"]);
+        } else {
+
+            return response()->json(["code" => 0, "message" => "Đăng ký tài khoản thất bại"]);
+        }
     }
 
     public function login(string $phone)
     {
 
         $user = User::where('phone', $phone)->first();
+        $bus_operator = BusOperator::where('phone', $phone)->first();
 
         if ($user) {
 
-            return response()->json(["code" => 1, "user" => $user]);
+            return response()->json(["code" => 1, "user" => $user, "role" => "user"]);
         }
 
-        return response()->json(["code" => 0, "user" => $user]);;
+        if ($bus_operator) {
+
+            return response()->json(["code" => 1, "user" => $bus_operator, "role" => "admin"]);
+        }
+
+        return response()->json(["code" => 0, "user" => $user, "role" => ""]);;
     }
 
     public function updated(string $user_id, string $name, string $phone, string $date, string $gender)
@@ -49,7 +65,7 @@ class UserController extends Controller
 
             return response()->json(["code" => 1, "user" => $user]);
         }
-        
+
         return response()->json(["code" => 0, "user" => $user]);
     }
 }

@@ -15,6 +15,7 @@ class SeatSeeder extends Seeder
     {
         //
         Seat::insert([
+            // xe 1 - id 1 2 3
             [
                 'bus_seat_type_id' => 1,
                 'name' => 'A1',
@@ -53,6 +54,296 @@ class SeatSeeder extends Seeder
             ],
             [
                 'bus_seat_type_id' => 3,
+                'name' => 'A7',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            // xe 2 - id 4 5 6
+            [
+                'bus_seat_type_id' => 4,
+                'name' => 'A1',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 5,
+                'name' => 'A2',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 5,
+                'name' => 'A3',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 5,
+                'name' => 'A4',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 5,
+                'name' => 'A5',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 5,
+                'name' => 'A6',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            //
+            [
+                'bus_seat_type_id' => 5,
+                'name' => 'A7',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 5,
+                'name' => 'A8',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 5,
+                'name' => 'A9',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 6,
+                'name' => 'A10',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 6,
+                'name' => 'A11',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            // xe 3: id 7 8 9
+            [
+                'bus_seat_type_id' => 7,
+                'name' => 'A1',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 8,
+                'name' => 'A2',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 8,
+                'name' => 'A3',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 8,
+                'name' => 'A4',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 8,
+                'name' => 'A5',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 8,
+                'name' => 'A6',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            //
+            [
+                'bus_seat_type_id' => 8,
+                'name' => 'A7',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 8,
+                'name' => 'A8',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 8,
+                'name' => 'A9',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 9,
+                'name' => 'A10',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 9,
+                'name' => 'A11',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            // xe 4: id 10 11 12
+            [
+                'bus_seat_type_id' => 10,
+                'name' => 'A1',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 11,
+                'name' => 'A2',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 11,
+                'name' => 'A3',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 11,
+                'name' => 'A4',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 11,
+                'name' => 'A5',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 12,
+                'name' => 'A6',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 12,
+                'name' => 'A7',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            // xe 5: id 13 14 15
+            [
+                'bus_seat_type_id' => 13,
+                'name' => 'A1',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 14,
+                'name' => 'A2',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 14,
+                'name' => 'A3',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 14,
+                'name' => 'A4',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 14,
+                'name' => 'A5',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 14,
+                'name' => 'A6',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            //
+            [
+                'bus_seat_type_id' => 14,
+                'name' => 'A7',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 14,
+                'name' => 'A8',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 14,
+                'name' => 'A9',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 15,
+                'name' => 'A10',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 15,
+                'name' => 'A11',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            // xe 6: id 16 17 18
+            [
+                'bus_seat_type_id' => 16,
+                'name' => 'A1',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 17,
+                'name' => 'A2',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 17,
+                'name' => 'A3',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 17,
+                'name' => 'A4',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 17,
+                'name' => 'A5',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 18,
+                'name' => 'A6',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 18,
                 'name' => 'A7',
                 'created_at' => now(),
                 'updated_at' => now()

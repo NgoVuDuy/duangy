@@ -35,4 +35,10 @@ class Ticket extends Model
     public function seat() {
         return $this->belongsTo(Seat::class);
     }
+
+    // Một vé thuộc về một thanh toán
+    public function payment() {
+
+        return $this->belongsTo(Payment::class);
+    }
 }
