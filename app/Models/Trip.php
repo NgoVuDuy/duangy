@@ -28,9 +28,11 @@ class Trip extends Model
         return $this->hasMany(PickupDropoffPoint::class);
     }
 
-    // Một chuyến đi có nhiều điểm trả
-    // public function dropoffs()
-    // {
-    //     return $this->hasMany(PickupDropoffPoint::class);
-    // }
+    // Một chuyến có nhiều vé xe
+    public function tickets() {
+
+        return $this->hasMany(Ticket::class);
+    }
+
+
 }

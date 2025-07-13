@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone');
+            // $table->string('email');
             $table->string('user_phone')->nullable();
             $table->unsignedBigInteger('trip_id')->nullable();
             $table->unsignedBigInteger('pickup')->nullable();

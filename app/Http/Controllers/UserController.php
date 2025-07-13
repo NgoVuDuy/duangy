@@ -51,9 +51,27 @@ class UserController extends Controller
         return response()->json(["code" => 0, "user" => $user, "role" => ""]);;
     }
 
+    public function updatedPatch(string $user_id, string $email, string $name) 
+    {
+        $user = User::where('phone', $user_id)->first();
+
+        if ($user) {
+
+            $user->name = $name;
+            $user->email = $email;
+
+            $user->save();
+
+            return response()->json(["code" => 1, "user" => $user]);
+        }
+
+        return response()->json(["code" => 0, "user" => $user]);
+    }
+
     public function updated(string $user_id, string $name, string $phone, string $date, string $gender, string $email)
     {
-        $user = User::find($user_id);
+        // $user = User::find($user_id);
+        $user = User::where('phone', $user_id)->first();
 
         if ($user) {
 

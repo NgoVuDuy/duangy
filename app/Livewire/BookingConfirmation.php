@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Http\Controllers\UserController;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
@@ -49,12 +50,15 @@ class BookingConfirmation extends Component
 
             return $this->js("alert('Vui lòng nhập thông tin liên hệ')");
         }
+        // Cập nhật thêm tên và sdt
+        $userController = new UserController();
+        $response = $userController->updatedPatch(session()->get('user')->phone, $this->email, $this->name);
+
         // Lưu tên người dùng và số điện thoại vào session
         session()->put('ticket.name', $this->name);
         session()->put('ticket.phone', $this->phone);
         session()->put('ticket.email', $this->email);
 
-        
         return $this->redirect('/payments', navigate: true);
     }
 

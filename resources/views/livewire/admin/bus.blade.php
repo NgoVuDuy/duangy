@@ -53,15 +53,38 @@
                                         data-bs-target="#{{ $bus->id }}">Xem</button>
                                 </td>
                                 <td>
-                                    <span>Hoạt động</span>
+                                    @if ($bus->status == 'active')
+                                        <span>
+                                            <svg style="color: green;" class="me-3" xmlns="http://www.w3.org/2000/svg"
+                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" class="lucide lucide-check-icon lucide-check">
+                                                <path d="M20 6 9 17l-5-5" />
+                                            </svg>Hoạt động
+                                        </span>
+                                    @else
+                                        <span>
+                                            <svg style="color: red;" class="me-3" xmlns="http://www.w3.org/2000/svg"
+                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" class="lucide lucide-ban-icon lucide-ban">
+                                                <circle cx="12" cy="12" r="10" />
+                                                <path d="m4.9 4.9 14.2 14.2" />
+                                            </svg>
+                                            Xe gặp sự cố
+                                        </span>
+                                    @endif
+
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger">Báo sự cố</button>
+                                    <button class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#buserror-{{ $bus->id }}">Báo sự cố</button>
                                 </td>
                             </tr>
                             <!-- Modal -->
-                            <div class="modal fade" id="{{ $bus->id }}" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+                            <div class="modal
+                                        fade" id="{{ $bus->id }}"
+                                tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
                                 <div class="modal-dialog modal-dialog-centered" style="width: fit-content">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -138,6 +161,48 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            {{-- Modal sự cố --}}
+                            <!-- Modal -->
+                            <div class="modal fade" id="buserror-{{ $bus->id }}" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            {{-- <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1> --}}
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="" wire:submit="save({{ $bus->id }})">
+                                                <textarea class="w-100 p-4 rounded" name="" id="" cols="30" rows="10"
+                                                    placeholder="Nội dung sự cố" wire:model.live="content"></textarea>
+
+                                                <div class="mt-3 mb-3">
+
+                                                    <select class="form-select" aria-label="Default select example"
+
+                                                        wire:model.live="bus_license_plate">
+                                                        <option value="0">Chọn xe  thay thế</option>
+
+                                                        @foreach ($buses->buses as $item)
+                                                            @if ($item->license_plate !== $bus->license_plate)
+                                                                <option value="{{ $item->license_plate }}">
+
+                                                                    {{ $item->license_plate }}</option>
+                                                            @endif
+                                                        @endforeach
+
+                                                    </select>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary">Xác nhận</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     </tbody>
                 </table>

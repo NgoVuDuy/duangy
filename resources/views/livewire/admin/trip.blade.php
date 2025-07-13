@@ -120,14 +120,14 @@
 
                                                     @foreach ($buses->buses as $item)
                                                         @if ($item->license_plate == $bus->license_plate)
-                                                            <option value="{{ $bus->id }}" selected>
+                                                            <option value="{{ $item->id }}" selected>
 
-                                                                {{ $bus->license_plate }}</option>
+                                                                {{ $item->license_plate }}</option>
                                                         @else
                                                             {{-- $bus->license_plate --}}
-                                                            <option value="{{ $bus->id }}">
+                                                            <option value="{{ $item->id }}">
 
-                                                                {{ $bus->license_plate }}</option>
+                                                                {{ $item->license_plate }}</option>
                                                         @endif
                                                     @endforeach
 

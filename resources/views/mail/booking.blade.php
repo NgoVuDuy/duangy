@@ -30,9 +30,9 @@
             {{$trip_details['dropoff']['time']}} -  {{$trip_details['dropoff']['name']}} - {{$trip_details['dropoff']['address']}}
         </span>
     </div>
-    <div class=""> Phương thức thanh toán
+    {{-- <div class=""> Phương thức thanh toán
         {{ $trip_details['method'] }}
-    </div>
+    </div> --}}
 
     
 </div>

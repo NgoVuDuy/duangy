@@ -21,7 +21,6 @@
                                     <img src="{{ asset('images/logo/vnpay-logo.jpg') }}" alt="" width="70px"
                                         height="70px">
                                     <span class="fw-medium">
-
                                         VNPay - Chuyển khoản thẻ ATM nội địa
                                     </span>
 

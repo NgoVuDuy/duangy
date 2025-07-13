@@ -31,13 +31,21 @@ class User extends Component
 
             $this->set_user();
         }
+
+        // dd($this->user);
     }
 
     #[On('login-success')]
     public function login_success()
     {
+        if (session()->get('user')) {
 
-        $this->isLogin = true;
+            $this->isLogin = true;
+
+            $this->user = session()->get('user');
+
+            $this->set_user();
+        }
     }
     #[On('logout-success')]
     public function logout_success()
@@ -60,13 +68,12 @@ class User extends Component
 
         $userController = new UserController();
 
-        $this->result = $userController->updated($this->user->id, $this->name, $this->phone, $this->date, $this->gender, $this->email)->getData();
+        $this->result = $userController->updated($this->user->phone, $this->name, $this->phone, $this->date, $this->gender, $this->email)->getData();
 
         $this->user = $this->result->user;
 
         session()->put('user', $this->user);
     }
-
 
 
     public function render()

@@ -53,7 +53,6 @@ class LoginRegisterForm extends Component
                 $this->dispatch('login-error');
             } else {
 
-
                 if ($this->result->role == "user") {
 
                     // $this->user = $this->result->user;

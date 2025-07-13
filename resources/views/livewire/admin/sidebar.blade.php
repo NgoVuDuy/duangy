@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="width: 400px !important">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin">
@@ -29,17 +29,17 @@
     <li class="nav-item" wire:current="active">
         <a class="nav-link" href="/routes" wire:navigate>
             {{-- <i class="fs-6 fas fa-fw fa-chart-area"></i> --}}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                 class="bi bi-distribute-vertical" viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
                     d="M1 1.5a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 0-1h-13a.5.5 0 0 0-.5.5m0 13a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 0-1h-13a.5.5 0 0 0-.5.5" />
                 <path d="M2 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
             </svg>
-            <span class="fs-6">Danh sách tuyến đi</span></a>
+            <span class="fs-5">Danh sách tuyến đi</span></a>
     </li>
 
     <li class="nav-item" wire:current="active">
-        <a class="nav-link" href="/admin-trips" wire:navigate>
+        <a class="nav-link" href="/admin-trips" wire:navigate style="width: 100%">
             {{-- <i class="fs-6 fas fa-fw fa-chart-area"></i> --}}
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -50,18 +50,17 @@
                 <path d="M9 17h6" />
                 <circle cx="17" cy="17" r="2" />
             </svg>
-            <span class="fs-6">Danh sách chuyến đi</span></a>
+            <span class="fs-5">Danh sách chuyến đi</span></a>
     </li>
 
     <li class="nav-item" wire:current="active">
         <a class="nav-link" href="/buses" wire:navigate>
             <i class="fs-6 fas fa-fw fa-bus"></i>
-            <span class="fs-6">Danh sách xe</span></a>
+            <span class="fs-5">Danh sách xe</span></a>
     </li>
 
-    <li class="nav-item" wire:current="active">
+    {{-- <li class="nav-item" wire:current="active">
         <a class="nav-link" href="/admin-account" wire:navigate>
-            {{-- <i class="fs-6 fas fa-fw fa-tachometer-alt"></i> --}}
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="lucide lucide-user-icon lucide-user">
@@ -69,15 +68,15 @@
                 <circle cx="12" cy="7" r="4" />
             </svg>
             <span class="fs-6">Tài khoản</span></a>
-    </li>
+    </li> --}}
 
     <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
+    {{-- <hr class="sidebar-divider d-none d-md-block"> --}}
 
     <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
+    {{-- <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
+    </div> --}}
 
 
 </ul>

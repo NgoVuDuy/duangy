@@ -36,11 +36,78 @@ class BusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update($bus_id, string $content, string $replacement_bus)
     {
         //
+        $bus = Bus::find($bus_id);
+
+        if ($bus) {
+            $bus->status = "inactive";
+            $bus->status_detail = $content;
+            $bus->replacement_bus = $replacement_bus;
+
+            $bus->save();
+
+            return response()->json(["code" => 1, "message" => "Cập nhật thành công"]);
+        }
+
+        return response()->json(["code" => 0, "message" => "Cập nhật thất bại"]);
     }
 
+    // public function getEmailByBusId($busId)
+    // {
+    //     $bus = Bus::find($busId)
+    //         // ->where('status', 'broken')
+    //         ->first();
+
+    //     if (!$bus) {
+    //         return response()->json(['message' => 'Bus not found or not broken'], 404);
+    //     }
+
+    //     $userPhones = $bus->trips()
+    //         ->with('tickets.user')
+    //         ->get()
+    //         // ->flatMap(function ($trip) {
+    //         //     return $trip->tickets->pluck('user_phone');
+    //         // })
+    //         ->flatMap(function ($trip) {
+    //             return $trip->tickets->map(function ($ticket) {
+    //                 return optional($ticket->user)->email;
+    //             });
+    //         })
+    //         ->unique()
+    //         ->values();
+
+    //     return response()->json($userPhones);
+    // }
+    public function getEmailByBusId($busId)
+    {
+        $bus = Bus::find($busId);
+
+        if (!$bus) {
+            return response()->json(['message' => 'Bus not found'], 404);
+        }
+
+        // Lấy tất cả trips của bus, kèm theo tickets và user
+        $trips = $bus->trips()->with('tickets.user')->get();
+
+        $emailsWithTickets = [];
+
+        foreach ($trips as $trip) {
+            foreach ($trip->tickets as $ticket) {
+                $user = $ticket->user;
+                if ($user && $user->email) {
+                    $email = $user->email;
+                    if (!isset($emailsWithTickets[$email])) {
+                        $emailsWithTickets[$email] = [];
+                    }
+                    $emailsWithTickets[$email][] = $ticket->id;
+                }
+            }
+        }
+
+        return response()->json($emailsWithTickets);
+    }
     /**
      * Remove the specified resource from storage.
      */

@@ -169,14 +169,14 @@
         <div class="topbar-divider d-none d-sm-block"></div>
 
         <!-- Nav Item - User Information -->
-        {{-- <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" id="userDropdown" role="button"
+        <li class="nav-item dropdown no-arrow">
+            <div class="nav-link dropdown-toggle" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ !empty($user) ? $user->name : '' }}</span>
-                <img class="img-profile rounded-circle" src="{{ asset('img/undraw_profile.svg') }}">
-            </a>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small fs-5">{{ !empty($user) ? $user->name : '' }}</span>
+                <img class="rounded-circle" src="{{ asset('img/undraw_profile.svg') }}" width="40px">
+            </div>
             <!-- Dropdown - User Information -->
-            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+            {{-- <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -188,8 +188,8 @@
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Đăng xuất
                 </a>
-            </div>
-        </li> --}}
+            </div> --}}
+        </li>
 
     </ul>
 

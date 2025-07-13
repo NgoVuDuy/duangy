@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('image');
             $table->string('license_plate');
             $table->integer('total_seat');
+            $table->string('status')->default('active');
+            $table->string('status_detail')->default("");
+            $table->string('replacement_bus')->default("");
             $table->timestamps();
 
             $table->foreign('bus_operator_phone')->references('phone')->on('bus_operators')->onDelete('set null');

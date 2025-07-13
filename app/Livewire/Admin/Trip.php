@@ -53,7 +53,7 @@ class Trip extends Component
         $this->buses = $busOperator->showBuses($this->user->phone)->getData();
         $this->routes = $routeController->index()->getData();
 
-        // dd($this->trips); 
+        // dd($this->buses); 
     }
 
     public function save()
