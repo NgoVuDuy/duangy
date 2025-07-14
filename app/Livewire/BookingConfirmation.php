@@ -50,9 +50,12 @@ class BookingConfirmation extends Component
 
             return $this->js("alert('Vui lòng nhập thông tin liên hệ')");
         }
-        // Cập nhật thêm tên và sdt
-        $userController = new UserController();
-        $response = $userController->updatedPatch(session()->get('user')->phone, $this->email, $this->name);
+        if(session()->get('user')) {
+
+            // Cập nhật thêm tên và sdt
+            $userController = new UserController();
+            $response = $userController->updatedPatch(session()->get('user')->phone, $this->email, $this->name);
+        }
 
         // Lưu tên người dùng và số điện thoại vào session
         session()->put('ticket.name', $this->name);

@@ -31,8 +31,8 @@ class PaymentController extends Controller
         $vnp_HashSecret = "2GT1GOM5TWXFHD5ZSA813GY01XVV7R4E"; //Chuỗi bí mật
 
         $vnp_TxnRef = time(); // Mã giao dịch là thời gian hiện tại
-        $vnp_OrderInfo = 'Thanh toán đơn hàng VND\'s Pizzeria '; // Nội dung chuyển khoản
-        $vnp_OrderType = 'Food'; // Danh mục hàng hóa
+        $vnp_OrderInfo = 'Thanh toán đặt vé xe DUANGY'; // Nội dung chuyển khoản
+        $vnp_OrderType = 'Bus Ticket'; // Danh mục hàng hóa
         $vnp_Amount = $amount * 100; // Số tiền cần thanh toán
         $vnp_Locale = 'vn'; // Ngôn ngữ hiển thị trên giao diện
         $vnp_BankCode = 'VNBANK'; // Phương thức thanh toán bằng tài khoản ngân hàng
