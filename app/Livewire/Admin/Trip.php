@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Http\Controllers\BusOperatorController;
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TripController;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -35,25 +36,25 @@ class Trip extends Component
     public function mount()
     {
 
-        if(session()->get('admin')) {
+        if (session()->get('admin')) {
 
             $this->user = session()->get('admin');
         }
-        
+
         // dd($this->user);
         // else {
         //     abort(404);
         // }
 
-        $busOperator = new BusOperatorController();
+        // $busOperator = new BusOperatorController();
         $routeController = new RouteController();
         $busOperator = new BusOperatorController();
 
-        $this->trips = $busOperator->showTrips($this->user->phone)->getData();
-        $this->buses = $busOperator->showBuses($this->user->phone)->getData();
-        $this->routes = $routeController->index()->getData();
+        $this->trips = $busOperator->showTrips($this->user->phone)->getData(); // Lấy chuyến
+        $this->buses = $busOperator->showBuses($this->user->phone)->getData(); // Lấy xe
+        $this->routes = $routeController->index()->getData(); // Lấy tuyến
 
-        // dd($this->buses); 
+        // dd($this->trips); 
     }
 
     public function save()
@@ -123,6 +124,35 @@ class Trip extends Component
             $this->departure_update = $trip->data->departure_date . 'T' . $trip->data->departure_time;
             $this->arrival_update = $trip->data->arrival_date . 'T' . $trip->data->arrival_time;
             $this->price_update = $trip->data->price;
+        }
+    }
+
+    // Hàm hủy vé
+    public function cancel_ticket($id)
+    {
+
+        $ticketController = new TicketController();
+
+        $response = $ticketController->cancel($id)->getData();
+
+        // dd($response);
+        if ($response->code == 1 || $response->code == 2) {
+
+            $busOperator = new BusOperatorController();
+
+            $this->trips = $busOperator->showTrips($this->user->phone)->getData();
+
+            // $this->tickets = $ticketController->getTicketById(session()->get('user')->phone)->getData();
+
+            return $this->dispatch('cancelled-success');
+        }
+        if ($response->code == -1) {
+
+            return $this->dispatch('cancelled-before');
+        }
+        if ($response->code == 0) {
+
+            return $this->dispatch('cancelled-error');
         }
     }
 

@@ -1,5 +1,4 @@
 <div>
-    {{-- If your happiness depends on money, you will never be happy with yourself. --}}
     <div class="container user mt-5 mb-5">
         <div class="row justify-content-center">
 
@@ -27,6 +26,7 @@
                                 <th>Giá</th>
                                 <th>Trạng thái</th>
                                 <th>Chi tiết</th>
+                                <th>Hủy vé</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,12 +43,39 @@
                                     <td>{{ $ticket->seat->name }}</td>
                                     <td>{{ $ticket->price }}đ</td>
                                     <td class="text-success fw-bold">
-                                        {{ $ticket->status == 'pending' ? 'Chưa đi' : 'Đã đi' }}</td>
+
+                                        @if ($ticket->status === 'pending')
+                                            Chưa đi
+                                        @elseif ($ticket->status === 'cancelled')
+                                            Đã hủy
+                                        @elseif ($ticket->status === 'done')
+                                            Đã đi
+                                        @endif
+
+                                    </td>
                                     <td class="text-center"><button class="main-btn tiny-btn" type="button"
                                             data-bs-toggle="offcanvas" data-bs-target="#{{ $ticket->id }}"
                                             aria-controls="offcanvasRight">Chi tiết</button>
                                     </td>
+                                    <td class="text-center">
+
+                                        @if ($ticket->status == 'cancelled')
+                                            <button class="main-btn tiny-btn cancel-ticket" type="button"
+                                                style="background: green" disabled>Đã hủy</button>
+                                        @else
+                                            <button class="main-btn tiny-btn cancel-ticket" type="button"
+                                                style="background: red"
+                                                wire:click="cancel_ticket({{ $ticket->id }})">Hủy
+                                                vé</button>
+                                        @endif
+
+                                        {{-- <button class="main-btn tiny-btn cancel-ticket" type="button"
+                                            style="background: red" wire:click="cancel_ticket({{ $ticket->id }})">Hủy
+                                            vé</button> --}}
+
+                                    </td>
                                 </tr>
+
                                 {{-- Phần hiển thị chi tiết vé --}}
                                 <div class="offcanvas offcanvas-end" tabindex="-1" id="{{ $ticket->id }}"
                                     aria-labelledby="offcanvasRightLabel">
@@ -61,17 +88,35 @@
                                     <div class="offcanvas-body">
                                         <div class="trip-details">
 
+                                            {{-- Họ và tên --}}
                                             <div class="items">
                                                 <span>
-                                                    Mã vé
+                                                    Họ và tên
                                                 </span>
-                                                <span>{{ $ticket->id }}</span>
+                                                <span>{{ $ticket->user->name }}</span>
                                             </div>
+                                            {{-- Số điện thoại --}}
+                                            <div class="items">
+                                                <span>
+                                                    Số điện thoại
+                                                </span>
+                                                <span>{{ $ticket->user->phone }}</span>
+                                            </div>
+                                            {{-- Mail --}}
+
+                                            <div class="items">
+                                                <span>
+                                                    Email
+                                                </span>
+                                                <span>{{ $ticket->user->email }}</span>
+                                            </div>
+                                            <hr>
                                             <div class="items">
                                                 <span>
                                                     Tuyến
                                                 </span>
-                                                <span>{{ $ticket->trip->route->start_point }} - {{ $ticket->trip->route->end_point }}</span>
+                                                <span>{{ $ticket->trip->route->start_point }} -
+                                                    {{ $ticket->trip->route->end_point }}</span>
                                             </div>
                                             <div class="items">
                                                 <span>
@@ -83,13 +128,15 @@
                                                 <span>
                                                     Chuyến
                                                 </span>
-                                                <span>{{ $ticket->trip->departure_time }} - {{ $ticket->trip->departure_date }}</span>
+                                                <span>{{ $ticket->trip->departure_time }} -
+                                                    {{ $ticket->trip->departure_date }}</span>
                                             </div>
                                             <div class="items">
                                                 <span>
                                                     Loại xe
                                                 </span>
-                                                <span>{{ $ticket->trip->bus->bus_type }} - {{ $ticket->trip->bus->total_seat }} chỗ</span>
+                                                <span>{{ $ticket->trip->bus->bus_type }} -
+                                                    {{ $ticket->trip->bus->total_seat }} chỗ</span>
                                             </div>
                                             <div class="items">
                                                 <span>
@@ -109,6 +156,23 @@
                                                 </span>
                                                 <span>{{ $ticket->seat->name }}</span>
                                             </div>
+                                            <hr>
+                                            <div class="items">
+                                                <span>
+                                                    Thanh toán
+                                                </span>
+                                                <span>{{ $ticket->payment->method }}</span>
+                                            </div>
+                                            {{-- Hoàn tiền --}}
+                                            @if (!empty($ticket->refund_amount))
+                                                <div class="items">
+                                                    <span>
+                                                        Hoàn tiền
+                                                    </span>
+                                                    <span>{{ $ticket->refund_amount }}đ</span>
+                                                </div>
+                                            @endif
+                                            <hr>
                                             <div class="d-flex flex-column row-gap-4 mt-4">
                                                 <div class="address-wrap">
                                                     <div class="d-flex align-items-center column-gap-2 mb-2">
@@ -132,9 +196,11 @@
                                                     </div>
                                                     <div class="d-flex flex-column">
                                                         <span class="fw-medium">{{ $ticket->pickup->name }}</span>
-                                                        <span class="address-details">{{ $ticket->pickup->address }}</span>
+                                                        <span
+                                                            class="address-details">{{ $ticket->pickup->address }}</span>
 
-                                                        <span class="fw-medium mt-1">Dự kiến đón lúc: {{ $ticket->pickup->time }}</span>
+                                                        <span class="fw-medium mt-1">Dự kiến đón lúc:
+                                                            {{ $ticket->pickup->time }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="address-wrap">
@@ -152,9 +218,12 @@
                                                         <span class="fw-medium">Điểm trả</span>
                                                     </div>
                                                     <div class="d-flex flex-column">
+
                                                         <span class="fw-medium">{{ $ticket->dropoff->name }}</span>
-                                                        <span class="address-details">{{ $ticket->dropoff->address }}</span>
-                                                        <span class="fw-medium mt-1">Dự kiến trả lúc: {{ $ticket->dropoff->time }}</span>
+                                                        <span
+                                                            class="address-details">{{ $ticket->dropoff->address }}</span>
+                                                        <span class="fw-medium mt-1">Dự kiến trả lúc:
+                                                            {{ $ticket->dropoff->time }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -282,3 +351,72 @@
         </div>
     </div> --}}
 </div>
+
+@script
+    <script>
+        $(document).ready(function() {
+
+
+            // $wire.on('confir', () => {
+
+            //         Swal.fire({
+
+            //             title: "Thông báo",
+            //             text: "Bạn có muốn hủy vé này không ?",
+            //             icon: "warning",
+            //             showCancelButton: true,
+            //             confirmButtonColor: "#3085d6",
+            //             cancelButtonColor: "#d33",
+            //             confirmButtonText: "Đồng ý"
+
+            //         }).then((result) => {
+
+            //             if (result.isConfirmed) {
+
+            //                 // $wire.set("is_confir", true)
+
+            //                 // $wire.dispatch('cancel_ticket')
+            //                 // $('.cancel-ticket').click()
+
+            //             }
+            //         });
+            // })
+
+
+            $wire.on('cancelled-success', () => {
+
+                Swal.fire({
+                    title: "Hủy vé thành công",
+                    icon: "success",
+                    draggable: true
+                });
+
+            })
+
+            $wire.on('cancelled-error', () => {
+
+                Swal.fire({
+                    title: "Vé này đã quá hạn để có thể hủy",
+                    icon: "error",
+                    draggable: true
+                });
+
+                // Đóng modal
+                // $('.btn-close').click()
+            })
+
+            $wire.on('cancelled-before', () => {
+
+                Swal.fire({
+                    title: "Vé này đã được hủy trước đó",
+                    icon: "error",
+                    draggable: true
+                });
+
+                // Đóng modal
+                // $('.btn-close').click()
+            })
+
+        })
+    </script>
+@endscript

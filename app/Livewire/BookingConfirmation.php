@@ -5,7 +5,9 @@ namespace App\Livewire;
 use App\Http\Controllers\UserController;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Title;
 
+#[Title('Thông tin liên hệ')]
 class BookingConfirmation extends Component
 {
     public $name = '';
@@ -48,7 +50,8 @@ class BookingConfirmation extends Component
     {
         if ($this->name == '' || $this->phone == '' || $this->email == '') {
 
-            return $this->js("alert('Vui lòng nhập thông tin liên hệ')");
+            // return $this->js("alert('Vui lòng nhập thông tin liên hệ')");
+            return $this->dispatch('not-information');
         }
         if(session()->get('user')) {
 

@@ -53,12 +53,12 @@
                     <div class="d-flex flex-column row-gap-5">
 
                         @foreach ($trips as $key => $trip)
-                        
                             <div class="item-wrap d-flex flex-column shadow">
                                 <div class="item d-flex justify-content-between">
                                     <div class="left d-flex column-gap-4">
 
-                                        <img src="{{ asset('images/' . $trip->bus->image) }}" alt="" width="200px">
+                                        <img src="{{ asset('images/' . $trip->bus->image) }}" alt=""
+                                            width="200px">
                                         <div class="d-flex flex-column justify-content-between">
 
                                             <div class="">
@@ -149,11 +149,12 @@
                                             <div class="seat-note">
                                                 <h6 class="title mb-4">Chú thích</h6>
                                                 <div class="note-item-wrap d-flex flex-column row-gap-2">
+
+
                                                     <div class="item d-flex align-items-center column-gap-4">
-                                                        <svg class="seat-item item1"
-                                                            xmlns="http://www.w3.org/2000/svg" width="32"
-                                                            height="32" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="1"
+                                                        <svg class="seat-item item1" xmlns="http://www.w3.org/2000/svg"
+                                                            width="32" height="32" viewBox="0 0 24 24"
+                                                            fill="none" stroke="currentColor" stroke-width="1"
                                                             stroke-linecap="round" stroke-linejoin="round"
                                                             class="lucide lucide-armchair-icon lucide-armchair">
                                                             <path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3" />
@@ -165,6 +166,27 @@
                                                         <div class="">
 
                                                             <span class="seat-type-text fw-medium">Ghế đang chọn</span>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    {{-- Ghế có người đặt --}}
+                                                    <div class="item d-flex align-items-center column-gap-4">
+                                                        <svg class="seat-item seat-booked" xmlns="http://www.w3.org/2000/svg"
+                                                            width="32" height="32" viewBox="0 0 24 24"
+                                                            fill="none" stroke="currentColor" stroke-width="1"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            class="lucide lucide-armchair-icon lucide-armchair">
+                                                            <path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3" />
+                                                            <path
+                                                                d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z" />
+                                                            <path d="M5 18v2" />
+                                                            <path d="M19 18v2" />
+                                                        </svg>
+                                                        <div class="">
+
+                                                            <span class="seat-type-text fw-medium">Ghế đã được đặt</span>
 
                                                         </div>
 
@@ -209,6 +231,7 @@
 
                                                     {{-- ở đây --}}
                                                     @foreach ($trip->bus->bus_seat_types as $i => $bus_seat_type)
+
                                                         @if ($bus_seat_type->seat_type->name == 'Ghế đầu')
                                                             @php $line = 'line-A'; @endphp
                                                         @elseif ($bus_seat_type->seat_type->name == 'Ghế giữa')
@@ -249,8 +272,9 @@
                                                                 @endphp
 
                                                                 @foreach ($bus_seat_type->seats as $i => $seat)
-                                                                    <svg wire:click="setSeat({{ $seat->id }},'{{ $seat->name }}', '{{ $seat_price }}')"
-                                                                        wire:ignore class="seat-item"
+
+                                                                    <svg  wire:click="setSeat({{ $seat->id }},'{{ $seat->name }}', '{{ $seat_price }}')"
+                                                                        wire:ignore class="seat-item {{ $seat->is_booking ? 'seat-booked' : '' }}"
                                                                         xmlns="http://www.w3.org/2000/svg"
                                                                         width="32" height="32"
                                                                         viewBox="0 0 24 24" fill="none"
@@ -284,9 +308,9 @@
                                                     <div class="title">
                                                         <h5>Điểm đón</h5>
                                                     </div>
-        
+
                                                     <div class="points-wrap d-flex flex-column row-gap-4">
-        
+
                                                         {{-- <div class="form-check">
         
                                                             <div class="points start">
@@ -372,19 +396,23 @@
                                                         @foreach ($trip->pickup_dropoff_points as $pickup_dropoff_point)
                                                             @if ($pickup_dropoff_point->type == 'pickup')
                                                                 <div class="form-check">
-        
+
                                                                     <div class="points">
-        
+
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="pickup" id="{{ $pickup_dropoff_point->id }}" value="{{ $pickup_dropoff_point->id }}" wire:model.live="pickup_id">
+                                                                            name="pickup"
+                                                                            id="{{ $pickup_dropoff_point->id }}"
+                                                                            value="{{ $pickup_dropoff_point->id }}"
+                                                                            wire:model.live="pickup_id">
                                                                         <div class="d-flex flex-column row-gap-1">
-        
+
                                                                             <label class="form-check-label"
                                                                                 for="{{ $pickup_dropoff_point->id }}">
                                                                                 <h6 class="fw-medium">
-                                                                                    {{ $pickup_dropoff_point->time }}</h6>
+                                                                                    {{ $pickup_dropoff_point->time }}
+                                                                                </h6>
                                                                             </label>
-        
+
                                                                             <div class="address">
                                                                                 <span
                                                                                     class="fw-medium">{{ $pickup_dropoff_point->name }}</span>
@@ -397,19 +425,19 @@
                                                                 </div>
                                                             @endif
                                                         @endforeach
-        
+
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                
+
                                                 <div class="end-points p-3">
                                                     <div class="title">
                                                         <h5>Điểm trả</h5>
                                                     </div>
-        
+
                                                     <div class="points-wrap d-flex flex-column row-gap-4">
-        
+
                                                         {{-- <div class="form-check">
         
                                                             <div class="points end">
@@ -492,24 +520,28 @@
                                                                 </div>
                                                             </div>
                                                         </div> --}}
-        
+
                                                         {{-- Vòng lặp điểm trả --}}
                                                         @foreach ($trip->pickup_dropoff_points as $pickup_dropoff_point)
                                                             @if ($pickup_dropoff_point->type == 'dropoff')
                                                                 <div class="form-check">
-        
+
                                                                     <div class="points">
-        
+
                                                                         <input class="form-check-input" type="radio"
-                                                                            name="dropoff" id="{{ $pickup_dropoff_point->id }}" value="{{ $pickup_dropoff_point->id }}" wire:model.live="dropoff_id">
+                                                                            name="dropoff"
+                                                                            id="{{ $pickup_dropoff_point->id }}"
+                                                                            value="{{ $pickup_dropoff_point->id }}"
+                                                                            wire:model.live="dropoff_id">
                                                                         <div class="d-flex flex-column row-gap-1">
-        
+
                                                                             <label class="form-check-label"
                                                                                 for="{{ $pickup_dropoff_point->id }}">
                                                                                 <h6 class="fw-medium">
-                                                                                    {{ $pickup_dropoff_point->time }}</h6>
+                                                                                    {{ $pickup_dropoff_point->time }}
+                                                                                </h6>
                                                                             </label>
-        
+
                                                                             <div class="address">
                                                                                 <span
                                                                                     class="fw-medium">{{ $pickup_dropoff_point->name }}</span>
@@ -667,6 +699,24 @@
 
                     $(this).addClass('active')
                 }
+            })
+            // Bắt sự kiện người dùng chưa chọn ghế và chưa chọn điểm đón trả
+            $wire.on('not-seleted-seat', () => {
+
+                Swal.fire({
+                    title: "Vui lòng chọn ghế",
+                    icon: "error",
+                    draggable: true
+                });
+            })
+
+            $wire.on('not-seleted-point', () => {
+
+                Swal.fire({
+                    title: "Vui lòng chọn điểm đón trả",
+                    icon: "error",
+                    draggable: true
+                });
             })
         })
     </script>

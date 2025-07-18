@@ -170,7 +170,7 @@
 
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
-            <div class="nav-link dropdown-toggle" id="userDropdown" role="button"
+            <div class="nav-link dropdown-toggle" id="userDropdown"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small fs-5">{{ !empty($user) ? $user->name : '' }}</span>
                 <img class="rounded-circle" src="{{ asset('img/undraw_profile.svg') }}" width="40px">

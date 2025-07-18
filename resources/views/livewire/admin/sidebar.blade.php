@@ -35,7 +35,7 @@
                     d="M1 1.5a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 0-1h-13a.5.5 0 0 0-.5.5m0 13a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 0-1h-13a.5.5 0 0 0-.5.5" />
                 <path d="M2 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
             </svg>
-            <span class="fs-5">Danh sách tuyến đi</span></a>
+            <span class="fs-5" style="cursor: pointer !important;">Danh sách tuyến đi</span></a>
     </li>
 
     <li class="nav-item" wire:current="active">
@@ -50,13 +50,13 @@
                 <path d="M9 17h6" />
                 <circle cx="17" cy="17" r="2" />
             </svg>
-            <span class="fs-5">Danh sách chuyến đi</span></a>
+            <span class="fs-5" style="cursor: pointer !important;">Danh sách chuyến đi</span></a>
     </li>
 
     <li class="nav-item" wire:current="active">
         <a class="nav-link" href="/buses" wire:navigate>
             <i class="fs-6 fas fa-fw fa-bus"></i>
-            <span class="fs-5">Danh sách xe</span></a>
+            <span class="fs-5" style="cursor: pointer !important;">Danh sách xe</span></a>
     </li>
 
     {{-- <li class="nav-item" wire:current="active">

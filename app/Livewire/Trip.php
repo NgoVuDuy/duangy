@@ -54,7 +54,10 @@ class Trip extends Component
         // dd($this->seat_id_list);
         // Kiểm tra xem người dùng đã chọn ghế chưa
         if (empty($this->seat_list)) {
-            return $this->js("alert('Vui lòng chọn ghế')");
+
+
+            // return $this->js("alert('Vui lòng chọn ghế')");
+            return $this->dispatch('not-seleted-seat');
         }
 
         $this->isShowPoints[$i] = true;
@@ -71,7 +74,8 @@ class Trip extends Component
 
         if ($this->pickup_id == null || $this->dropoff_id == null) {
 
-            return $this->js("alert('Vui lòng chọn điểm đón trả')");
+            // return $this->js("alert('Vui lòng chọn điểm đón trả')");
+            return $this->dispatch('not-seleted-point');
         }
         // Lấy ra chi tiết điểm đón trả dựa vào id
         $pickupDropoffPointController = new PickupDropoffPointController();
@@ -90,7 +94,7 @@ class Trip extends Component
         /// Tạo mảng session để lưu trữ vé - lưu thông tin tuyến xe
         session()->put('ticket.routes', ["start" => $this->start_point_value, "end" => $this->end_point_value]);
         /// Tạo mảng session để lưu trữ vé - lưu thông tin của chuyến xe
-        session()->put('ticket.trip',["id" => $trip_id, "departure_time" => $this->trips[$trip_index]->departure_time, "departure_date" => $this->trips[$trip_index]->departure_date]);
+        session()->put('ticket.trip', ["id" => $trip_id, "departure_time" => $this->trips[$trip_index]->departure_time, "departure_date" => $this->trips[$trip_index]->departure_date]);
         /// Tạo mảng session để lưu trữ vé - lưu thông tin của nhà xe
         session()->put('ticket.bus_operator', $this->trips[$trip_index]->bus->bus_operator->name);
 

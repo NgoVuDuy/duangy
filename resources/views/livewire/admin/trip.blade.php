@@ -27,7 +27,7 @@
                             <th>Giá</th>
                             {{-- <th>Trạng thái</th> --}}
                             <th>Hành động</th>
-
+                            <th>Danh sách vé</th>
                         </tr>
                     </thead>
 
@@ -60,12 +60,127 @@
                                         <button class="btn btn-danger"
                                             wire:click="delete_trip('{{ $trip->id }}')">Xóa</button>
                                     </td>
-
+                                    <td class="text-center">
+                                        <button class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#ticket-details-{{ $trip->id }}">Xem
+                                        </button>
+                                    </td>
+                                    {{-- Lặp qua các vé của chuyến --}}
+                                    {{-- Modal hiển thị các chi tiết vé --}}
                                 </tr>
+                                {{-- <div class="modal fade" id="ticket-details-{{ $trip->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Thông tin các vé
+                                                    xe</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @if (!empty($trip->tickets))
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>Họ và tên</th>
+                                                                <th>Số điện thoại</th>
+                                                                <th>Điểm đón</th>
+                                                                <th>Điểm trả</th>
+                                                                <th>Giá vé</th>
+                                                                <th>Ghế ngồi</th>
+                                                                <th>Hủy vé</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            @foreach ($trip->tickets as $ticket)
+                                                                <tr>
+                                                                    <td>{{ $ticket->name }}</td>
+                                                                    <td>{{ $ticket->phone }}</td>
+                                                                    <td>{{ $ticket->pickup->time }} -
+                                                                        {{ $ticket->pickup->address }}</td>
+                                                                    <td>{{ $ticket->dropoff->time }} -
+                                                                        {{ $ticket->dropoff->address }}</td>
+                                                                    <td>{{ $ticket->price }}</td>
+                                                                    <td>{{ $ticket->seat->name }}</td>
+                                                                    <td>
+                                                                        <button class="btn btn-danger">Chi tiết</button>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                @else
+                                                    <h5 class="text-center">Chuyến này hiện chưa có vé nào</h5>
+                                                @endif
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> --}}
                             @endforeach
                         @endforeach
                     </tbody>
                 </table>
+                @foreach ($trips->buses as $bus)
+                    @foreach ($bus->trips as $trip)
+                        <div class="modal fade" id="ticket-details-{{ $trip->id }}" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+                            <div class="modal-dialog modal-dialog-centered" style="max-width: 1200px">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Thông tin các vé
+                                            xe</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        @if (!empty($trip->tickets))
+                                            <table>
+                                                <thead>
+                                                    <tr>
+
+                                                        <th>Họ và tên</th>
+                                                        <th>Số điện thoại</th>
+                                                        <th>Điểm đón</th>
+                                                        <th>Điểm trả</th>
+                                                        <th>Giá vé</th>
+                                                        <th>Ghế ngồi</th>
+                                                        <th>Hủy vé</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    @foreach ($trip->tickets as $ticket)
+                                                        <tr>
+                                                            <td>{{ $ticket->name }}</td>
+                                                            <td>{{ $ticket->phone }}</td>
+                                                            <td>{{ $ticket->pickup->time }} -
+                                                                {{ $ticket->pickup->address }}</td>
+                                                            <td>{{ $ticket->dropoff->time }} -
+                                                                {{ $ticket->dropoff->address }}</td>
+                                                            <td>{{ $ticket->price }}</td>
+                                                            <td>{{ $ticket->seat->name }}</td>
+                                                            <td>
+                                                                <button class="btn btn-danger" style="height: 40px"
+                                                                    wire:click="cancel_ticket({{ $ticket->id }})">Hủy</button>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        @else
+                                            <h5 class="text-center">Chuyến này hiện chưa có vé nào</h5>
+                                        @endif
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endforeach
                 @foreach ($trips->buses as $bus)
                     @foreach ($bus->trips as $trip)
                         {{-- O day --}}
@@ -244,6 +359,41 @@
 @script
     <script>
         $(document).ready(function() {
+
+            $wire.on('cancelled-success', () => {
+
+                Swal.fire({
+                    title: "Hủy vé thành công",
+                    icon: "success",
+                    draggable: true
+                });
+
+            })
+
+            $wire.on('cancelled-error', () => {
+
+                Swal.fire({
+                    title: "Vé này đã quá hạn để có thể hủy",
+                    icon: "error",
+                    draggable: true
+                });
+
+                // Đóng modal
+                // $('.btn-close').click()
+            })
+
+            $wire.on('cancelled-before', () => {
+
+                Swal.fire({
+                    title: "Vé này đã được hủy trước đó",
+                    icon: "error",
+                    draggable: true
+                });
+
+                // Đóng modal
+                // $('.btn-close').click()
+            })
+
 
 
             $wire.on('delete-trip-success', () => {

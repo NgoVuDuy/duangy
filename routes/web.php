@@ -18,6 +18,8 @@ Route::get('/', function () {
     return redirect('/home');
 });
 Route::get('/home', Home::class);
+Route::get('/news', Home::class);
+
 Route::get('/trips', Trip::class)->name('trips');
 Route::get('/payments', Payment::class);
 Route::get('/bookingconfirmation', BookingConfirmation::class);

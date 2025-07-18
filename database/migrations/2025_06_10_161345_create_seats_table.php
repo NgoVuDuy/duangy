@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('bus_seat_type_id');
             $table->string('name');
             $table->timestamps();
+            $table->boolean('is_booking')->default(false);
 
             $table->foreign('bus_seat_type_id')->references('id')->on('bus_seat_type')->onDelete('cascade');
         });

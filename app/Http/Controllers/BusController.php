@@ -36,13 +36,13 @@ class BusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update($bus_id, string $content, string $replacement_bus)
+    public function update($bus_id,  $content,  $replacement_bus, string $status)
     {
         //
         $bus = Bus::find($bus_id);
 
         if ($bus) {
-            $bus->status = "inactive";
+            $bus->status = $status;
             $bus->status_detail = $content;
             $bus->replacement_bus = $replacement_bus;
 

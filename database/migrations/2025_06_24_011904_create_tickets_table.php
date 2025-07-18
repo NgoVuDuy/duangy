@@ -23,6 +23,8 @@ return new class extends Migration
             $table->unsignedBigInteger('dropoff')->nullable();
             $table->unsignedBigInteger('seat_id')->nullable();
             $table->unsignedBigInteger('payment_id')->nullable();
+            // số tiền được hoàn lại
+            $table->string('refund_amount')->nullable();
             $table->string('price');
             $table->string('status');
             $table->string('method');

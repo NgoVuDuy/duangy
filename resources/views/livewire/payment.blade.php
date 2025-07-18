@@ -319,7 +319,6 @@
                         draggable: true
                     });
                 } else {
-                    console.log("ff")
 
 
                     Swal.fire({
@@ -348,7 +347,7 @@
 
                 Swal.fire({
                     title: "Thông báo",
-                    text: "Đặt vé thành công ?",
+                    text: "Đặt vé thành công",
                     icon: "success",
                     showCancelButton: false,
                     confirmButtonColor: "#3085d6",
@@ -390,7 +389,7 @@
                     Swal.fire({
 
                         title: "Thông báo",
-                        text: "Đặt vé thành công ?",
+                        text: "Đặt vé thành công",
                         icon: "success",
                         showCancelButton: false,
                         confirmButtonColor: "#3085d6",

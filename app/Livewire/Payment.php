@@ -3,13 +3,16 @@
 namespace App\Livewire;
 
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SeatController;
 use App\Http\Controllers\TicketController;
 use App\Mail\UserMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Title;
 
+#[Title('Thanh toán')]
 class Payment extends Component
 {
     public $pym_option = 'opt-2';
@@ -44,6 +47,8 @@ class Payment extends Component
                 $this->payment_result = false;
             }
         }
+
+        // dd($this->trip_details);
     }
 
     #[On('login-success')]
@@ -100,6 +105,13 @@ class Payment extends Component
             foreach ($this->trip_details["seat_id"] as $key => $seat_id) {
 
                 $ticketController->store($this->trip_details["name"], $this->trip_details["phone"], $this->user_phone, $this->trip_details["trip"]["id"], $this->trip_details["pickup"]["id"], $this->trip_details["dropoff"]["id"], $seat_id, "pending", "", $this->trip_details["seat_list"][$key], $response->id);
+            }
+            // Cập nhật ghế đã đặt
+            $seatController = new SeatController();
+
+            foreach($this->trip_details["seat_id"] as $seat) {
+
+                $seatController->update($seat);
             }
 
             // Thông báo thành công

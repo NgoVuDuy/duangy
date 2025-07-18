@@ -43,7 +43,7 @@ class Bus extends Component
             $busController = new BusController();
 
             // cập nhật lại trạng thái xe
-            $response = $busController->update($bus_id, $this->content, $this->bus_license_plate)->getData();
+            $response = $busController->update($bus_id, $this->content, $this->bus_license_plate, "inactive")->getData();
 
             // Lấy ra các người dùng để gửi mail
             $emailList = $busController->getEmailByBusId($bus_id)->getData();
@@ -57,11 +57,44 @@ class Bus extends Component
                     Mail::to($email)->send(new ProblemMail($this->bus_license_plate, $code, $this->content));
                 }
             }
-            return $this->js("alert('Cáo sự cố thành công')");
+            // Lấy lại danh sách các xe
+            $busOperator = new BusOperatorController();
+            $this->buses = $busOperator->showBuses($this->user->phone)->getData();
+            // return $this->js("alert('Cáo sự cố thành công')");
 
+            return $this->dispatch('reported-problem');
         }
-        // dd("hic");
 
+        return $this->dispatch('error-reported-problem');
+    }
+
+    public function fixed_problem($bus_id)
+    {
+
+        // dd($this->content . $this->bus_id);
+        $busController = new BusController();
+
+        // cập nhật lại trạng thái xe
+        $response = $busController->update($bus_id, "", "", "active")->getData();
+
+        // Lấy ra các người dùng để gửi mail
+        $emailList = $busController->getEmailByBusId($bus_id)->getData();
+
+        // dd($emailList);
+
+        foreach ($emailList as $email => $ticket_code) {
+
+            foreach ($ticket_code as $code) {
+
+                Mail::to($email)->send(new ProblemMail($this->bus_license_plate, $code, "Xe của chúng tôi đã khắc phục sự cố và hoạt động lại bình thường"));
+            }
+        }
+        // Lấy lại danh sách các xe
+        $busOperator = new BusOperatorController();
+        $this->buses = $busOperator->showBuses($this->user->phone)->getData();
+        // return $this->js("alert('Cáo sự cố thành công')");
+
+        return $this->dispatch('fixed-problem');
     }
 
     public function render()

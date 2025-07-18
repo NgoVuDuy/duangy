@@ -13,9 +13,9 @@ class BusOperatorController extends Controller
     {
 
         $buses = BusOperator::where('phone', $phone)
-        ->with('buses.busSeatTypes.seatType')
-        ->with('buses.busSeatTypes.seats')
-        ->first();
+            ->with('buses.busSeatTypes.seatType')
+            ->with('buses.busSeatTypes.seats')
+            ->first();
 
         // dd($buses);
 
@@ -36,7 +36,15 @@ class BusOperatorController extends Controller
                 'buses.trips' => function ($query) {
                     $query->orderBy('created_at', 'desc');
                 },
-                'buses.trips.route'
+                'buses.trips.route',
+                'buses.trips.tickets' => function ($query) {
+                    $query->where('status', 'pending'); // Chỉ lấy vé chưa đi
+                },
+                'buses.trips.tickets.pickup',
+                'buses.trips.tickets.dropoff',
+                'buses.trips.tickets.seat',
+                'buses.trips.tickets.payment'
+
             ])
             ->first();
 

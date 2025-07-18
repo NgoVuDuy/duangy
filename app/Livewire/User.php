@@ -5,7 +5,9 @@ namespace App\Livewire;
 use App\Http\Controllers\UserController;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Title;
 
+#[Title('Thông tin người dùng')]
 class User extends Component
 {
 

@@ -49,8 +49,11 @@
                                     {{ $bus->total_seat }}
                                 </td>
                                 <td>
-                                    <button class="btn btn-success" data-bs-toggle="modal"
-                                        data-bs-target="#{{ $bus->id }}">Xem</button>
+                                    <div class="text-center">
+
+                                        <button class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#{{ $bus->id }}">Xem</button>
+                                    </div>
                                 </td>
                                 <td>
                                     @if ($bus->status == 'active')
@@ -77,11 +80,48 @@
 
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#buserror-{{ $bus->id }}">Báo sự cố</button>
+                                    {{-- Xe gặp sự cố rồi chời --}}
+                                    @if ($bus->status == 'inactive')
+                                        {{-- <div class="text-center"> --}}
+
+                                        <button class="btn btn-success"
+                                            wire:click="fixed_problem({{ $bus->id }})">Đã khắc phục sự cố</button>
+                                        <button class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#prob-detail-{{ $bus->id }}">Chi tiết sự cố</button>
+                                        {{-- </div> --}}
+                                    @else
+                                        {{-- Xe này còn chạy okela --}}
+
+                                        <button class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#buserror-{{ $bus->id }}">Báo sự cố</button>
+                                    @endif
+
                                 </td>
                             </tr>
-                            <!-- Modal -->
+                            {{-- Model xem chi tiết sự cố --}}
+
+                            <div class="modal fade" id="prob-detail-{{ $bus->id }}" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            {{-- <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1> --}}
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>
+                                                <span class="fw-bold me-3">Chi tiết sự
+                                                    cố:</span>{{ $bus->status_detail }} <br>
+                                                <span class="fw-bold me-3">Xe thay thế:</span>
+                                                {{ $bus->replacement_bus }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal ghế -->
                             <div class="modal
                                         fade" id="{{ $bus->id }}"
                                 tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
@@ -136,9 +176,9 @@
                                                             @endphp --}}
 
                                                             @foreach ($bus_seat_type->seats as $i => $seat)
-                                                                <svg {{-- wire:click="setSeat({{ $seat->id }},'{{ $seat->name }}', '{{ $seat_price }}')" --}} wire:ignore class="seat-item"
-                                                                    {{-- title="{{ $seat->name }}" --}} data-bs-toggle="popover"
-                                                                    data-bs-title="Tên ghế"
+                                                                <svg {{-- wire:click="setSeat({{ $seat->id }},'{{ $seat->name }}', '{{ $seat_price }}')" --}} wire:ignore
+                                                                    class="seat-item" {{-- title="{{ $seat->name }}" --}}
+                                                                    data-bs-toggle="popover" data-bs-title="Tên ghế"
                                                                     data-bs-content="{{ $seat->name }}"
                                                                     xmlns="http://www.w3.org/2000/svg" width="32"
                                                                     height="32" viewBox="0 0 24 24" fill="none"
@@ -182,9 +222,8 @@
                                                 <div class="mt-3 mb-3">
 
                                                     <select class="form-select" aria-label="Default select example"
-
                                                         wire:model.live="bus_license_plate">
-                                                        <option value="0">Chọn xe  thay thế</option>
+                                                        <option value="0">Chọn xe thay thế</option>
 
                                                         @foreach ($buses->buses as $item)
                                                             @if ($item->license_plate !== $bus->license_plate)
@@ -209,14 +248,61 @@
             </div>
         </div>
     </div>
-    <script>
+
+    {{-- <script>
         if (typeof popoverTriggerList === 'undefined') {
             const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
             [...popoverTriggerList].map(el => new bootstrap.Popover(el));
         }
-    </script>
+    </script> --}}
 
 </div>
 
+@script
+    <script>
+        $(document).ready(function() {
 
-{{-- ? --}}
+            if (typeof popoverTriggerList === 'undefined') {
+                const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+                [...popoverTriggerList].map(el => new bootstrap.Popover(el));
+            }
+
+            $wire.on('reported-problem', () => {
+
+                Swal.fire({
+                    title: "Báo cáo sự cố thành công",
+                    icon: "success",
+                    draggable: true
+                });
+
+                // Đóng modal
+                $('.btn-close').click()
+            })
+
+            $wire.on('error-reported-ploblem', () => {
+
+                Swal.fire({
+                    title: "Báo cáo sự cố thất bại",
+                    icon: "error",
+                    draggable: true
+                });
+
+                // Đóng modal
+                $('.btn-close').click()
+            })
+
+            $wire.on('fixed-ploblem', () => {
+
+                Swal.fire({
+                    title: "Báo cáo khắc phục sự cố thành công",
+                    icon: "success",
+                    draggable: true
+                });
+
+                // Đóng modal
+                $('.btn-close').click()
+            })
+
+        })
+    </script>
+@endscript

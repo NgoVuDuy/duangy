@@ -35,7 +35,7 @@
                                     <path d="m9 12 2 2 4-4" />
                                 </svg>
                                 <div>
-                                    Thông tin vé xe sẽ được gửi về Email của bạn
+                                    Thông tin vé xe sẽ được gửi về mail của bạn sau khi đặt vé thành công
                                 </div>
                             </div>
                         </div>
@@ -271,3 +271,19 @@
         </div>
     </div>
 </div>
+
+@script
+    <script>
+        $(document).ready(function() {
+
+            $wire.on('not-information', () => {
+
+                Swal.fire({
+                    title: "Vui lòng nhập thông tin liên hệ",
+                    icon: "error",
+                    draggable: true
+                });
+            })
+        })
+    </script>
+@endscript
