@@ -31,7 +31,7 @@
                         </thead>
                         <tbody>
                             {{-- Ở đây --}}
-                            @foreach ($tickets as $ticket)
+                            @foreach ($tickets as $index => $ticket)
                                 {{-- Một trường dữ liệu trong bảng --}}
                                 <tr>
                                     <td>
@@ -61,12 +61,14 @@
 
                                         @if ($ticket->status == 'cancelled')
                                             <button class="main-btn tiny-btn cancel-ticket" type="button"
-                                                style="background: green" disabled>Đã hủy</button>
+                                                style="background: green" data-bs-toggle="modal"
+                                                data-bs-target="#information-ticket-{{ $ticket->id }}">Đã
+                                                hủy</button>
                                         @else
                                             <button class="main-btn tiny-btn cancel-ticket" type="button"
-                                                style="background: red"
-                                                wire:click="cancel_ticket({{ $ticket->id }})">Hủy
-                                                vé</button>
+                                                style="background: red" data-bs-toggle="modal"
+                                                data-bs-target="#cancel-ticket-{{ $ticket->id }}">
+                                                Hủy vé</button>
                                         @endif
 
                                         {{-- <button class="main-btn tiny-btn cancel-ticket" type="button"
@@ -75,6 +77,189 @@
 
                                     </td>
                                 </tr>
+                                {{-- Phần modal chi tiết hủy vé --}}
+                                <!-- Modal -->
+                                <div class="modal fade" id="information-ticket-{{ $ticket->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Thông tin hủy vé
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="trip-details">
+                                                    <div class="items">
+                                                        <span>
+                                                            Phương thức thanh toán
+                                                        </span>
+                                                        <span>{{ $ticket->payment->method }}</span>
+                                                    </div>
+
+                                                    <div class="items">
+                                                        <span>
+                                                            Thời gian khởi hành
+                                                        </span>
+                                                        <span>{{ $ticket->trip->departure_time }} -
+                                                            {{ $ticket->trip->departure_date }}</span>
+                                                    </div>
+
+                                                    @if ($refund['method'][$index] == 'cod' && $refund['is_cancel'][$index] == true)
+                                                        {{-- <div class="items">
+                                                            <span>
+                                                                Cách ngày hiện tại
+                                                            </span>
+                                                            <span>{{ $refund['daybefore'][$index] }} ngày</span>
+                                                        </div> --}}
+
+                                                        {{-- <span>> 3 ngày</span> --}}
+                                                    @elseif($refund['method'][$index] == 'cod' && $refund['is_cancel'][$index] == false)
+                                                        {{-- <div class="items">
+                                                            <span>
+                                                                Cách ngày hiện tại
+                                                            </span>
+                                                            <span>{{ $refund['daybefore'][$index] }} ngày</span>
+                                                        </div> --}}
+                                                    @else
+                                                        <div class="items">
+                                                            <span>
+                                                                Cách ngày hiện tại
+                                                            </span>
+                                                            <span>{{ $refund['daybefore'][$index] }} ngày</span>
+                                                        </div>
+                                                        <div class="items">
+                                                            <span>
+                                                                Phần trăm hoàn tiền
+                                                            </span>
+                                                            <span>{{ $refund['pecent'][$index] }}%</span>
+                                                        </div>
+
+                                                        <div class="items">
+                                                            <span>
+                                                                Tổng tiền hoàn
+                                                            </span>
+                                                            <span>{{ $refund['amount'][$index] }}đ</span>
+                                                        </div>
+                                                    @endif
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- Phần modal hủy vé --}}
+                                <!-- Modal -->
+                                <div class="modal fade" id="cancel-ticket-{{ $ticket->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Thông tin hủy vé
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="trip-details">
+                                                    <div class="items">
+                                                        <span>
+                                                            Phương thức thanh toán
+                                                        </span>
+                                                        <span>{{ $ticket->payment->method }}</span>
+                                                    </div>
+
+                                                    <div class="items">
+                                                        <span>
+                                                            Thời gian khởi hành
+                                                        </span>
+                                                        <span>{{ $ticket->trip->departure_time }} -
+                                                            {{ $ticket->trip->departure_date }}</span>
+                                                    </div>
+
+                                                    @if ($refund['method'][$index] == 'cod' && $refund['is_cancel'][$index] == true)
+                                                        <div class="items">
+                                                            <span>
+                                                                Cách ngày hiện tại
+                                                            </span>
+                                                            <span>{{ $refund['daybefore'][$index] }} ngày</span>
+                                                        </div>
+                                                        <div class="alert alert-success d-flex align-items-center mt-3"
+                                                            role="alert">
+
+                                                            <svg class="me-3" xmlns="http://www.w3.org/2000/svg"
+                                                                width="24" height="24" viewBox="0 0 24 24"
+                                                                fill="none" stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                                <path
+                                                                    d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z">
+                                                                </path>
+                                                                <path d="m9 12 2 2 4-4"></path>
+                                                            </svg>
+                                                            <div>
+                                                                Bạn có thể hủy vé này
+                                                            </div>
+                                                        </div>
+                                                        {{-- <span>> 3 ngày</span> --}}
+                                                    @elseif($refund['method'][$index] == 'cod' && $refund['is_cancel'][$index] == false)
+                                                        <div class="items">
+                                                            <span>
+                                                                Cách ngày hiện tại
+                                                            </span>
+                                                            <span>{{ $refund['daybefore'][$index] }} ngày</span>
+                                                        </div>
+                                                        <div class="alert alert-danger d-flex align-items-center mt-3"
+                                                            role="alert">
+
+                                                            <svg class="me-3" xmlns="http://www.w3.org/2000/svg"
+                                                                width="24" height="24" viewBox="0 0 24 24"
+                                                                fill="none" stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-ban-icon lucide-ban">
+                                                                <circle cx="12" cy="12" r="10" />
+                                                                <path d="m4.9 4.9 14.2 14.2" />
+                                                            </svg>
+                                                            <div>
+                                                                Bạn không thể hủy vé này
+                                                            </div>
+                                                        </div>
+                                                    @else
+                                                        <div class="items">
+                                                            <span>
+                                                                Cách ngày hiện tại
+                                                            </span>
+                                                            <span>{{ $refund['daybefore'][$index] }} ngày</span>
+                                                        </div>
+                                                        <div class="items">
+                                                            <span>
+                                                                Phần trăm hoàn tiền
+                                                            </span>
+                                                            <span>{{ $refund['pecent'][$index] }}%</span>
+                                                        </div>
+
+                                                        <div class="items">
+                                                            <span>
+                                                                Tổng tiền hoàn
+                                                            </span>
+                                                            <span>{{ $refund['amount'][$index] }}đ</span>
+                                                        </div>
+                                                    @endif
+
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                @if (!($refund['method'][$index] == 'cod' && $refund['is_cancel'][$index] == false))
+                                                    <button class="main-btn tiny-btn cancel-ticket" type="button"
+                                                        style="background: red"
+                                                        wire:click="cancel_ticket({{ $ticket->id }})">
+                                                        Hủy vé</button>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 {{-- Phần hiển thị chi tiết vé --}}
                                 <div class="offcanvas offcanvas-end" tabindex="-1" id="{{ $ticket->id }}"
@@ -167,9 +352,16 @@
                                             @if (!empty($ticket->refund_amount))
                                                 <div class="items">
                                                     <span>
+                                                        Trạng thái
+                                                    </span>
+                                                    <span style="color: red">Đã hủy</span>
+                                                </div>
+
+                                                <div class="items">
+                                                    <span>
                                                         Hoàn tiền
                                                     </span>
-                                                    <span>{{ $ticket->refund_amount }}đ</span>
+                                                    <span style="color: green">+ {{ $ticket->refund_amount }}đ</span>
                                                 </div>
                                             @endif
                                             <hr>
@@ -177,9 +369,10 @@
                                                 <div class="address-wrap">
                                                     <div class="d-flex align-items-center column-gap-2 mb-2">
 
-                                                        <svg class="light-blue-text" xmlns="http://www.w3.org/2000/svg"
-                                                            width="20" height="20" viewBox="0 0 24 24"
-                                                            fill="none" stroke="currentColor" stroke-width="2"
+                                                        <svg class="light-blue-text"
+                                                            xmlns="http://www.w3.org/2000/svg" width="20"
+                                                            height="20" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2"
                                                             stroke-linecap="round" stroke-linejoin="round"
                                                             class="lucide lucide-locate-icon lucide-locate">
                                                             <line x1="2" x2="5" y1="12"
@@ -390,6 +583,8 @@
                     icon: "success",
                     draggable: true
                 });
+                $('.btn-close').click()
+
 
             })
 
@@ -402,7 +597,7 @@
                 });
 
                 // Đóng modal
-                // $('.btn-close').click()
+                $('.btn-close').click()
             })
 
             $wire.on('cancelled-before', () => {
@@ -414,7 +609,7 @@
                 });
 
                 // Đóng modal
-                // $('.btn-close').click()
+                $('.btn-close').click()
             })
 
         })

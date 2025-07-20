@@ -18,10 +18,11 @@ class Header extends Component
     public function mount()
     {
 
-
         if (!empty(session()->get('user'))) {
 
             $this->isShowUserIcon = true;
+
+            // dd(session()->get('user'));
         }
     }
 
@@ -69,6 +70,17 @@ class Header extends Component
 
         // return $this->redirect('/', navigate: true);
     }
+
+    // #[On('logout-admin-success')]
+    // public function logout_admin_success()
+    // {
+    //     dd("hì");
+
+    //     $this->isShowUserIcon = false; // Ẩn icon
+    //     $this->isShowLoginForm = false; // Ẩn form đăng nhập
+
+    //     return $this->redirect('/');
+    // }
 
     public function render()
     {

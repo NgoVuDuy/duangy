@@ -33,7 +33,7 @@ class UserSidebar extends Component
 
 
     public function logout()
-    {
+    { 
 
         session()->forget('user');
 

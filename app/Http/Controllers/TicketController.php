@@ -116,8 +116,8 @@ class TicketController extends Controller
     {
         // $ticket = Ticket::findOrFail($id);
         $ticket = Ticket::with('payment')
-        ->with('trip')
-        ->findOrFail($id);
+            ->with('trip')
+            ->findOrFail($id);
 
         // dd($ticket->toArray());
 
@@ -131,6 +131,7 @@ class TicketController extends Controller
         }
 
         // 
+        $seatController = new SeatController();
 
         $today = Carbon::now()->startOfDay(); // Thời gian hiện tại
         $departureDate = Carbon::parse($ticket->trip->departure_date)->startOfDay(); // Thời gian khởi hành của xe
@@ -143,9 +144,11 @@ class TicketController extends Controller
         if ($ticket->payment->method == "COD") {
 
             if ($daysBeforeDeparture >= 2) { // Có thể hủy  
-                
+
                 $ticket->status = 'cancelled';
                 $ticket->save();
+
+                $seatController->update($ticket->seat_id, false);
 
                 return response()->json([
 
@@ -176,7 +179,6 @@ class TicketController extends Controller
             } elseif ($daysBeforeDeparture === 1) {
 
                 $refundPercent = 50;
-
             } elseif ($daysBeforeDeparture <= 0) {
 
                 $refundPercent = 0;
@@ -189,6 +191,9 @@ class TicketController extends Controller
 
             $ticket->status = 'cancelled';
             $ticket->save();
+
+            $seatController->update($ticket->seat_id, false);
+
 
             return response()->json([
                 'code' => 2,

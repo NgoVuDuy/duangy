@@ -26,21 +26,20 @@ Route::get('/bookingconfirmation', BookingConfirmation::class);
 Route::get('/user', User::class);
 Route::get('/ticket', Ticket::class);
 
-Route::get('/vnpay/success', function() {
+Route::get('/vnpay/success', function () {
     return view('payment-success');
 });
-Route::get('/vnpay/error', function() {
+Route::get('/vnpay/error', function () {
     return view('payment-error');
 });
 
 Route::get('payment/callback', [PaymentController::class, 'callback'])->name('vnpay.callback');
 
-Route::get('/admin', Index::class);
-Route::get('/routes', AdminRoute::class);
-Route::get('/admin-trips', AdminTrip::class);
-Route::get('/buses', Bus::class);
-Route::get('/admin-account', Account::class);
+Route::middleware('is_admin')->group(function () {
 
-
-
-
+    // Route::get('/admin', Index::class);
+    Route::get('/routes', AdminRoute::class);
+    Route::get('/admin-trips', AdminTrip::class);
+    Route::get('/buses', Bus::class);
+    Route::get('/admin-account', Account::class);
+});

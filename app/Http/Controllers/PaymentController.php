@@ -137,18 +137,20 @@ class PaymentController extends Controller
                 }
 
                 $ticketController = new TicketController();
+                $seatController = new SeatController();
+
                 // Thêm dữ liệu vào vé
                 foreach ($trip_details["seat_id"] as $key => $seat_id) {
 
                     $ticketController->store($trip_details["name"], $trip_details["phone"], $user_phone ?? null, $trip_details["trip"]["id"], $trip_details["pickup"]["id"], $trip_details["dropoff"]["id"], $seat_id, "pending", "", $trip_details["seat_list"][$key], $payment_id);
+                    $seatController->update($seat_id, true);
                 }
 
                 // Cập nhật ghế đã đặt
-                $seatController = new SeatController();
-                foreach ($trip_details->seat_id as $seat) {
+                
+                // foreach ($trip_details->seat_id as $seat) {
 
-                    $seatController->update($seat);
-                }
+                // }
             }
 
             // $url = 'http://localhost:8000/success' . '?query=' . $payment['vnp_TxnRef'];

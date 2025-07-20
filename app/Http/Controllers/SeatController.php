@@ -14,17 +14,17 @@ class SeatController extends Controller
 
     //     return $seats;
     // }
-    public function update($id)
+    public function update($id, $b)
     {
 
         $seat = Seat::findOrFail($id);
 
-        $seat->is_booking = true;
+        $seat->is_booking = $b;
         $seat->save();
 
-        return response()->json([
-            'message' => 'Cập nhật trạng thái ghế thành công.',
-            'seat' => $seat
-        ]);
+        // return response()->json([
+        //     'message' => 'Cập nhật trạng thái ghế thành công.',
+        //     'seat' => $seat
+        // ]);
     }
 }

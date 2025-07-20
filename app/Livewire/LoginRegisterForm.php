@@ -28,8 +28,6 @@ class LoginRegisterForm extends Component
 
     }
 
-    public function close_header_form() {}
-
     // Hàm chuyển đổi form đăng nhập - đăng ký
     public function setShowOther()
     {

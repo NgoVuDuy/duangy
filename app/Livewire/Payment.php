@@ -111,7 +111,7 @@ class Payment extends Component
 
             foreach($this->trip_details["seat_id"] as $seat) {
 
-                $seatController->update($seat);
+                $seatController->update($seat, true);
             }
 
             // Thông báo thành công
