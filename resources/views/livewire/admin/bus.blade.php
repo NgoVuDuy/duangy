@@ -80,7 +80,6 @@
 
                                 </td>
                                 <td>
-                                    {{-- Xe gặp sự cố rồi chời --}}
                                     @if ($bus->status == 'inactive')
                                         {{-- <div class="text-center"> --}}
 
@@ -90,8 +89,6 @@
                                             data-bs-target="#prob-detail-{{ $bus->id }}">Chi tiết sự cố</button>
                                         {{-- </div> --}}
                                     @else
-                                        {{-- Xe này còn chạy okela --}}
-
                                         <button class="btn btn-danger" data-bs-toggle="modal"
                                             data-bs-target="#buserror-{{ $bus->id }}">Báo sự cố</button>
                                     @endif
@@ -215,14 +212,15 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
+
                                             <form action="" wire:submit="save({{ $bus->id }})">
                                                 <textarea class="w-100 p-4 rounded" name="" id="" cols="30" rows="10"
-                                                    placeholder="Nội dung sự cố" wire:model.live="content"></textarea>
+                                                    placeholder="Nội dung sự cố" wire:model.live="content" required></textarea>
 
                                                 <div class="mt-3 mb-3">
 
                                                     <select class="form-select" aria-label="Default select example"
-                                                        wire:model.live="bus_license_plate">
+                                                        wire:model.live="bus_license_plate" required>
                                                         <option value="0">Chọn xe thay thế</option>
 
                                                         @foreach ($buses->buses as $item)
@@ -262,47 +260,33 @@
     <script>
         $(document).ready(function() {
 
-            if (typeof popoverTriggerList === 'undefined') {
-                const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-                [...popoverTriggerList].map(el => new bootstrap.Popover(el));
-            }
-
             $wire.on('reported-problem', () => {
 
                 Swal.fire({
-                    title: "Báo cáo sự cố thành công",
+                    title: "Báo sự cố thành công",
                     icon: "success",
                     draggable: true
                 });
 
-                // Đóng modal
                 $('.btn-close').click()
+
             })
 
-            $wire.on('error-reported-ploblem', () => {
-
+            $wire.on('error-reported-problem', () => {
                 Swal.fire({
-                    title: "Báo cáo sự cố thất bại",
+                    title: "Vui lòng điền đầy đủ thông tin",
                     icon: "error",
                     draggable: true
                 });
-
-                // Đóng modal
-                $('.btn-close').click()
             })
 
-            $wire.on('fixed-ploblem', () => {
-
+            $wire.on('error-reported-problem', () => {
                 Swal.fire({
-                    title: "Báo cáo khắc phục sự cố thành công",
+                    title: "Xe đã khắc phục sự cố thành công",
                     icon: "success",
                     draggable: true
                 });
-
-                // Đóng modal
-                $('.btn-close').click()
             })
-
         })
     </script>
 @endscript

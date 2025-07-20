@@ -394,8 +394,6 @@
                 // $('.btn-close').click()
             })
 
-
-
             $wire.on('delete-trip-success', () => {
                 Swal.fire({
                     position: "top-end",
