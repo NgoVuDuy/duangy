@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Http\Controllers\BusController;
 use App\Http\Controllers\BusOperatorController;
+use App\Mail\FixedMail;
 use App\Mail\ProblemMail;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
@@ -48,7 +49,7 @@ class Bus extends Component
             // Lấy ra các người dùng để gửi mail
             $emailList = $busController->getEmailByBusId($bus_id)->getData();
 
-            // dd($emailList);
+            dd($emailList);
 
             foreach ($emailList as $email => $ticket_code) {
 
@@ -64,6 +65,7 @@ class Bus extends Component
 
             return $this->dispatch('reported-problem');
         }
+        dd("vao day");
 
         return $this->dispatch('error-reported-problem');
     }
@@ -86,7 +88,7 @@ class Bus extends Component
 
             foreach ($ticket_code as $code) {
 
-                Mail::to($email)->send(new ProblemMail($this->bus_license_plate, $code, "Xe của chúng tôi đã khắc phục sự cố và hoạt động lại bình thường"));
+                Mail::to($email)->send(new FixedMail($code));
             }
         }
         // Lấy lại danh sách các xe
