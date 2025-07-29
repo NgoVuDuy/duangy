@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ticket;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -187,13 +188,31 @@ class TicketController extends Controller
             $refundAmount = str_replace('.', '',  $ticket->price) * ($refundPercent / 100);
 
             $ticket->refund_amount = number_format($refundAmount, 0, ',', '.');
+
+            $user = User::where('phone', $ticket->user_phone)->first();
+
+            // dd($user->toArray());
+            
+            if ($user) {
+
+                $currentWallet = (int) str_replace('.', '', $user->wallet); // Chuyển từ '1.000.000' => 1000000
+                $user->wallet = $currentWallet + $refundAmount;
+
+                // Nếu muốn lưu lại định dạng hiển thị đẹp:
+                $user->wallet = number_format($user->wallet, 0, ',', '.');
+
+                $user->save();
+
+                // Cập nhật lại thông tin người dùng trong session
+                session()->put('user', $user);
+
+            }
             // Gọi API hoàn tiền nếu cần (VD: VNPay, Momo...)
 
             $ticket->status = 'cancelled';
             $ticket->save();
 
             $seatController->update($ticket->seat_id, false);
-
 
             return response()->json([
                 'code' => 2,

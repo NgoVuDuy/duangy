@@ -35,8 +35,9 @@ class Ticket extends Component
         }
 
         // Tính khoảng cách thời gian từ hiện tại tới ngày khởi hành chuyến
-        $today = Carbon::now()->startOfDay(); // Thời gian hiện tại
+        $today = Carbon::now()->startOfDay();  // Thời gian hiện tại
 
+        // dd($this->tickets);
 
         foreach ($this->tickets as $ticket) {
 
@@ -47,22 +48,22 @@ class Ticket extends Component
             $daysBeforeDeparture = (int) $daysBeforeDeparture;
 
 
-
             if ($ticket->payment->method == "COD") {
 
                 if ($daysBeforeDeparture >= 2) { // Có thể hủy  
 
                     $this->refund["is_cancel"][] = true;
-                    
                 } else {
 
                     $this->refund["is_cancel"][] = false;
-                    
                 }
+                // $this->refund["pecent"][] = 0;
                 $this->refund["method"][] = "cod";
                 $this->refund["daybefore"][] = $daysBeforeDeparture;
 
-
+                $this->refund["pecent"][] = '';
+                $this->refund["amount"][] = '';
+                $this->refund["is_cancel"][] = '';
             } else {
 
                 $refundPercent = 0; // Phần trăm hoàn tiền
@@ -83,17 +84,15 @@ class Ticket extends Component
 
                 $refundAmount = str_replace('.', '',  $ticket->price) * ($refundPercent / 100);
 
-                $this->refund["pecent"][] = $refundPercent;
                 $this->refund["daybefore"][] = $daysBeforeDeparture;
+                $this->refund["method"][] = "prepay";
+                $this->refund["pecent"][] = $refundPercent;
                 $this->refund["amount"][] = number_format($refundAmount, 0, ',', '.');
                 $this->refund["is_cancel"][] = true;
-                $this->refund["method"][] = "vnpay";
-
             }
         }
 
         // dd($this->refund);
-
     }
 
     #[On('login-success')]
@@ -138,7 +137,6 @@ class Ticket extends Component
     // Hàm hủy vé
     public function cancel_ticket($id)
     {
-
         $ticketController = new TicketController();
 
         $response = $ticketController->cancel($id)->getData();
@@ -147,7 +145,6 @@ class Ticket extends Component
         if ($response->code == 1 || $response->code == 2) {
 
             $this->tickets = $ticketController->getTicketById(session()->get('user')->phone)->getData();
-
             return $this->dispatch('cancelled-success');
         }
         if ($response->code == -1) {

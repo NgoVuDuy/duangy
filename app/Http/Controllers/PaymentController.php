@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Mail;
 class PaymentController extends Controller
 {
     // Lưu thanh toán khi lên xe
-    public function save(string $amount)
+    public function save(string $amount, $method)
     {
 
         $payment = Payment::create([
             "amount" => $amount,
-            "method" => "COD"
+            "method" => $method
         ]);
 
         return response()->json($payment);

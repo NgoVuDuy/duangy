@@ -16,12 +16,14 @@ class User extends Component
     public $date = '';
     public $gender = '';
     public $email = '';
+    public $wallet = '********';
 
     public $result = null;
 
     public $user;
 
     public $isLogin = false;
+    public $isShowWallet = false;
 
     public function mount()
     {
@@ -63,6 +65,7 @@ class User extends Component
         $this->date = $this->user->date;
         $this->gender = $this->user->gender;
         $this->email = $this->user->email;
+        // $this->wallet = $this->user->wallet . 'đ';
     }
 
     public function save()
@@ -75,6 +78,18 @@ class User extends Component
         $this->user = $this->result->user;
 
         session()->put('user', $this->user);
+    }
+
+    public function showWallet()
+    {
+
+        $this->isShowWallet = !$this->isShowWallet;
+        
+        if ($this->isShowWallet) {
+            $this->wallet = $this->user->wallet . 'đ';
+        } else {
+            $this->wallet = '********';
+        }
     }
 
 

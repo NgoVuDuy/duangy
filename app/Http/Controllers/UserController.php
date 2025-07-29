@@ -50,7 +50,23 @@ class UserController extends Controller
 
         return response()->json(["code" => 0, "user" => $user, "role" => ""]);;
     }
+    public function updateWallet(string $user_phone, string $wallet) {
 
+        $user = User::where('phone', $user_phone)->first();
+
+        if ($user) {
+
+            $user->wallet = $wallet;
+            $user->save();
+
+            session()->put('user', $user);
+
+            return response()->json(["code" => 1, "user" => $user]);
+        }
+
+        return response()->json(["code" => 0, "message" => "Cập nhật ví tiền thất bại"]);
+
+    }
     public function updatedPatch(string $user_id, string $email, string $name) 
     {
         $user = User::where('phone', $user_id)->first();
@@ -61,6 +77,8 @@ class UserController extends Controller
             $user->email = $email;
 
             $user->save();
+
+            session()->put('user', $user);
 
             return response()->json(["code" => 1, "user" => $user]);
         }

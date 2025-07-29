@@ -43,6 +43,4 @@
             <button class="main-btn lg-btn w-100">Đăng ký</button>
         </div>
     </form>
-
-    
 </div>

@@ -18,8 +18,11 @@ class Bus extends Component
     public $user;
 
     //
-    public $bus_license_plate = "0";
-    public $content;
+    // public $bus_license_plate = "0";
+    // public $content;
+    public $content = [];
+    public $bus_license_plate = [];
+
 
     public function mount()
     {
@@ -38,24 +41,27 @@ class Bus extends Component
     public function save($bus_id)
     {
 
-        if ($this->bus_license_plate != "0" && !empty($this->content)) {
+        $content = $this->content[$bus_id] ?? null;
+        $busLicense = $this->bus_license_plate[$bus_id] ?? null;
+
+        if (!empty($busLicense) && !empty($content)) {
 
             // dd($this->content . $this->bus_id);
             $busController = new BusController();
 
             // cập nhật lại trạng thái xe
-            $response = $busController->update($bus_id, $this->content, $this->bus_license_plate, "inactive")->getData();
+            $response = $busController->update($bus_id, $content, $busLicense, "inactive")->getData();
 
             // Lấy ra các người dùng để gửi mail
             $emailList = $busController->getEmailByBusId($bus_id)->getData();
 
-            dd($emailList);
+            // dd($emailList);
 
             foreach ($emailList as $email => $ticket_code) {
 
                 foreach ($ticket_code as $code) {
 
-                    Mail::to($email)->send(new ProblemMail($this->bus_license_plate, $code, $this->content));
+                    Mail::to($email)->send(new ProblemMail($busLicense, $code, $content));
                 }
             }
             // Lấy lại danh sách các xe
@@ -65,7 +71,8 @@ class Bus extends Component
 
             return $this->dispatch('reported-problem');
         }
-        dd("vao day");
+
+        // dd("vao day");
 
         return $this->dispatch('error-reported-problem');
     }

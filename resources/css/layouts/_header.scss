@@ -1,7 +1,20 @@
-.header-wrap {
-
+.header-footer-df {
     background: $light_blue;
-    
+}
+
+.header-footer-01 {
+    background: #2E8B57;
+}
+
+.header-footer-02 {
+    background: #A0522D;
+}
+
+.header-footer-03 {
+    background: #BA55D3;
+}
+
+.header-wrap {
 
     .header {
 
@@ -34,7 +47,8 @@
 
             .nav-item.active {
 
-                background: $outline_blue;
+                // background: $outline_blue;
+                background: white;
                 color: $light_blue;
                 // border: 2px black solid;
             }
@@ -74,12 +88,13 @@
 
 
 
-    .login-form, .register-form {
+    .login-form,
+    .register-form {
 
         .to-other {
-            cursor: pointer ;
+            cursor: pointer;
         }
-    
+
         input {
             border: none;
             padding: 8px;
@@ -95,5 +110,60 @@
 
     svg {
         width: 30px;
+    }
+}
+
+.app-color-button-box {
+
+    button {
+        // padding: 18px;
+        width: 38px;
+        height: 38px;
+        border: none;
+        border-radius: 12px;
+        padding: 0px;
+        // border: 2px transparent solid;
+        // border-bottom: 2px transparent solid;
+    }
+
+    .app-color-button-1 {
+        background: #2E8B57;
+    }
+
+    .app-color-button-2 {
+        background: #A0522D;
+
+    }
+
+    .app-color-button-3 {
+        background: #BA55D3;
+    }
+
+    .app-color-button-4 {
+        background: #9b2335;
+    }
+
+    .app-color-button-5 {
+        background: #af8d1f;
+    }
+
+    .app-color-button-6 {
+        background: #00a591;
+    }
+
+    .app-color-button-7 {
+        background: #ce3175;
+    }
+
+    .app-color-button-8 {
+        background: #004b8d;
+    }
+
+    .app-color-button-9 {
+        background: #e15d44;
+    }
+
+    .div {
+        background-color: rgb(65, 105, 225);
     }
 }

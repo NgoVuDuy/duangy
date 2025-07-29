@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\UserController;
 use App\Mail\UserMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -22,6 +23,8 @@ class Payment extends Component
 
     public $payment_result = null;
 
+    public $isShowWallet = false;
+
     public function mount(Request $request)
     {
 
@@ -33,8 +36,10 @@ class Payment extends Component
         if (session()->get('user')) {
 
             $this->user = session()->get('user');
+
             $this->user_phone = $this->user->phone ?? null;
         }
+
         // dd(session()->get('ticket'));
         if ($request->query('query')) {
 
@@ -47,8 +52,6 @@ class Payment extends Component
                 $this->payment_result = false;
             }
         }
-
-        // dd($this->trip_details);
     }
 
     #[On('login-success')]
@@ -64,13 +67,6 @@ class Payment extends Component
     #[On('payment')]
     public function payment()
     {
-        // dd($this->trip_details);
-        // Kiểm tra đăng nhập
-        // if(!session()->get('user')) {
-
-        //     return $this->dispatch('not-login');
-        // }
-
 
         if (session()->get('user')) {
 
@@ -87,6 +83,7 @@ class Payment extends Component
         // Tính tổng tiền của đơn
         $amount = number_format(array_sum($this->trip_details["seat_list"]) * 1000, 0, ',', '');
 
+        // dd($this->user->wallet);
         // dd($amount);
 
         // Thanh toán khi lên xe
@@ -95,7 +92,7 @@ class Payment extends Component
             session()->put('ticket.method', "Thanh toán khi lên xe");
 
             // Thêm thanh toán
-            $response = $paymentController->save((int) $amount * 100)->getData();
+            $response = $paymentController->save((int) $amount * 100, "COD")->getData();
 
             // dd($response);
 
@@ -109,17 +106,17 @@ class Payment extends Component
             // Cập nhật ghế đã đặt
             $seatController = new SeatController();
 
-            foreach($this->trip_details["seat_id"] as $seat) {
+            foreach ($this->trip_details["seat_id"] as $seat) {
 
                 $seatController->update($seat, true);
             }
+            // dd($this->trip_details);
 
             // Thông báo thành công
             $this->dispatch('payment-success');
 
             Mail::to($this->trip_details["email"])->send(new UserMail($this->trip_details));
 
-            //
         }
 
         // Thanh toán bằng vnpay
@@ -136,6 +133,58 @@ class Payment extends Component
                 return $this->redirect($response->data);
             }
         }
+
+        // Thanh toán bằng ví
+        if ($this->pym_option == 'opt-3') {
+
+            $walletFormat = str_replace('.', '',  $this->user->wallet);
+            $newWallet = (int) $walletFormat - (int) $amount;
+            // dd($newWallet);
+
+            if ($newWallet < 0) {
+
+                $this->dispatch('wallet-error');
+                return;
+                // return $this->js("alert('Số dư ví không đủ để thanh toán.');");
+            }
+
+            $newWallet = number_format($newWallet, 0, ',', '.');
+
+            session()->put('ticket.method', "Thanh toán bằng ví điện tử");
+
+            // Thêm thanh toán
+            $response = $paymentController->save((int) $amount * 100, "Wallet")->getData();
+
+            // Cập nhật ví tiền
+            $userController = new UserController();
+            $userController->updateWallet($this->user_phone, $newWallet);
+
+            // Thêm vé xe vào database
+            $ticketController = new TicketController();
+
+            foreach ($this->trip_details["seat_id"] as $key => $seat_id) {
+
+                $ticketController->store($this->trip_details["name"], $this->trip_details["phone"], $this->user_phone, $this->trip_details["trip"]["id"], $this->trip_details["pickup"]["id"], $this->trip_details["dropoff"]["id"], $seat_id, "pending", "", $this->trip_details["seat_list"][$key], $response->id);
+            }
+            // Cập nhật ghế đã đặt
+            $seatController = new SeatController();
+
+            foreach ($this->trip_details["seat_id"] as $seat) {
+
+                $seatController->update($seat, true);
+            }
+
+            // Thông báo thành công
+            $this->dispatch('payment-success');
+
+            Mail::to($this->trip_details["email"])->send(new UserMail($this->trip_details));
+        }
+    }
+
+    public function showWallet()
+    {
+
+        $this->isShowWallet = !$this->isShowWallet;
     }
 
     public function render()

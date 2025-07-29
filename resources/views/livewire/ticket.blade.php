@@ -95,7 +95,14 @@
                                                         <span>
                                                             Phương thức thanh toán
                                                         </span>
-                                                        <span>{{ $ticket->payment->method }}</span>
+                                                        @if ($ticket->payment->method == 'COD')
+                                                            <span>Thanh toán khi nhận vé</span>
+                                                        @elseif ($ticket->payment->method == 'Wallet')
+                                                            <span>Ví điện tử</span>
+                                                        @elseif ($ticket->payment->method == 'VNPay')
+                                                            <span>VNPay</span>
+                                                        @endif
+                                                        {{-- <span>{{ $ticket->payment->method }}</span> --}}
                                                     </div>
 
                                                     <div class="items">
@@ -106,29 +113,15 @@
                                                             {{ $ticket->trip->departure_date }}</span>
                                                     </div>
 
-                                                    @if ($refund['method'][$index] == 'cod' && $refund['is_cancel'][$index] == true)
-                                                        {{-- <div class="items">
-                                                            <span>
-                                                                Cách ngày hiện tại
-                                                            </span>
-                                                            <span>{{ $refund['daybefore'][$index] }} ngày</span>
-                                                        </div> --}}
-
-                                                        {{-- <span>> 3 ngày</span> --}}
-                                                    @elseif($refund['method'][$index] == 'cod' && $refund['is_cancel'][$index] == false)
-                                                        {{-- <div class="items">
-                                                            <span>
-                                                                Cách ngày hiện tại
-                                                            </span>
-                                                            <span>{{ $refund['daybefore'][$index] }} ngày</span>
-                                                        </div> --}}
-                                                    @else
+                                                    @if ($refund['method'][$index] == 'prepay')
+                                                    
                                                         <div class="items">
                                                             <span>
                                                                 Cách ngày hiện tại
                                                             </span>
                                                             <span>{{ $refund['daybefore'][$index] }} ngày</span>
                                                         </div>
+
                                                         <div class="items">
                                                             <span>
                                                                 Phần trăm hoàn tiền
@@ -142,7 +135,9 @@
                                                             </span>
                                                             <span>{{ $refund['amount'][$index] }}đ</span>
                                                         </div>
+
                                                     @endif
+
 
                                                 </div>
                                             </div>
@@ -168,7 +163,13 @@
                                                         <span>
                                                             Phương thức thanh toán
                                                         </span>
-                                                        <span>{{ $ticket->payment->method }}</span>
+                                                        @if ($ticket->payment->method == 'COD')
+                                                            <span>Thanh toán khi nhận vé</span>
+                                                        @elseif ($ticket->payment->method == 'Wallet')
+                                                            <span>Ví điện tử</span>
+                                                        @elseif ($ticket->payment->method == 'VNPay')
+                                                            <span>VNPay</span>
+                                                        @endif
                                                     </div>
 
                                                     <div class="items">
@@ -346,7 +347,13 @@
                                                 <span>
                                                     Thanh toán
                                                 </span>
-                                                <span>{{ $ticket->payment->method }}</span>
+                                                @if ($ticket->payment->method == 'COD')
+                                                    <span>Thanh toán khi nhận vé</span>
+                                                @elseif ($ticket->payment->method == 'Wallet')
+                                                    <span>Ví điện tử</span>
+                                                @elseif ($ticket->payment->method == 'VNPay')
+                                                    <span>VNPay</span>
+                                                @endif
                                             </div>
                                             {{-- Hoàn tiền --}}
                                             @if (!empty($ticket->refund_amount))

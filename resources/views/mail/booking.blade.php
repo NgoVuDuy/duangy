@@ -12,7 +12,7 @@
     <div class="">Nhà xe : {{ $trip_details['bus_operator'] }}</div>
     <div class="">Chuyến : {{ $trip_details['trip']["departure_time"]}} - {{$trip_details['trip']["departure_date"]}}</div>
     <div class="">Loại xe : {{ $trip_details['bus'] }}</div>
-    <div class="">Biển số xe : {{ $trip_details['name'] }}</div>
+    <div class="">Biển số xe : {{ $trip_details['bus_license_plate'] }}</div>
     {{-- <div class="">Tổng giá : {{ $trip_details['name'] }}</div> --}}
     <div class="">Ghế ngồi : 
         @foreach($trip_details['seat_list'] as $key => $seat_list )

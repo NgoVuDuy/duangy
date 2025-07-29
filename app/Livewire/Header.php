@@ -32,6 +32,26 @@ class Header extends Component
         $this->isShowLoginForm = !$this->isShowLoginForm;
     }
 
+    public function deleteColor() {
+        session()->forget('header-footer');
+        session()->forget('id-color');
+        // session()->forget('button');
+
+        // return $this->js("location.reload();");
+        return $this->dispatch('changed-app-color');
+    }
+
+    public function setColor($color, $idColor)
+    {
+
+        session()->put('header-footer', $color);
+        session()->put('id-color', $idColor);
+        // session()->put('button', "rgb(106, 90, 205)");
+
+        // return $this->js("location.reload();");
+        return $this->dispatch('changed-app-color');
+    }
+
     #[On('login-success')]
     public function login_success()
     {

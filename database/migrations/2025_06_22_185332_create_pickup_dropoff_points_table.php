@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('longitude');
             $table->decimal('discount_percent', 3, 1)->nullable();
             $table->timestamps();
-
             $table->foreign('trip_id')->references('id')->on('trips')->onDelete('set null');
         });
     }

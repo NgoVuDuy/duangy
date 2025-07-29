@@ -101,6 +101,7 @@ class Trip extends Component
         /// Tạo mảng session để lưu trữ vé - lưu thông tin của loại xe
         session()->put('ticket.bus', $this->trips[$trip_index]->bus->bus_type);
 
+        session()->put('ticket.bus_license_plate', $this->trips[$trip_index]->bus->license_plate);
 
 
 

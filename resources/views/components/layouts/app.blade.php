@@ -22,7 +22,6 @@
 
     @livewire('header')
 
-
     <div class="" style="padding-top: 86px">
 
         {{ $slot }}
@@ -34,4 +33,16 @@
 
     @livewireScripts
 </body>
+{{-- <script>
+    $(document).ready(function() {
+
+        if (localStorage.getItem('header-footer')) {
+
+            $('.header-wrap').css('background', localStorage.getItem('header-footer'));
+            $('footer').css('background', localStorage.getItem('header-footer'));
+
+        }
+    });
+</script> --}}
+
 </html>

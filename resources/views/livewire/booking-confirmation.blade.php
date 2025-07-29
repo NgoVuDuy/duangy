@@ -120,6 +120,12 @@
                                     </div>
                                     <div class="items">
                                         <span>
+                                            Biển số xe
+                                        </span>
+                                        <span>{{ $trip_details['bus_license_plate'] }}</span>
+                                    </div>
+                                    <div class="items">
+                                        <span>
                                             Số lượng vé
                                         </span>
                                         <span>{{ count($trip_details['seat_id']) }} vé</span>

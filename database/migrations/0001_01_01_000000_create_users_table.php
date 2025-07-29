@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('date');
             $table->string('email');
             $table->string('gender');
+            $table->string('wallet')->default('0');
             $table->timestamps();
         });
 

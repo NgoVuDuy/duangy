@@ -27,16 +27,48 @@
                                 </div>
                             </label>
                         </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment" id="3" value="opt-3"
+                                wire:model.live="pym_option">
+                            <label class="form-check-label" for="2">
+                                <span class="fw-medium">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-wallet-icon lucide-wallet">
+                                        <path
+                                            d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" />
+                                        <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />
+                                    </svg>
+                                    Thanh toán qua ví điện tử
+                                    <button class="wallet-more ms-3 btn btn-primary btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#wallet-more-modal">Chi tiết</button>
+                                </span>
+                            </label>
+                        </div>
+
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="payment" id="2" checked
                                 value="opt-2" wire:model.live="pym_option">
                             <label class="form-check-label" for="2">
                                 <span class="fw-medium">
-
-                                    Thanh toán khi lên xe
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-hand-coins-icon lucide-hand-coins">
+                                        <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17" />
+                                        <path
+                                            d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9" />
+                                        <path d="m2 16 6 6" />
+                                        <circle cx="16" cy="9" r="2.9" />
+                                        <circle cx="6" cy="5" r="3" />
+                                    </svg>
+                                    Thanh toán khi nhận vé
                                 </span>
                             </label>
                         </div>
+
 
                     </div>
                 </div>
@@ -151,6 +183,12 @@
                                     </div>
                                     <div class="items">
                                         <span>
+                                            Biển số xe
+                                        </span>
+                                        <span>{{ $trip_details['bus_license_plate'] }}</span>
+                                    </div>
+                                    <div class="items">
+                                        <span>
                                             Số lượng vé
                                         </span>
                                         <span>{{ count($trip_details['seat_id']) }} vé</span>
@@ -181,7 +219,8 @@
                                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                                     stroke-linejoin="round"
                                                     class="lucide lucide-locate-icon lucide-locate">
-                                                    <line x1="2" x2="5" y1="12" y2="12" />
+                                                    <line x1="2" x2="5" y1="12"
+                                                        y2="12" />
                                                     <line x1="19" x2="22" y1="12"
                                                         y2="12" />
                                                     <line x1="12" x2="12" y1="2"
@@ -301,6 +340,71 @@
 
         </div>
     </div>
+
+    <div class="modal fade" id="wallet-more-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Thông tin số dư ví
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="trip-details">
+
+                        @if (session()->get('user'))
+                            <div class="items">
+                                <span>
+                                    Số dư
+                                </span>
+                                <div class="d-flex align-items-center column-gap-2 cursor-pointer">
+
+                                    <span class="eye-off {{ $isShowWallet ? 'd-none' : '' }}"
+                                        style="height: fit-content;">
+
+                                        ********
+                                    </span>
+
+                                    <span class="eye-on {{ $isShowWallet ? '' : 'd-none' }}">
+                                        {{ $user->wallet }}đ
+                                    </span>
+
+                                    <svg class="{{ $isShowWallet ? '' : 'd-none' }}"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-eye-icon lucide-eye" wire:click="showWallet">
+                                        <path
+                                            d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+                                        <circle cx="12" cy="12" r="3" />
+                                    </svg>
+
+                                    <svg class="{{ $isShowWallet ? 'd-none' : '' }}"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-eye-off-icon lucide-eye-off" wire:click="showWallet">
+                                        <path
+                                            d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" />
+                                        <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" />
+                                        <path
+                                            d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" />
+                                        <path d="m2 2 20 20" />
+                                    </svg>
+                                </div>
+                            </div>
+                        @else
+                            <h5 class="text-center" style="color: red">Vui lòng đăng nhập để xem số dư ví</h5>
+                        @endif
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @script
@@ -309,9 +413,7 @@
 
             $('.payment-btn').click(function() {
 
-                if (!$wire.get('user')) {
-
-                    console.log("add")
+                if (!$wire.get('user_phone')) {
 
                     Swal.fire({
                         title: "Vui lòng đăng nhập để đặt vé !",
@@ -322,7 +424,7 @@
 
 
                     Swal.fire({
-    
+
                         title: "Thông báo",
                         text: "Bạn có đồng ý đặt vé không ?",
                         icon: "warning",
@@ -330,17 +432,27 @@
                         confirmButtonColor: "#3085d6",
                         cancelButtonColor: "#d33",
                         confirmButtonText: "Đồng ý"
-    
+
                     }).then((result) => {
-    
+
                         if (result.isConfirmed) {
-    
+
                             $wire.dispatch('payment')
-    
+
                         }
                     });
                 }
 
+
+            })
+
+            $wire.on('wallet-error', () => {
+
+                Swal.fire({
+                    title: "Ví bạn không đủ tiền !",
+                    icon: "warning",
+                    draggable: true
+                });
             })
 
             $wire.on('payment-success', () => {
@@ -371,14 +483,6 @@
                 });
             })
 
-            // $wire.on('not-login', () => {
-
-            //     Swal.fire({
-            //         title: "Vui lòng đăng nhập để đặt vé !",
-            //         icon: "warning",
-            //         draggable: true
-            //     });
-            // })
 
             const payment_result = $wire.get('payment_result')
 
