@@ -212,7 +212,6 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-
                                             <form action="" wire:submit="save({{ $bus->id }})">
                                                 <textarea class="w-100 p-4 rounded" name="" id="" cols="30" rows="10"
                                                     placeholder="Nội dung sự cố" wire:model.live="content.{{ $bus->id }}" required>
@@ -222,6 +221,7 @@
 
                                                     <select class="form-select" aria-label="Default select example"
                                                         wire:model.live="bus_license_plate.{{ $bus->id }}" required>
+                                                        
                                                         <option value="0">Chọn xe thay thế</option>
 
                                                         @foreach ($buses->buses as $item)

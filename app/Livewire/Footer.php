@@ -8,12 +8,31 @@ use Livewire\Attributes\On;
 class Footer extends Component
 {
 
-    public $appColor;
+    // public $appColor;
 
+    // #[On('changed-app-color')]
+    // public function changedAppColor() {
+
+    //     $this->reset();
+    //     // $this->appColor = 1;
+    // }
     #[On('changed-app-color')]
-    public function changedAppColor() {
+    public function changedAppColor($color, $idColor)
+    {
 
-        $this->appColor = 1;
+        session()->put('header-footer', $color);
+        session()->put('id-color', $idColor);
+
+        // return $this->js("location.reload();");
+        // return $this->dispatch('changed-app-color');
+    }
+
+    #[On('delete-app-color')]
+    public function deleteAppColor()
+    {
+
+        session()->forget('header-footer');
+        session()->forget('id-color');
     }
 
     public function render()

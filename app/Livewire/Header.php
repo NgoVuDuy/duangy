@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Session;
+use Livewire\Livewire;
 
 class Header extends Component
 {
@@ -32,24 +33,34 @@ class Header extends Component
         $this->isShowLoginForm = !$this->isShowLoginForm;
     }
 
-    public function deleteColor() {
-        session()->forget('header-footer');
-        session()->forget('id-color');
-        // session()->forget('button');
+    public function deleteColor()
+    {
 
-        // return $this->js("location.reload();");
-        return $this->dispatch('changed-app-color');
+
+        // return $this->dispatch('changed-app-color');
+        $this->dispatch('delete-app-color');
     }
 
     public function setColor($color, $idColor)
     {
 
+        $this->dispatch('changed-app-color', color: $color, idColor: $idColor);
+    }
+
+    #[On('changed-app-color')]
+    public function changedAppColor($color, $idColor)
+    {
+
         session()->put('header-footer', $color);
         session()->put('id-color', $idColor);
-        // session()->put('button', "rgb(106, 90, 205)");
+    }
 
-        // return $this->js("location.reload();");
-        return $this->dispatch('changed-app-color');
+    #[On('delete-app-color')]
+    public function deleteAppColor()
+    {
+
+        session()->forget('header-footer');
+        session()->forget('id-color');
     }
 
     #[On('login-success')]

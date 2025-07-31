@@ -95,6 +95,8 @@ class Trip extends Component
         session()->put('ticket.routes', ["start" => $this->start_point_value, "end" => $this->end_point_value]);
         /// Tạo mảng session để lưu trữ vé - lưu thông tin của chuyến xe
         session()->put('ticket.trip', ["id" => $trip_id, "departure_time" => $this->trips[$trip_index]->departure_time, "departure_date" => $this->trips[$trip_index]->departure_date]);
+
+        session()->put('ticket.trip.off', ["id" => $trip_id, "arrival_time" => $this->trips[$trip_index]->arrival_time, "arrival_date" => $this->trips[$trip_index]->arrival_date]);
         /// Tạo mảng session để lưu trữ vé - lưu thông tin của nhà xe
         session()->put('ticket.bus_operator', $this->trips[$trip_index]->bus->bus_operator->name);
 

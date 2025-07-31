@@ -40,11 +40,14 @@ class Bus extends Component
 
     public function save($bus_id)
     {
+        // dd($bus_id);
 
         $content = $this->content[$bus_id] ?? null;
         $busLicense = $this->bus_license_plate[$bus_id] ?? null;
 
         if (!empty($busLicense) && !empty($content)) {
+
+            dd("Hợp lệ");
 
             // dd($this->content . $this->bus_id);
             $busController = new BusController();
@@ -72,7 +75,7 @@ class Bus extends Component
             return $this->dispatch('reported-problem');
         }
 
-        // dd("vao day");
+        dd("không hợp lệ");
 
         return $this->dispatch('error-reported-problem');
     }

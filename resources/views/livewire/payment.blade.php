@@ -261,7 +261,7 @@
                                                     class="address-details">{{ $trip_details['dropoff']['address'] }}</span>
                                                 <span class="fw-medium mt-1">Dự kiến trả lúc:
                                                     {{ $trip_details['dropoff']['time'] }},
-                                                    {{ $trip_details['trip']['departure_date'] }}</span>
+                                                    {{ $trip_details['trip']['off']['arrival_date'] }}</span>
 
                                             </div>
                                         </div>

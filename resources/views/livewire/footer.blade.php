@@ -1,6 +1,6 @@
 <div>
     {{-- Because she competes with no one, no one can compete with her. --}}
-    <footer style="background: {{ session()->get('header-footer') ?? '#2474e5' }};" wire:model.live="appColor">
+    <footer style="background: {{ session()->get('header-footer') ?? '#2474e5' }};">
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-3">

@@ -24,6 +24,7 @@ class BookingConfirmation extends Component
             $this->trip_details = session()->get('ticket');
         }
         // dd(session()->get('ticket'));
+        // dd($this->trip_details);
     }
     // Lấy thông tin người dùng
     public function get_user()

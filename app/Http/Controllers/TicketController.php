@@ -81,6 +81,8 @@ class TicketController extends Controller
     public function updateExpiredTickets($userPhone)
     {
 
+        $seatController = new SeatController();
+
         $tickets = Ticket::with('user')
             ->with('trip.route')
             ->with('trip.bus')
@@ -99,8 +101,12 @@ class TicketController extends Controller
             $departureTime = Carbon::parse($ticket->trip->departure_date);
 
             if ($ticket->status !== 'cancelled' && $departureTime->lt(now())) {
+
                 $ticket->status = 'done';
                 $ticket->save();
+
+                $seatController->update($ticket->seat_id, false);
+                
                 $updatedCount++;
             }
         }
@@ -192,7 +198,7 @@ class TicketController extends Controller
             $user = User::where('phone', $ticket->user_phone)->first();
 
             // dd($user->toArray());
-            
+
             if ($user) {
 
                 $currentWallet = (int) str_replace('.', '', $user->wallet); // Chuyển từ '1.000.000' => 1000000
@@ -205,7 +211,6 @@ class TicketController extends Controller
 
                 // Cập nhật lại thông tin người dùng trong session
                 session()->put('user', $user);
-
             }
             // Gọi API hoàn tiền nếu cần (VD: VNPay, Momo...)
 
