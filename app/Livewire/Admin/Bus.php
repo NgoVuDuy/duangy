@@ -47,26 +47,31 @@ class Bus extends Component
 
         if (!empty($busLicense) && !empty($content)) {
 
-            dd("Hợp lệ");
+            // dd($content);
 
             // dd($this->content . $this->bus_id);
             $busController = new BusController();
+            // Lấy ra các người dùng để gửi mail
+            $emailList = $busController->getEmailByBusId($bus_id)->getData();
+
+            dd($emailList);
+
+            // dd($email);
 
             // cập nhật lại trạng thái xe
             $response = $busController->update($bus_id, $content, $busLicense, "inactive")->getData();
 
-            // Lấy ra các người dùng để gửi mail
-            $emailList = $busController->getEmailByBusId($bus_id)->getData();
+            if (!empty($emailList)) {
 
-            // dd($emailList);
+                foreach ($emailList as $email => $ticket) {
 
-            foreach ($emailList as $email => $ticket_code) {
+                    foreach ($ticket as $item) {
 
-                foreach ($ticket_code as $code) {
-
-                    Mail::to($email)->send(new ProblemMail($busLicense, $code, $content));
+                        Mail::to($email)->send(new ProblemMail($busLicense, $code, $content));
+                    }
                 }
             }
+
             // Lấy lại danh sách các xe
             $busOperator = new BusOperatorController();
             $this->buses = $busOperator->showBuses($this->user->phone)->getData();

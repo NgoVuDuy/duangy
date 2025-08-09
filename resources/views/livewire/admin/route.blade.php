@@ -76,19 +76,12 @@
                                             @endforeach
     
                                         </select>
-                                        {{-- <input type="text" class="form-control" id="exampleInputPassword1"> --}}
                                     </div>
-                                    {{-- <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                    </div> --}}
+                            
                                     <button type="submit" class="btn btn-primary">Lưu</button>
                                 </form>
                             </div>
-                            {{-- <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                <button type="button" class="btn btn-primary">Lưu</button>
-                            </div> --}}
+                    
                         </div>
                     </div>
                 </div>

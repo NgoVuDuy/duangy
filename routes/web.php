@@ -3,12 +3,12 @@
 use App\Http\Controllers\PaymentController;
 use App\Livewire\Admin\Account;
 use App\Livewire\Admin\Bus;
-use App\Livewire\Admin\Index;
 use App\Livewire\Admin\Route as AdminRoute;
 use App\Livewire\Admin\Trip as AdminTrip;
 use App\Livewire\BookingConfirmation;
 use App\Livewire\Home;
 use App\Livewire\Payment;
+use App\Livewire\Admin\Station;
 use App\Livewire\Ticket;
 use App\Livewire\Trip;
 use App\Livewire\User;
@@ -42,4 +42,6 @@ Route::middleware('is_admin')->group(function () {
     Route::get('/admin-trips', AdminTrip::class);
     Route::get('/buses', Bus::class);
     Route::get('/admin-account', Account::class);
+    Route::get('/pickup-dropoff', Station::class);
+
 });

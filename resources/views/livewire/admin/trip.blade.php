@@ -25,9 +25,9 @@
                             <th>Dự kiến đến</th>
                             <th>Biển số xe</th>
                             <th>Giá</th>
-                            {{-- <th>Trạng thái</th> --}}
                             <th>Hành động</th>
                             <th>Danh sách vé</th>
+
                         </tr>
                     </thead>
 
@@ -50,9 +50,7 @@
                                     <td>
                                         {{ $trip->price }}
                                     </td>
-                                    {{-- <td>
-                                                    {{ $trip->status }}
-                                                </td> --}}
+
                                     <td class="text-center">
                                         <button class="btn btn-warning" data-bs-toggle="modal"
                                             data-bs-target="#{{ $trip->id }}"
@@ -60,66 +58,14 @@
                                         <button class="btn btn-danger"
                                             wire:click="delete_trip('{{ $trip->id }}')">Xóa</button>
                                     </td>
+
+
                                     <td class="text-center">
-                                        <button class="btn btn-success" data-bs-toggle="modal"
+                                        <button class="btn btn-info" data-bs-toggle="modal"
                                             data-bs-target="#ticket-details-{{ $trip->id }}">Xem
                                         </button>
                                     </td>
-                                    {{-- Lặp qua các vé của chuyến --}}
-                                    {{-- Modal hiển thị các chi tiết vé --}}
                                 </tr>
-                                {{-- <div class="modal fade" id="ticket-details-{{ $trip->id }}" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Thông tin các vé
-                                                    xe</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                @if (!empty($trip->tickets))
-                                                    <table>
-                                                        <thead>
-                                                            <tr>
-
-                                                                <th>Họ và tên</th>
-                                                                <th>Số điện thoại</th>
-                                                                <th>Điểm đón</th>
-                                                                <th>Điểm trả</th>
-                                                                <th>Giá vé</th>
-                                                                <th>Ghế ngồi</th>
-                                                                <th>Hủy vé</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            @foreach ($trip->tickets as $ticket)
-                                                                <tr>
-                                                                    <td>{{ $ticket->name }}</td>
-                                                                    <td>{{ $ticket->phone }}</td>
-                                                                    <td>{{ $ticket->pickup->time }} -
-                                                                        {{ $ticket->pickup->address }}</td>
-                                                                    <td>{{ $ticket->dropoff->time }} -
-                                                                        {{ $ticket->dropoff->address }}</td>
-                                                                    <td>{{ $ticket->price }}</td>
-                                                                    <td>{{ $ticket->seat->name }}</td>
-                                                                    <td>
-                                                                        <button class="btn btn-danger">Chi tiết</button>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                @else
-                                                    <h5 class="text-center">Chuyến này hiện chưa có vé nào</h5>
-                                                @endif
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
                             @endforeach
                         @endforeach
                     </tbody>
@@ -128,7 +74,7 @@
                     @foreach ($bus->trips as $trip)
                         <div class="modal fade" id="ticket-details-{{ $trip->id }}" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
-                            <div class="modal-dialog modal-dialog-centered" style="max-width: 1200px">
+                            <div class="modal-dialog modal-dialog-centered" style="max-width: 1400px">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="modal-title fs-5" id="exampleModalLabel">Thông tin các vé
@@ -144,11 +90,13 @@
 
                                                         <th>Họ và tên</th>
                                                         <th>Số điện thoại</th>
-                                                        <th>Điểm đón</th>
-                                                        <th>Điểm trả</th>
+                                                        <th style="width: 20%">Điểm đón</th>
+                                                        <th style="width: 20%">Điểm trả</th>
                                                         <th>Giá vé</th>
                                                         <th>Ghế ngồi</th>
+                                                        <th class="text-center">Duyệt</th>
                                                         <th>Hủy vé</th>
+                                                        {{-- <th>Hoàn tác</th> --}}
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -163,10 +111,38 @@
                                                                 {{ $ticket->dropoff->address }}</td>
                                                             <td>{{ $ticket->price }}</td>
                                                             <td>{{ $ticket->seat->name }}</td>
+
+                                                            <td class="text-center">
+
+                                                                @if ($ticket->status == 'done')
+                                                                    <span class="badge bg-success">Đã đi</span>
+                                                                @elseif ($ticket->status == 'not_attended')
+                                                                    <span class="badge bg-primary">Không đi</span>
+                                                                @elseif ($ticket->status == 'cancelled')
+                                                                    <span class="badge bg-danger">Đã hủy</span>
+                                                                @else
+                                                                    <button class="btn btn-primary"
+                                                                        wire:click="approve({{ $ticket->id }}, 'not_attended')">Không
+                                                                        đi
+                                                                    </button>
+
+                                                                    <button class="btn btn-success"
+                                                                        wire:click="approve({{ $ticket->id }}, 'done')">Đã
+                                                                        đi
+                                                                    </button>
+                                                                @endif
+
+                                                            </td>
+
                                                             <td>
                                                                 <button class="btn btn-danger" style="height: 40px"
-                                                                    wire:click="cancel_ticket({{ $ticket->id }})">Hủy</button>
+                                                                    wire:click="cancel_ticket({{ $ticket->id }})" 
+                                                                    @if($ticket->status != 'pending') disabled @endif>
+                                                                    Hủy</button>
                                                             </td>
+                                                            {{-- <td>
+                                                                <button class="btn btn-primary" wire:click="rollback_status({{ $ticket->id }}, 'pending')">Hoàn tác</button>
+                                                            </td> --}}
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -427,6 +403,8 @@
 
                 $('.btn-close').click()
             })
+
+
 
             let now = new Date();
             now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); // để đúng múi giờ

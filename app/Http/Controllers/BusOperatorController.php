@@ -37,9 +37,9 @@ class BusOperatorController extends Controller
                     $query->orderBy('created_at', 'desc');
                 },
                 'buses.trips.route',
-                'buses.trips.tickets' => function ($query) {
-                    $query->where('status', 'pending'); // Chỉ lấy vé chưa đi
-                },
+                // 'buses.trips.tickets' => function ($query) {
+                //     $query->where('status', 'pending'); 
+                // },
                 'buses.trips.tickets.pickup',
                 'buses.trips.tickets.dropoff',
                 'buses.trips.tickets.seat',

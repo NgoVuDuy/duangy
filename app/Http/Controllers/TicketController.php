@@ -71,6 +71,7 @@ class TicketController extends Controller
         $ticket->save();
 
         return response()->json([
+            'code' => 1,
             'message' => 'Cập nhật trạng thái thành công.',
             'ticket_id' => $ticket->id,
             'new_status' => $new_status
@@ -226,5 +227,28 @@ class TicketController extends Controller
                 // 'refund_percent' => $refundPercent . '%'
             ]);
         }
+    }
+
+    public function approve($id, $status)
+    {
+        $ticket = Ticket::findOrFail($id);
+
+        if ($ticket->status === 'cancelled') {
+
+            return response()->json([
+                'code' => -1,
+                'message' => 'Vé đã bị hủy trước đó.',
+            ], 400);
+        }
+
+        $ticket->status = $status ? 'approved' : 'rejected';
+        $ticket->save();
+
+        return response()->json([
+            'code' => 1,
+            'message' => 'Cập nhật trạng thái vé thành công.',
+            'ticket_id' => $ticket->id,
+            'new_status' => $ticket->status
+        ]);
     }
 }

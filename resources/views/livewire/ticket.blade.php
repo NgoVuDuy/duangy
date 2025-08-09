@@ -50,6 +50,8 @@
                                             Đã hủy
                                         @elseif ($ticket->status === 'done')
                                             Đã đi
+                                        @elseif ($ticket->status === 'not_attended')
+                                            Không đi
                                         @endif
 
                                     </td>
@@ -66,7 +68,11 @@
                                                 hủy</button>
                                         @else
                                             <button class="main-btn tiny-btn cancel-ticket" type="button"
-                                                style="background: red" data-bs-toggle="modal"
+
+                                                
+                                                style="background: red" 
+                                                
+                                                data-bs-toggle="modal"
                                                 data-bs-target="#cancel-ticket-{{ $ticket->id }}">
                                                 Hủy vé</button>
                                         @endif

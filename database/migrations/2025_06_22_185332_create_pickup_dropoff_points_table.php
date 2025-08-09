@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('time');
             $table->string('type');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->decimal('discount_percent', 3, 1)->nullable();
             $table->timestamps();
             $table->foreign('trip_id')->references('id')->on('trips')->onDelete('set null');

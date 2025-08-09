@@ -80,6 +80,41 @@ class BusController extends Controller
 
     //     return response()->json($userPhones);
     // }
+    // public function getEmailByBusId($busId)
+    // {
+    //     $bus = Bus::find($busId);
+
+    //     if (!$bus) {
+    //         return response()->json(['message' => 'Bus not found'], 404);
+    //     }
+
+    //     // Lấy tất cả trips của bus, kèm theo tickets và user
+    //     // $trips = $bus->trips()->with('tickets.user')->get();
+    //     $trips = $bus->trips()
+    //         ->with(['tickets' => function ($query) {
+    //             $query->where('status', 'pending');
+    //         }, 'tickets.user'])
+    //         ->get();
+
+
+    //     $emailsWithTickets = [];
+
+    //     foreach ($trips as $trip) {
+
+    //         foreach ($trip->tickets as $ticket) {
+    //             $user = $ticket->user;
+    //             if ($user && $user->email) {
+    //                 $email = $user->email;
+    //                 if (!isset($emailsWithTickets[$email])) {
+    //                     $emailsWithTickets[$email] = [];
+    //                 }
+    //                 $emailsWithTickets[$email][] = $ticket->id;
+    //             }
+    //         }
+    //     }
+
+    //     return response()->json($emailsWithTickets);
+    // }
     public function getEmailByBusId($busId)
     {
         $bus = Bus::find($busId);
@@ -88,26 +123,49 @@ class BusController extends Controller
             return response()->json(['message' => 'Bus not found'], 404);
         }
 
-        // Lấy tất cả trips của bus, kèm theo tickets và user
-        $trips = $bus->trips()->with('tickets.user')->get();
+        // Lấy các chuyến đi kèm vé có trạng thái pending và người dùng
+        $trips = $bus->trips()
+            ->with(['tickets' => function ($query) {
+                $query->where('status', 'pending');
+            }, 'tickets.user', 'tickets.pickup', 'tickets.dropoff'])
+            ->get();
 
-        $emailsWithTickets = [];
+
+        $emailsWithTrips = [];
 
         foreach ($trips as $trip) {
             foreach ($trip->tickets as $ticket) {
                 $user = $ticket->user;
                 if ($user && $user->email) {
                     $email = $user->email;
-                    if (!isset($emailsWithTickets[$email])) {
-                        $emailsWithTickets[$email] = [];
+
+                    // dd($ticket->toArray());
+
+                    // Chuyển trip thành mảng (nếu cần), hoặc chỉ chọn vài trường cụ thể
+                    $tripInfo = [
+                        'id' => $ticket->id,
+                        'from' => $trip->from,
+                        // 'to' => $trip->to,
+                        // 'start_time' => $trip->start_time,
+                        // 'end_time' => $trip->end_time,
+                        // thêm thông tin khác nếu cần
+                    ];
+
+                    if (!isset($emailsWithTrips[$email])) {
+                        $emailsWithTrips[$email] = [];
                     }
-                    $emailsWithTickets[$email][] = $ticket->id;
+
+                    // Tránh lặp lại cùng chuyến
+                    if (!in_array($ticket->toArray(), $emailsWithTrips[$email])) {
+                        $emailsWithTrips[$email][] = $ticket->toArray();
+                    }
                 }
             }
         }
 
-        return response()->json($emailsWithTickets);
+        return response()->json($emailsWithTrips);
     }
+
     /**
      * Remove the specified resource from storage.
      */

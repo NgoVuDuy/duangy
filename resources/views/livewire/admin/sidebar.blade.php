@@ -1,5 +1,6 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="width: 400px !important">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"
+    style="width: 400px !important">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin">
@@ -54,29 +55,25 @@
     </li>
 
     <li class="nav-item" wire:current="active">
+        <a class="nav-link" href="/pickup-dropoff" wire:navigate style="width: 100%">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-map-pin-house-icon lucide-map-pin-house">
+                <path
+                    d="M15 22a1 1 0 0 1-1-1v-4a1 1 0 0 1 .445-.832l3-2a1 1 0 0 1 1.11 0l3 2A1 1 0 0 1 22 17v4a1 1 0 0 1-1 1z" />
+                <path d="M18 10a8 8 0 0 0-16 0c0 4.993 5.539 10.193 7.399 11.799a1 1 0 0 0 .601.2" />
+                <path d="M18 22v-3" />
+                <circle cx="10" cy="10" r="3" />
+            </svg>
+            <span class="fs-5" style="cursor: pointer !important;">Danh sách điểm đón trả</span></a>
+    </li>
+
+    <li class="nav-item" wire:current="active">
         <a class="nav-link" href="/buses" wire:navigate>
             <i class="fs-6 fas fa-fw fa-bus"></i>
             <span class="fs-5" style="cursor: pointer !important;">Danh sách xe</span></a>
     </li>
-
-    {{-- <li class="nav-item" wire:current="active">
-        <a class="nav-link" href="/admin-account" wire:navigate>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-user-icon lucide-user">
-                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-            </svg>
-            <span class="fs-6">Tài khoản</span></a>
-    </li> --}}
-
-    <!-- Divider -->
-    {{-- <hr class="sidebar-divider d-none d-md-block"> --}}
-
-    <!-- Sidebar Toggler (Sidebar) -->
-    {{-- <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div> --}}
 
 
 </ul>

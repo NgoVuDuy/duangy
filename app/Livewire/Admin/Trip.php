@@ -156,6 +156,25 @@ class Trip extends Component
         }
     }
 
+    public function approve($id, $status)
+    {
+        $ticketController = new TicketController();
+
+        $response = $ticketController->updateStatus($id, $status)->getData();
+
+        if ($response->code == 1) {
+            
+            // dd($response);
+            $busOperator = new BusOperatorController();
+            $this->trips = $busOperator->showTrips($this->user->phone)->getData();
+
+            return $this->dispatch('approve-success');
+        } else {
+            // dd($response);
+            return $this->dispatch('approve-error');
+        }
+    }
+
     public function render()
     {
         return view('livewire.admin.trip');
