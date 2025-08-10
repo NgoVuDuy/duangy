@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Http\Controllers\BusOperatorController;
+use App\Http\Controllers\PickupDropoffPointController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TripController;
@@ -22,6 +23,8 @@ class Trip extends Component
     public $departure_value;
     public $arrival_value;
     public $price_value;
+    public $pickup_value;
+    public $dropoff_value;
 
     // Các giá trị cần cập nhật
     public $route_update;
@@ -30,6 +33,18 @@ class Trip extends Component
     public $departure_update;
     public $arrival_update;
     public $price_update;
+    public $pickup_update;
+    public $dropoff_update;
+
+    public $pickupPoints = [];
+    public $dropoffPoints = [];
+    public $pickupSeleted = [];
+    public $dropoffSeleted = [];
+
+    public $pickupUpdatePoints = [];
+    public $dropoffUpdatePoints = [];
+    public $pickupUpdateSeleted = [];
+    public $dropoffUpdateSeleted = [];
 
     public $user;
 
@@ -41,25 +56,22 @@ class Trip extends Component
             $this->user = session()->get('admin');
         }
 
-        // dd($this->user);
-        // else {
-        //     abort(404);
-        // }
-
-        // $busOperator = new BusOperatorController();
         $routeController = new RouteController();
         $busOperator = new BusOperatorController();
+        $pickupDropoffPointsController = new PickupDropoffPointController();
 
         $this->trips = $busOperator->showTrips($this->user->phone)->getData(); // Lấy chuyến
         $this->buses = $busOperator->showBuses($this->user->phone)->getData(); // Lấy xe
+        $this->pickupPoints = $pickupDropoffPointsController->index('pickup')->getData(); // Lấy điểm đón
+        $this->dropoffPoints = $pickupDropoffPointsController->index('dropoff')->getData(); // Lấy điểm trả
         $this->routes = $routeController->index()->getData(); // Lấy tuyến
 
-        // dd($this->trips); 
     }
 
     public function save()
     {
 
+        // dd($this->pickupSeleted);
 
         if (!empty($this->route_value) && !empty($this->bus_value) && !empty($this->departure_value) && !empty($this->arrival_value) && !empty($this->price_value)) {
 
@@ -67,8 +79,23 @@ class Trip extends Component
             list($arrival_date, $arrival_time) = explode('T', $this->arrival_value);
 
             $tripController = new TripController();
-
             $response = $tripController->store($this->bus_value, $this->route_value, $departure_date, $departure_time, $arrival_time, $arrival_date, "pending", $this->price_value)->getData();
+
+            $trip_id = $response->tripId;
+            // Điểm đón trả
+            if (!empty($this->pickupSeleted)) {
+                foreach ($this->pickupSeleted as $pickup) {
+                    $pickupDropoffPointsController = new PickupDropoffPointController();
+                    $pickupDropoffPointsController->updateTripId($pickup->id, $trip_id);
+                }
+            }
+
+            if (!empty($this->dropoffSeleted)) {
+                foreach ($this->dropoffSeleted as $dropoff) {
+                    $pickupDropoffPointsController = new PickupDropoffPointController();
+                    $pickupDropoffPointsController->updateTripId($dropoff->id, $trip_id);
+                }
+            }
 
             $busOperator = new BusOperatorController();
             $this->trips = $busOperator->showTrips($this->user->phone)->getData();
@@ -78,6 +105,68 @@ class Trip extends Component
                 $this->dispatch('add-trip-success');
             }
         }
+    }
+
+    public function updatedPickupValue($value)
+    {
+        $pickupDropoffPointsController = new PickupDropoffPointController();
+        $pickupPoint = $pickupDropoffPointsController->show((int) $value)->getData();
+
+        $this->pickupSeleted[] = $pickupPoint;
+    }
+
+    public function updatedDropoffValue($value)
+    {
+
+        $pickupDropoffPointsController = new PickupDropoffPointController();
+        $dropoffPoint = $pickupDropoffPointsController->show((int) $value)->getData();
+
+        $this->dropoffSeleted[] = $dropoffPoint;
+    }
+
+    public function updatedPickupUpdate($value)
+    {
+        $pickupDropoffPointsController = new PickupDropoffPointController();
+        $pickupPoint = $pickupDropoffPointsController->show((int) $value)->getData();
+
+        $this->pickupUpdateSeleted[] = $pickupPoint;
+    }
+
+    public function updatedDropoffUpdate($value)
+    {
+
+        $pickupDropoffPointsController = new PickupDropoffPointController();
+        $dropoffPoint = $pickupDropoffPointsController->show((int) $value)->getData();
+
+        $this->dropoffUpdateSeleted[] = $dropoffPoint;
+    }
+
+    public function removePickup($id)
+    {
+        $this->pickupSeleted = array_filter($this->pickupSeleted, function ($pickup) use ($id) {
+            return $pickup->id !== $id;
+        });
+    }
+
+    public function removeDropoff($id)
+    {
+        $this->dropoffSeleted = array_filter($this->dropoffSeleted, function ($dropoff) use ($id) {
+            return $dropoff->id !== $id;
+        });
+    }
+
+    public function removePickupUpdate($id)
+    {
+        $this->pickupUpdateSeleted = array_filter($this->pickupUpdateSeleted, function ($pickup) use ($id) {
+            return $pickup->id !== $id;
+        });
+    }
+
+    public function removeDropoffUpdate($id)
+    {
+        $this->dropoffUpdateSeleted = array_filter($this->dropoffUpdateSeleted, function ($dropoff) use ($id) {
+            return $dropoff->id !== $id;
+        });
     }
 
     public function delete_trip($id)
@@ -102,6 +191,29 @@ class Trip extends Component
 
         $response = $tripController->update($id, $this->bus_update, $this->route_update, $departure_date, $departure_time, $arrival_time, $arrival_date, "pending", $this->price_update)->getData();
 
+        if ($response->code == 0) {
+            return $this->dispatch('update-trip-error');
+        }
+
+        $trip_id = $response->tripId;
+        // Cập nhật tất cả điểm đón trả của chuyến đi là null
+        $pickupDropoffPointsController = new PickupDropoffPointController();
+        $pickupDropoffPointsController->setNullTripId($trip_id);
+        
+        // Điểm đón trả
+        if (!empty($this->pickupUpdateSeleted)) {
+
+            foreach ($this->pickupUpdateSeleted as $pickup) {
+                $pickupDropoffPointsController->updateTripId($pickup->id, $trip_id);
+            }
+        }
+
+        if (!empty($this->dropoffUpdateSeleted)) {
+            foreach ($this->dropoffUpdateSeleted as $dropoff) {
+                $pickupDropoffPointsController->updateTripId($dropoff->id, $trip_id);
+            }
+        }
+
         $busOperator = new BusOperatorController();
         $this->trips = $busOperator->showTrips($this->user->phone)->getData();
 
@@ -115,15 +227,26 @@ class Trip extends Component
     {
 
         $tripController = new TripController();
-
         $trip = $tripController->show($id)->getData();
 
+        // dd($trip);
         if ($trip->code == 1) {
             $this->route_update = $trip->data->route_id;
             $this->bus_update = $trip->data->bus_id;
             $this->departure_update = $trip->data->departure_date . 'T' . $trip->data->departure_time;
             $this->arrival_update = $trip->data->arrival_date . 'T' . $trip->data->arrival_time;
             $this->price_update = $trip->data->price;
+
+            $this->reset('pickupUpdateSeleted');
+            $this->reset('dropoffUpdateSeleted');
+
+            foreach ($trip->data->pickup_dropoff_points as $point) {
+                if ($point->type == 'pickup') {
+                    $this->pickupUpdateSeleted[] = $point;
+                } elseif ($point->type == 'dropoff') {
+                    $this->dropoffUpdateSeleted[] = $point;
+                }
+            }
         }
     }
 
@@ -163,7 +286,7 @@ class Trip extends Component
         $response = $ticketController->updateStatus($id, $status)->getData();
 
         if ($response->code == 1) {
-            
+
             // dd($response);
             $busOperator = new BusOperatorController();
             $this->trips = $busOperator->showTrips($this->user->phone)->getData();

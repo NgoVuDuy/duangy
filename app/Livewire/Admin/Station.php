@@ -20,7 +20,7 @@ class Station extends Component
     {
         $pickupDropoffPointsController = new PickupDropoffPointController();
 
-        $this->pickupDropoffPoints = $pickupDropoffPointsController->index()->getData();
+        $this->pickupDropoffPoints = $pickupDropoffPointsController->index('all')->getData();
     }
 
     public function save()
@@ -35,7 +35,7 @@ class Station extends Component
     
                 $pickupDropoffPointsController = new PickupDropoffPointController();
     
-                $this->pickupDropoffPoints = $pickupDropoffPointsController->index()->getData();
+                $this->pickupDropoffPoints = $pickupDropoffPointsController->index('all')->getData();
     
                 $this->dispatch("stationSaved");
             } else {
@@ -43,6 +43,13 @@ class Station extends Component
             }
         }
 
+    }
+    public function resetFields()
+    {
+        $this->name = '';
+        $this->address = '';
+        $this->time = '';
+        $this->type = '0';
     }
 
     public function setter($id)
@@ -64,7 +71,7 @@ class Station extends Component
         $response = $pickupDropoffPointsController->update($id, $this->name, $this->address, $this->time, $this->type)->getData();
 
         if ($response->code == 1) {
-            $this->pickupDropoffPoints = $pickupDropoffPointsController->index()->getData();
+            $this->pickupDropoffPoints = $pickupDropoffPointsController->index('all')->getData();
 
             $this->dispatch("stationUpdated");
         } else {
@@ -78,7 +85,7 @@ class Station extends Component
         $response = $pickupDropoffPointsController->destroy($id)->getData();
 
         if ($response->code == 1) {
-            $this->pickupDropoffPoints = $pickupDropoffPointsController->index()->getData();
+            $this->pickupDropoffPoints = $pickupDropoffPointsController->index('all')->getData();
 
             $this->dispatch("stationDeleted");
         } else {

@@ -136,8 +136,8 @@
 
                                                             <td>
                                                                 <button class="btn btn-danger" style="height: 40px"
-                                                                    wire:click="cancel_ticket({{ $ticket->id }})" 
-                                                                    @if($ticket->status != 'pending') disabled @endif>
+                                                                    wire:click="cancel_ticket({{ $ticket->id }})"
+                                                                    @if ($ticket->status != 'pending') disabled @endif>
                                                                     Hủy</button>
                                                             </td>
                                                             {{-- <td>
@@ -173,8 +173,8 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form wire:submit="update_trip({{ $trip->id }})">
-
+                                        <form wire:submit="update_trip({{ $trip->id }})" class="form-add-trip">
+ 
                                             {{-- {{ $route_value }} --}}
 
                                             <div class="mb-3">
@@ -207,7 +207,6 @@
                                                 <select class="form-select" aria-label="Default select example"
                                                     wire:model.live="bus_update">
 
-                                                    {{-- <option value="0" selected>Chọn xe</option> --}}
 
                                                     @foreach ($buses->buses as $item)
                                                         @if ($item->license_plate == $bus->license_plate)
@@ -238,6 +237,83 @@
                                                     value="{{ $trip->arrival_date . 'T' . $trip->arrival_time }}"
                                                     wire:model.live="arrival_update">
                                             </div>
+
+                                            {{-- Điểm đón trả --}}
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Chọn điểm đón</label>
+
+                                                <h6 class="place-seleted">
+
+                                                    @foreach ($pickupUpdateSeleted as $pickup)
+
+                                                        <span class="badge text-bg-primary">{{ $pickup->id }} -
+                                                            {{ $pickup->name }}
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                height="18" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-x-icon lucide-x"
+                                                                wire:click="removePickupUpdate({{ $pickup->id }})">
+                                                                <path d="M18 6 6 18" />
+                                                                <path d="m6 6 12 12" />
+                                                            </svg>
+                                                        </span>
+                                                    @endforeach
+
+                                                </h6>
+
+                                                <select class="form-select" aria-label="Default select example"
+                                                    wire:model.live="pickup_update">
+
+                                                    <option value="0">Chọn điểm đón</option>
+
+                                                    @foreach ($pickupPoints as $pickupPoint)
+                                                        <option value="{{ $pickupPoint->id }}">
+
+                                                            {{ $pickupPoint->id }} - {{ $pickupPoint->name }} -
+                                                            {{ $pickupPoint->time }}
+                                                        </option>
+                                                    @endforeach
+
+                                                </select>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="" class="form-label">Chọn điểm trả</label>
+
+                                                <h6 class="place-seleted">
+                                                    @foreach ($dropoffUpdateSeleted as $dropoff)
+                                                        <span class="badge text-bg-primary">{{ $dropoff->id }} -
+                                                            {{ $dropoff->name }}
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                height="18" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-x-icon lucide-x"
+                                                                wire:click="removeDropoffUpdate({{ $dropoff->id }})">
+                                                                <path d="M18 6 6 18" />
+                                                                <path d="m6 6 12 12" />
+                                                            </svg>
+                                                        </span>
+                                                    @endforeach
+
+                                                </h6>
+
+                                                <select class="form-select" aria-label="Default select example"
+                                                    wire:model.live="dropoff_update">
+
+                                                    <option value="0">Chọn điểm trả</option>
+
+                                                    @foreach ($dropoffPoints as $dropoffPoint)
+                                                        <option value="{{ $dropoffPoint->id }}">
+
+                                                            {{ $dropoffPoint->id }} - {{ $dropoffPoint->name }} -
+                                                            {{ $dropoffPoint->time }}</option>
+                                                    @endforeach
+
+                                                </select>
+                                            </div>
+
 
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Giá chuyến đi</label>
@@ -311,6 +387,75 @@
                             <label for="arrival" class="form-label">Thời gian đến</label>
                             <input type="datetime-local" class="form-control" id="arrival"
                                 wire:model.live="arrival_value">
+                        </div>
+
+                        {{-- Điểm đón trả --}}
+                        <div class="mb-3">
+                            <label for="" class="form-label">Chọn điểm đón</label>
+
+                            <h6 class="place-seleted">
+                                @foreach ($pickupSeleted as $pickup)
+                                    <span class="badge text-bg-primary">{{ $pickup->id }} - {{ $pickup->name }}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-x-icon lucide-x"
+                                            wire:click="removePickup({{ $pickup->id }})">
+                                            <path d="M18 6 6 18" />
+                                            <path d="m6 6 12 12" />
+                                        </svg>
+                                    </span>
+                                @endforeach
+
+                            </h6>
+
+                            <select class="form-select" aria-label="Default select example"
+                                wire:model.live="pickup_value">
+
+                                <option value="0">Chọn điểm đón</option>
+
+                                @foreach ($pickupPoints as $pickupPoint)
+                                    <option value="{{ $pickupPoint->id }}">
+
+                                        {{ $pickupPoint->id }} - {{ $pickupPoint->name }} - {{ $pickupPoint->time }}
+                                    </option>
+                                @endforeach
+
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="" class="form-label">Chọn điểm trả</label>
+
+                            <h6 class="place-seleted">
+                                @foreach ($dropoffSeleted as $dropoff)
+                                    <span class="badge text-bg-primary">{{ $dropoff->id }} - {{ $dropoff->name }}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-x-icon lucide-x"
+                                            wire:click="remove({{ $dropoff->id }})">
+                                            <path d="M18 6 6 18" />
+                                            <path d="m6 6 12 12" />
+                                        </svg>
+                                    </span>
+                                @endforeach
+
+                            </h6>
+
+                            <select class="form-select" aria-label="Default select example"
+                                wire:model.live="dropoff_value">
+
+                                <option value="0">Chọn điểm trả</option>
+
+                                @foreach ($dropoffPoints as $dropoffPoint)
+                                    <option value="{{ $dropoffPoint->id }}">
+
+                                        {{ $dropoffPoint->id }} - {{ $dropoffPoint->name }} -
+                                        {{ $dropoffPoint->time }}</option>
+                                @endforeach
+
+                            </select>
                         </div>
 
                         <div class="mb-3">

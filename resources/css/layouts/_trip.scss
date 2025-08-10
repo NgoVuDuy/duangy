@@ -256,3 +256,22 @@
         }
     }
 }
+
+.place-seleted{
+
+    span {
+
+        margin-bottom: 5px;
+    }
+
+    svg {
+        cursor: pointer;
+    }
+}
+
+.form-add-trip {
+    label {
+        font-weight: 600;
+        color: $dark-blue;
+    }
+}

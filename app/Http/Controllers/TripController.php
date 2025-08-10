@@ -18,25 +18,6 @@ class TripController extends Controller
         return response()->json($trips);
     }
 
-    // public function get_pickups()
-    // {
-    //     //
-    //     $trips = Trip::with(['pickups' => function ($query) {
-    //         $query->where('type', 'pickup');
-    //     }])->get();
-
-    //     return response()->json($trips);
-    // }
-
-    // public function get_dropoffs()
-    // {
-    //     //
-    //     $trips = Trip::with(['dropoffs' => function ($query) {
-    //         $query->where('type', 'dropoff');
-    //     }])->get();
-
-    //     return response()->json($trips);
-    // }
 
     /**
      * Store a newly created resource in storage.
@@ -57,7 +38,11 @@ class TripController extends Controller
 
         $trip->save();
 
-        return response()->json(["code" => 1, "message" => "Tạo chuyến đi thành công"]);
+        return response()->json([
+            "code" => 1,
+            "tripId" => $trip->id,
+            "message" => "Tạo chuyến đi thành công"
+        ]);
     }
 
 
@@ -66,7 +51,12 @@ class TripController extends Controller
      */
     public function show($id)
     {
-        $trip = Trip::find($id);
+        $trip = Trip::with('pickup_dropoff_points')
+            ->with('bus.busSeatTypes.seatType') // Kèm theo loại ghế
+            ->with('bus.busSeatTypes.seats') // Kèm theo các ghế ngồi
+            ->with('route') // Kèm theo tuyến đường
+            ->with('bus.busOperator') // Kèm theo nhà xe
+            ->find($id);
 
         if (!$trip) {
             return response()->json([
@@ -107,7 +97,11 @@ class TripController extends Controller
 
         $trip->save();
 
-        return response()->json(["code" => 1, "message" => "Cập nhật chuyến đi thành công"]);
+        return response()->json([
+            "code" => 1,
+            "tripId" => $trip->id,
+            "message" => "Cập nhật chuyến đi thành công"
+        ]);
     }
 
 

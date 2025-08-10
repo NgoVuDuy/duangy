@@ -4,7 +4,9 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"></h1>
         <div class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" data-bs-toggle="modal"
-            data-bs-target="#pickupDropoffPointModal">
+            data-bs-target="#pickupDropoffPointModal"
+            wire:click="resetFields" style="cursor: pointer" title="Thêm điểm đón trả mới" id="addPickupDropoffPointButton"
+            >
             <i class="fas fa-plus fa-sm text-white-50 me-2"></i>Thêm điểm mới
         </div>
     </div>

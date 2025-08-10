@@ -32,6 +32,8 @@ class Trip extends Component
 
     public $seat_id_list = []; // Mảng chứa danh sách id các ghế đã chọn
 
+    
+
     public function mount()
     {
 

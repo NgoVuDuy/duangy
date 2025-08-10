@@ -8,39 +8,45 @@ use Illuminate\Http\Request;
 class PickupDropoffPointController extends Controller
 {
     //
-    public function index() {
+    public function index($type)
+    {
 
-        $rs = PickupDropoffPoint::orderBy('created_at', 'desc')->get();
+        if ($type ==  "all") {
 
-        if($rs) {
+            $rs = PickupDropoffPoint::orderBy('created_at', 'desc')->get();
+        } else {
+            $rs = PickupDropoffPoint::where('type', $type)->orderBy('created_at', 'desc')->get();
+        }
+        if ($rs) {
 
             return response()->json($rs);
         }
-        
     }
-    public function show($id) {
-        
+    public function show($id)
+    {
+
         $rs = PickupDropoffPoint::find($id);
 
-        if($rs) {
+        if ($rs) {
 
             return response()->json($rs);
         }
     }
-    public function store($name, $address, $time, $type) {
+    public function store($name, $address, $time, $type)
+    {
 
         $rs = PickupDropoffPoint::create([
             'name' => $name,
             'address' => $address,
             'time' => $time,
             'type' => $type,
-            'longitude' => '0', 
+            'longitude' => '0',
             'latitude' => '0',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
-        if($rs) {
+        if ($rs) {
 
             return response()->json([
                 'code' => 1,
@@ -50,11 +56,36 @@ class PickupDropoffPointController extends Controller
         }
     }
 
-    public function update($id, $name, $address, $time, $type) {
+    public function setNullTripId($id)
+    {
+        PickupDropoffPoint::where('trip_id', $id)->update(['trip_id' => null]);
+    }
+
+
+
+    public function updateTripId($id, $trip_id)
+    {
 
         $rs = PickupDropoffPoint::find($id);
 
-        if($rs) {
+        if ($rs) {
+            $rs->trip_id = $trip_id;
+            $rs->save();
+
+            return response()->json([
+                'code' => 1,
+                'message' => 'Pickup/Dropoff point updated successfully.',
+                'data' => $rs
+            ]);
+        }
+    }
+
+    public function update($id, $name, $address, $time, $type)
+    {
+
+        $rs = PickupDropoffPoint::find($id);
+
+        if ($rs) {
             $rs->name = $name;
             $rs->address = $address;
             $rs->time = $time;
@@ -69,11 +100,12 @@ class PickupDropoffPointController extends Controller
         }
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
 
         $rs = PickupDropoffPoint::find($id);
 
-        if($rs) {
+        if ($rs) {
             $rs->delete();
 
             return response()->json([
