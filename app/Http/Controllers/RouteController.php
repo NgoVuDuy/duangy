@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BusOperator;
 use App\Models\Route;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class RouteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(string $start_point, string $end_point)
+    public function store(string $start_point, string $end_point, string $bus_operator_phone)
     {
 
         $route = Route::where('start_point', $start_point)
@@ -33,7 +34,8 @@ class RouteController extends Controller
 
         $route = Route::create([
             "start_point" => $start_point,
-            "end_point" => $end_point
+            "end_point" => $end_point,
+            "bus_operator_phone" => $bus_operator_phone
         ]);
 
         return response()->json(["code" => 1, "route" => $route]);
@@ -45,14 +47,31 @@ class RouteController extends Controller
     public function show(string $id)
     {
         //
+        $rs = Route::findOrFail($id);
+
+        if ($rs) {
+
+            return response()->json(["code" => 1, "data" => $rs]);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(string $id, string $start_point, string $end_point)
     {
         //
+        $rs = Route::findOrFail($id);
+
+        if ($rs) {
+            $rs->start_point = $start_point;
+            $rs->end_point = $end_point;
+
+            $rs->save();
+
+        }
+
+        return response()->json(["code" => 1, "data" => $rs]);
     }
 
     /**
@@ -61,6 +80,11 @@ class RouteController extends Controller
     public function destroy(string $id)
     {
         //
+        $rs = Route::findOrFail($id);
+
+        if($rs) {
+            $rs->delete();
+        }
     }
 
     public function search_start_point(string $start_point_value, string $end_point_value)

@@ -213,9 +213,9 @@
                                         </div>
                                         <div class="modal-body">
                                             <form action="" wire:submit="save({{ $bus->id }})">
-                                                <textarea class="w-100 p-4 rounded" name="" id="" cols="30" rows="10"
+                                                <input class="w-100 p-4 rounded" name="" id="" cols="30" rows="10"
                                                     placeholder="Nội dung sự cố" wire:model.live="content.{{ $bus->id }}" required>
-                                                </textarea>
+                                                </input>
 
                                                 <div class="mt-3 mb-3">
 

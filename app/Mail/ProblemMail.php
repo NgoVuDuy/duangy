@@ -16,7 +16,7 @@ class ProblemMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public $bus_license_plate, public $ticket_id, public $content)
+    public function __construct(public $tickets, public $content, public $bus_license_plate)
     {
         //
     }

@@ -54,21 +54,21 @@ class Bus extends Component
             // Lấy ra các người dùng để gửi mail
             $emailList = $busController->getEmailByBusId($bus_id)->getData();
 
-            dd($emailList);
-
-            // dd($email);
+            // dd($emailList);
 
             // cập nhật lại trạng thái xe
             $response = $busController->update($bus_id, $content, $busLicense, "inactive")->getData();
 
             if (!empty($emailList)) {
 
-                foreach ($emailList as $email => $ticket) {
+                foreach ($emailList as $email => $tickets) {
 
-                    foreach ($ticket as $item) {
+                    Mail::to($email)->send(new ProblemMail($tickets, $content, $busLicense));
 
-                        Mail::to($email)->send(new ProblemMail($busLicense, $code, $content));
-                    }
+                    // foreach ($ticket as $item) {
+
+                    //     Mail::to($email)->send(new ProblemMail($busLicense, $code, $content));
+                    // }
                 }
             }
 
@@ -98,14 +98,26 @@ class Bus extends Component
         $emailList = $busController->getEmailByBusId($bus_id)->getData();
 
         // dd($emailList);
+        if (!empty($emailList)) {
 
-        foreach ($emailList as $email => $ticket_code) {
+            foreach ($emailList as $email => $tickets) {
 
-            foreach ($ticket_code as $code) {
+                Mail::to($email)->send(new FixedMail($tickets));
 
-                Mail::to($email)->send(new FixedMail($code));
+                // foreach ($ticket as $item) {
+
+                //     Mail::to($email)->send(new ProblemMail($busLicense, $code, $content));
+                // }
             }
         }
+
+        // foreach ($emailList as $email => $ticket_code) {
+
+        //     foreach ($ticket_code as $code) {
+
+        //         Mail::to($email)->send(new FixedMail($code));
+        //     }
+        // }
         // Lấy lại danh sách các xe
         $busOperator = new BusOperatorController();
         $this->buses = $busOperator->showBuses($this->user->phone)->getData();

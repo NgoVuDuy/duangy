@@ -16,7 +16,7 @@ class FixedMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public $ticket_id)
+    public function __construct(public $tickets)
     {
         //
     }

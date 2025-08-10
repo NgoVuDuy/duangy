@@ -12,6 +12,7 @@ class Route extends Component
     public $routes;
     public $start_point;
     public $end_point;
+    public $bus_operator_phone;
 
     public $provinces = [
 
@@ -37,7 +38,16 @@ class Route extends Component
         $routeController = new RouteController();
 
         $this->routes = $routeController->index()->getData();
+
+        $this->bus_operator_phone = session()->get('admin')->phone;
+        // dd($this->routes);
     }
+    public function add_route() {
+
+        $this->reset('start_point');
+        $this->reset('end_point');
+    }
+
     public function save()
     {
 
@@ -48,7 +58,7 @@ class Route extends Component
 
             $routeController = new RouteController();
 
-            $route = $routeController->store($this->start_point, $this->end_point)->getData();
+            $route = $routeController->store($this->start_point, $this->end_point, $this->bus_operator_phone)->getData();
 
             if ($route->code == 0) {
 
@@ -63,6 +73,44 @@ class Route extends Component
         } else {
             // $this->dispatch('route-exists');
         }
+    }
+
+    public function edit($route_id) {
+
+        $routeController = new RouteController();
+
+        $route = $routeController->show($route_id)->getData();
+
+        if($route->code = 1) {
+
+            $this->start_point = $route->data->start_point;
+            $this->end_point = $route->data->end_point;
+        }
+
+    }
+
+    public function update_route($route_id) {
+
+
+        $routeController = new RouteController();
+
+        $route = $routeController->update($route_id, $this->start_point, $this->end_point)->getData();
+
+        $this->routes = $routeController->index()->getData();
+
+        $this->dispatch('update-route-success');
+
+    }
+
+    public function delete($route_id) {
+
+        $routeController = new RouteController();
+        
+        $routeController->destroy($route_id);
+
+        $this->routes = $routeController->index()->getData();
+
+        $this->dispatch('delete-route-success');
     }
 
     public function render()

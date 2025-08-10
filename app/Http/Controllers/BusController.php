@@ -119,6 +119,7 @@ class BusController extends Controller
     {
         $bus = Bus::find($busId);
 
+
         if (!$bus) {
             return response()->json(['message' => 'Bus not found'], 404);
         }
@@ -130,6 +131,7 @@ class BusController extends Controller
             }, 'tickets.user', 'tickets.pickup', 'tickets.dropoff'])
             ->get();
 
+        // dd($trips->toArray());
 
         $emailsWithTrips = [];
 
@@ -162,6 +164,7 @@ class BusController extends Controller
                 }
             }
         }
+
 
         return response()->json($emailsWithTrips);
     }

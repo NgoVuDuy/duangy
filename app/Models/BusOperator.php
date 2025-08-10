@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class BusOperator extends Model
 {
     //
+    protected $primaryKey = 'phone';
+    public $incrementing = false;
+
     protected $fillable = ['name', 'phone'];
 
     public function buses() {

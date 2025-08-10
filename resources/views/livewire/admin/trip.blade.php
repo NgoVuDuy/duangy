@@ -549,8 +549,6 @@
                 $('.btn-close').click()
             })
 
-
-
             let now = new Date();
             now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); // để đúng múi giờ
 

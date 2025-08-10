@@ -56,9 +56,11 @@ class BookingConfirmation extends Component
         }
         if(session()->get('user')) {
 
-            // Cập nhật thêm tên và sdt
+            // Cập nhật thêm tên và sdt, email
             $userController = new UserController();
-            $response = $userController->updatedPatch(session()->get('user')->phone, $this->email, $this->name);
+            $response = $userController->updatedPatch(session()->get('user')->phone, $this->email, $this->name)->getData();
+        
+            // dd($response);
         }
 
         // Lưu tên người dùng và số điện thoại vào session

@@ -17,8 +17,10 @@ return new class extends Migration
 
             $table->string('start_point');
             $table->string('end_point');
-
+            $table->string('bus_operator_phone')->nullable();
             $table->timestamps();
+
+            $table->foreign('bus_operator_phone')->references('phone')->on('bus_operators')->onDelete('set null');
         });
     }
 

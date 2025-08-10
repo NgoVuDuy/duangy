@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Route extends Model
 {
     //
-    protected $fillable = ['start_point', 'end_point'];
+    protected $fillable = ['start_point', 'end_point', 'bus_operator_phone'];
 }
