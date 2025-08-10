@@ -45,13 +45,13 @@
                                     <td class="text-success fw-bold">
 
                                         @if ($ticket->status === 'pending')
-                                            Chưa đi
+                                            <h5><span class="badge text-bg-warning">Chưa đi</span></h5>
                                         @elseif ($ticket->status === 'cancelled')
-                                            Đã hủy
+                                            <h5><span class="badge text-bg-danger">Đã hủy</span></h5>
                                         @elseif ($ticket->status === 'done')
-                                            Đã đi
+                                            <h5><span class="badge text-bg-success">Đã đi</span></h5>
                                         @elseif ($ticket->status === 'not_attended')
-                                            Không đi
+                                            <h5><span class="badge text-bg-primary">Không đi</span></h5>
                                         @endif
 
                                     </td>
@@ -61,18 +61,17 @@
                                     </td>
                                     <td class="text-center">
 
-                                        @if ($ticket->status == 'cancelled')
+                                        @if ($ticket->status == 'done' || $ticket->status == 'not_attended')
+                                            <button class="main-btn tiny-btn cancel-ticket" type="button"
+                                                style="background: gray" disabled>
+                                                Hủy vé</button>
+                                        @elseif ($ticket->status == 'cancelled')
                                             <button class="main-btn tiny-btn cancel-ticket" type="button"
                                                 style="background: green" data-bs-toggle="modal"
-                                                data-bs-target="#information-ticket-{{ $ticket->id }}">Đã
-                                                hủy</button>
+                                                data-bs-target="#information-ticket-{{ $ticket->id }}">Xem</button>
                                         @else
                                             <button class="main-btn tiny-btn cancel-ticket" type="button"
-
-                                                
-                                                style="background: red" 
-                                                
-                                                data-bs-toggle="modal"
+                                                style="background: red" data-bs-toggle="modal"
                                                 data-bs-target="#cancel-ticket-{{ $ticket->id }}">
                                                 Hủy vé</button>
                                         @endif
@@ -120,7 +119,6 @@
                                                     </div>
 
                                                     @if ($refund['method'][$index] == 'prepay')
-                                                    
                                                         <div class="items">
                                                             <span>
                                                                 Cách ngày hiện tại
@@ -141,7 +139,6 @@
                                                             </span>
                                                             <span>{{ $refund['amount'][$index] }}đ</span>
                                                         </div>
-
                                                     @endif
 
 
