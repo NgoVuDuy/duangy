@@ -34,12 +34,10 @@ class BusOperatorController extends Controller
         $trips = BusOperator::where('phone', $phone)
             ->with([
                 'buses.trips' => function ($query) {
-                    $query->orderBy('created_at', 'desc');
+                    $query->whereNot('route_id', null)->orderBy('created_at', 'desc');
                 },
+
                 'buses.trips.route',
-                // 'buses.trips.tickets' => function ($query) {
-                //     $query->where('status', 'pending'); 
-                // },
                 'buses.trips.tickets.pickup',
                 'buses.trips.tickets.dropoff',
                 'buses.trips.tickets.seat',

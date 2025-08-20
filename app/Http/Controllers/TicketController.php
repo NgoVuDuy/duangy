@@ -26,17 +26,23 @@ class TicketController extends Controller
     public function getTicketById($phone)
     {
 
-        $tickets = Ticket::with('user')
-            ->with('trip.route')
-            ->with('trip.bus')
-            ->with('trip.bus.busOperator')
-            ->with('pickup')
-            ->with('dropoff')
-            ->with('seat')
-            ->with('payment')
+        $tickets = Ticket::with([
+            'user',
+            'trip.route',
+            'trip.bus',
+            'trip.bus.busOperator',
+            'pickup',
+            'dropoff',
+            'seat',
+            'payment'
+        ])
             ->where('user_phone', $phone)
+            ->whereHas('trip', function ($query) {
+                $query->whereNotNull('route_id'); // Chỉ lấy trip có route_id khác null
+            })
             ->orderBy('created_at', 'desc')
             ->get();
+
         return response()->json($tickets);
     }
 
@@ -107,7 +113,7 @@ class TicketController extends Controller
                 $ticket->save();
 
                 $seatController->update($ticket->seat_id, false);
-                
+
                 $updatedCount++;
             }
         }

@@ -11,3 +11,21 @@ td {
     border: 2px $border-gray solid;
     padding: 10px;
 }
+.return-role {
+
+    ul {
+        padding-left: 1.2rem;
+    }
+
+    h6 {
+        color: red;
+        margin: 0px;
+    }
+
+    li {
+        font-size: 14px;
+    }
+    .text-50 {
+        color: rgb(232, 139, 0);
+    }
+}

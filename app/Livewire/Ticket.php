@@ -29,7 +29,7 @@ class Ticket extends Component
         if (session()->get('user')) {
 
             // cập nhật lại vé đã đi
-            $ticketController->updateExpiredTickets(session()->get('user')->phone);
+            // $ticketController->updateExpiredTickets(session()->get('user')->phone);
 
             $this->tickets = $ticketController->getTicketById(session()->get('user')->phone)->getData();
         }

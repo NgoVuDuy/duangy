@@ -4,7 +4,69 @@
 
             <div class="col-3">
                 @livewire('user-sidebar')
+
+                <div class="mt-3">
+                    {{-- The Master doesn't talk, he acts. --}}
+                    <div class="return-role shadow d-flex flex-column row-gap-3 p-3">
+                        <div class="d-flex column-gap-3 align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-notepad-text-icon lucide-notepad-text">
+                                <path d="M8 2v4" />
+                                <path d="M12 2v4" />
+                                <path d="M16 2v4" />
+                                <rect width="16" height="18" x="4" y="4" rx="2" />
+                                <path d="M8 10h6" />
+                                <path d="M8 14h8" />
+                                <path d="M8 18h5" />
+                            </svg>
+                            <h6>Quy tắc hủy vé & hoàn tiền</h6>
+                        </div>
+                        <i><strong>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-flag-triangle-right-icon lucide-flag-triangle-right">
+                                    <path d="M6 22V2.8a.8.8 0 0 1 1.17-.71l11.38 5.69a.8.8 0 0 1 0 1.44L6 15.5" />
+                                </svg>
+                                <span>Thanh toán khi nhận vé</span>
+                            </strong>
+                        </i>
+                        <ul>
+                            <li>Có thể hủy <strong class="text-primary">trước ngày khởi hành 2 ngày</strong> </li>
+
+                        </ul>
+
+                        <i>
+                            <strong>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-flag-triangle-right-icon lucide-flag-triangle-right">
+                                    <path d="M6 22V2.8a.8.8 0 0 1 1.17-.71l11.38 5.69a.8.8 0 0 1 0 1.44L6 15.5" />
+                                </svg>
+                                <span>Thanh toán VNPay & Ví điện tử</span>
+                            </strong>
+                        </i>
+                        <ul>
+
+                            <li>Hủy vé <strong>trước 3 ngày: </strong> <strong class="text-primary">100%</strong> Hoàn
+                                tiền vé</li>
+                            <li>Hủy vé <strong>trước 2 ngày: </strong><strong class="text-success">70%</strong> Hoàn
+                                tiền vé</li>
+                            <li>Hủy vé <strong>trước 1 ngày: </strong> <strong class="text-50">50%</strong>
+                                Hoàn tiền vé</li>
+                            <li>Hủy vé <strong>sau 1 ngày: </strong><strong class="text-danger">0%</strong> hoàn tiền vé
+                            </li>
+
+                        </ul>
+                        <span class="text-danger fw-bold text-center">Tiền sẽ được hoàn vào ví điện tử của bạn</span>
+
+                    </div>
+                </div>
             </div>
+
+
             <div class="col-7">
                 <div class="shadow p-3">
 
