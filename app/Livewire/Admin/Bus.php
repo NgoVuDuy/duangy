@@ -35,7 +35,6 @@ class Bus extends Component
         $busOperator = new BusOperatorController();
         $this->buses = $busOperator->showBuses($this->user->phone)->getData();
 
-        // dd($this->buses);
     }
 
     public function save($bus_id)

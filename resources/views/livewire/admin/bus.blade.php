@@ -130,7 +130,7 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <div class="" style="width: 100px">
+                                            <div class="{{ $bus->total_seat == 11 ? "wi-100" : "wi-140" }}">
 
                                                 {{-- ở đây --}}
                                                 @foreach ($bus->bus_seat_types as $i => $bus_seat_type)

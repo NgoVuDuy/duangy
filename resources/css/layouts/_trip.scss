@@ -80,6 +80,8 @@
             .right {
                 .seat-diagram-wrap {
 
+
+
                     .seat-diagram {
                         padding: 12px 8px;
                         border-radius: 12px;
@@ -251,7 +253,7 @@
     }
 }
 
-.place-seleted{
+.place-seleted {
 
     span {
 
@@ -268,4 +270,12 @@
         font-weight: 600;
         color: $dark-blue;
     }
+}
+
+.wi-100 {
+    width: 100%;
+}
+
+.wi-140 {
+    width: 140px;
 }
