@@ -47,14 +47,86 @@ class SeatSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'bus_seat_type_id' => 3,
+                'bus_seat_type_id' => 2,
                 'name' => 'A6',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'bus_seat_type_id' => 3,
+                'bus_seat_type_id' => 2,
                 'name' => 'A7',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 2,
+                'name' => 'A8',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 2,
+                'name' => 'A9',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 2,
+                'name' => 'A10',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 2,
+                'name' => 'A11',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 2,
+                'name' => 'A12',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 2,
+                'name' => 'A13',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 2,
+                'name' => 'A14',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 2,
+                'name' => 'A15',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 2,
+                'name' => 'A16',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 3,
+                'name' => 'A17',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 3,
+                'name' => 'A18',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 3,
+                'name' => 'A19',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -226,14 +298,87 @@ class SeatSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'bus_seat_type_id' => 12,
+                'bus_seat_type_id' => 11,
                 'name' => 'A6',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'bus_seat_type_id' => 12,
+                'bus_seat_type_id' => 11,
                 'name' => 'A7',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 11,
+                'name' => 'A8',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 11,
+                'name' => 'A9',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 11,
+                'name' => 'A10',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 11,
+                'name' => 'A11',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 11,
+                'name' => 'A12',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 11,
+                'name' => 'A13',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 11,
+                'name' => 'A14',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 11,
+                'name' => 'A15',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 11,
+                'name' => 'A16',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 12,
+                'name' => 'A17',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+
+            [
+                'bus_seat_type_id' => 12,
+                'name' => 'A18',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 12,
+                'name' => 'A19',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -337,14 +482,86 @@ class SeatSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'bus_seat_type_id' => 18,
+                'bus_seat_type_id' => 17,
                 'name' => 'A6',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'bus_seat_type_id' => 18,
+                'bus_seat_type_id' => 17,
                 'name' => 'A7',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 17,
+                'name' => 'A8',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 17,
+                'name' => 'A9',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 17,
+                'name' => 'A10',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 17,
+                'name' => 'A11',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 17,
+                'name' => 'A12',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 17,
+                'name' => 'A13',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 17,
+                'name' => 'A14',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 17,
+                'name' => 'A15',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 17,
+                'name' => 'A16',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 18,
+                'name' => 'A17',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 18,
+                'name' => 'A18',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'bus_seat_type_id' => 18,
+                'name' => 'A19',
                 'created_at' => now(),
                 'updated_at' => now()
             ],

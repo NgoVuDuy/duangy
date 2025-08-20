@@ -7,6 +7,7 @@ use App\Http\Controllers\PickupDropoffPointController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TripController;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
@@ -66,6 +67,8 @@ class Trip extends Component
         $this->dropoffPoints = $pickupDropoffPointsController->index('dropoff')->getData(); // Lấy điểm trả
         $this->routes = $routeController->index()->getData(); // Lấy tuyến
 
+        // dd(Carbon::now());
+        // dd($this->trips);
     }
 
     public function save()

@@ -226,7 +226,7 @@
                                         <div class="right">
                                             <div class="seat-diagram-wrap">
                                                 <h6 class="title mb-4">Sơ đồ ghế</h6>
-                                                <div class="seat-diagram d-flex flex-column row-gap-1">
+                                                <div style="width: {{ $trip->bus->total_seat == 11 ? "100px" : "140px" }}" class="seat-diagram d-flex flex-column row-gap-1">
 
 
                                                     {{-- ở đây --}}

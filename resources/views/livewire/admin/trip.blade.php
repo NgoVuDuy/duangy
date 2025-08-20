@@ -137,8 +137,11 @@
                                                             <td>
                                                                 <button class="btn btn-danger" style="height: 40px"
                                                                     wire:click="cancel_ticket({{ $ticket->id }})"
-                                                                    @if ($ticket->status != 'pending') disabled @endif>
-                                                                    Hủy</button>
+                                                                    @if (
+                                                                        $ticket->status != 'pending' ||
+                                                                            now()->lessThan(\Carbon\Carbon::parse($trip->departure_date . ' ' . $trip->departure_time))) disabled @endif>
+                                                                    Hủy
+                                                                </button>
                                                             </td>
                                                             {{-- <td>
                                                                 <button class="btn btn-primary" wire:click="rollback_status({{ $ticket->id }}, 'pending')">Hoàn tác</button>
@@ -174,7 +177,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <form wire:submit="update_trip({{ $trip->id }})" class="form-add-trip">
- 
+
                                             {{-- {{ $route_value }} --}}
 
                                             <div class="mb-3">
@@ -245,7 +248,6 @@
                                                 <h6 class="place-seleted">
 
                                                     @foreach ($pickupUpdateSeleted as $pickup)
-
                                                         <span class="badge text-bg-primary">{{ $pickup->id }} -
                                                             {{ $pickup->name }}
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18"

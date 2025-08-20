@@ -20,7 +20,7 @@ class BusSeeder extends Seeder
                 "bus_type" => "Giường nằm",
                 "license_plate" => "51B-79834",
                 "image" => "bus-1.jpg",
-                "total_seat" => 7,
+                "total_seat" => 19,
                 "created_at" => now(),
                 "updated_at" => now()
             ],
@@ -47,7 +47,7 @@ class BusSeeder extends Seeder
                 "bus_type" => "Giường nằm",
                 "license_plate" => "59B-89296",
                 "image" => "bus-4.jpg",
-                "total_seat" => 7,
+                "total_seat" => 19,
                 "created_at" => now(),
                 "updated_at" => now()
             ],
@@ -65,7 +65,7 @@ class BusSeeder extends Seeder
                 "bus_type" => "Giường nằm",
                 "license_plate" => "55B-80819",
                 "image" => "bus-6.jpg",
-                "total_seat" => 7,
+                "total_seat" => 19,
                 "created_at" => now(),
                 "updated_at" => now()
             ]
