@@ -127,7 +127,12 @@
                                                                     </button>
 
                                                                     <button class="btn btn-success"
-                                                                        wire:click="approve({{ $ticket->id }}, 'done')">Đã
+                                                                        wire:click="approve({{ $ticket->id }}, 'done')"
+                                                                        
+                                                                        @if (now()->lessThan(\Carbon\Carbon::parse($trip->departure_date . ' ' . $trip->departure_time)))
+                                                                            disabled
+                                                                        @endif
+                                                                        >Đã
                                                                         đi
                                                                     </button>
                                                                 @endif
@@ -138,8 +143,8 @@
                                                                 <button class="btn btn-danger" style="height: 40px"
                                                                     wire:click="cancel_ticket({{ $ticket->id }})"
                                                                     @if (
-                                                                        $ticket->status != 'pending' ||
-                                                                            now()->lessThan(\Carbon\Carbon::parse($trip->departure_date . ' ' . $trip->departure_time))) disabled @endif>
+                                                                        $ticket->status != 'pending'
+                                                                            ) disabled @endif>
                                                                     Hủy
                                                                 </button>
                                                             </td>
